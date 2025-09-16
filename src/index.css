@@ -4,6 +4,7 @@
 @theme {
   --color-primary: #4880ff;
   --color-secondary: #202224;
+  --color-three: #f5f6fa;
 }
 
 * {
@@ -12,7 +13,7 @@
 
 
 body {
-  background-color: #f5f6fa;
+  background-color: var(--color-three);
 }
 
 button {
