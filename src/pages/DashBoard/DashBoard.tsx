@@ -1,4 +1,6 @@
 import { BoxTitle } from "../../components/BoxTitle/BoxTitle";
+import { PageTitle } from "../../components/PageTitle/PageTitle";
+import { PrimaryTable } from "../../components/Table/PrimaryTable";
 import { RevenueChart } from "./RevenueChart";
 
 import { StatCard } from "./StatCard";
@@ -27,7 +29,7 @@ const stats = [
 export const DashBoard = () => {
   return (
     <>
-      <BoxTitle title="Tổng quan" />
+      <PageTitle title="Tổng quan" />
 
       <div className="mb-[30px] grid grid-cols-3 gap-[30px]">
         {stats.map((item) => (
@@ -41,6 +43,18 @@ export const DashBoard = () => {
       </div>
 
       <RevenueChart />
+
+      <div
+        className="rounded-[14px] bg-white p-8"
+        style={{
+          boxShadow: "6px 6px 54px 0px #0000000D",
+        }}
+      >
+        <BoxTitle text="Đơn hàng mới" />
+        <div>
+          <PrimaryTable />
+        </div>
+      </div>
     </>
   );
 };

@@ -62,9 +62,7 @@ export const RevenueChart = () => {
         }}
       >
         <div className="mb-8 flex flex-wrap items-center justify-between gap-2.5">
-          <h1 className="text-secondary text-2xl font-bold">
-            Biểu đồ doanh thu
-          </h1>
+          <h1 className="text-secondary text-2xl font-bold">Biểu đồ doanh thu</h1>
           <input type="month" />
         </div>
         <div className="h-[350px]">
