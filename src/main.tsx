@@ -3,18 +3,18 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { DefaultLayout } from "./layouts/DefaultLayout.tsx";
 import { DashBoard } from "./pages/DashBoard/DashBoard.tsx";
-import { CategoryList } from "./pages/Category/Category.tsx";
+import { CategoryList } from "./pages/Category/CategoryList.tsx";
 
 const router = createBrowserRouter([
   {
     element: <DefaultLayout />,
     children: [
       {
-        path: "/dashboard",
+        path: "/admin/dashboard",
         element: <DashBoard />,
       },
       {
-        path: "/category",
+        path: "/admin/category",
         element: <CategoryList />,
       },
     ],

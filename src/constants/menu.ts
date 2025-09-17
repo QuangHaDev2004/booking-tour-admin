@@ -11,32 +11,32 @@ import {
 
 export const mainMenus = [
   {
-    to: "/dashboard",
+    to: "/admin/dashboard",
     label: "Tổng quan",
     icon: FaGaugeHigh,
   },
   {
-    to: "/category",
+    to: "/admin/category",
     label: "Quản lý danh mục",
     icon: FaTable,
   },
   {
-    to: "/tour",
+    to: "/admin/tour",
     label: "Quản lý tour",
     icon: FaList,
   },
   {
-    to: "/order",
+    to: "/admin/order",
     label: "Quản lý đơn hàng",
     icon: FaListCheck,
   },
   {
-    to: "/user",
+    to: "/admin/user",
     label: "Quản lý người dùng",
     icon: FaUser,
   },
   {
-    to: "/contact",
+    to: "/admin/contact",
     label: "Thông tin liên hệ",
     icon: FaUserGroup,
   },
@@ -44,12 +44,12 @@ export const mainMenus = [
 
 export const settingsMenus = [
   {
-    to: "/setting",
+    to: "/admin/setting",
     label: "Cài đặt chung",
     icon: FaGear,
   },
   {
-    to: "/profile",
+    to: "/admin/profile",
     label: "Thông tin cá nhân",
     icon: FaUserGear,
   },

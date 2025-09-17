@@ -10,6 +10,8 @@ type SidebarProps = {
 
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const { pathname } = useLocation();
+  console.log(pathname);
+  
 
   return (
     <>
