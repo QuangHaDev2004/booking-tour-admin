@@ -1,8 +1,8 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import DashBoard from "./pages/DashBoard/DashBoard.tsx";
 import { DefaultLayout } from "./layouts/DefaultLayout.tsx";
+import { DashBoard } from "./pages/DashBoard/DashBoard.tsx";
 
 const router = createBrowserRouter([
   {
