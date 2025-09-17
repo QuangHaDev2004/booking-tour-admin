@@ -56,7 +56,7 @@ export const RevenueChart = () => {
   return (
     <>
       <div
-        className="mb-[30px] rounded-[14px] bg-white p-8"
+        className="mb-[30px] rounded-[14px] bg-white p-6 sm:p-8"
         style={{
           boxShadow: "6px 6px 54px 0px #0000000D",
         }}
