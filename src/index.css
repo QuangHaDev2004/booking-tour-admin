@@ -38,3 +38,11 @@ textarea {
   content: "";
   @apply bg-primary absolute top-0 left-[-24px] h-full w-[4.5px] rounded-tr-sm rounded-br-sm;
 }
+
+.primary-table::-webkit-scrollbar {
+  height: 5px;
+}
+
+.primary-table::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+}

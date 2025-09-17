@@ -1,7 +1,7 @@
 export const PrimaryTable = () => {
   return (
     <>
-      <table className="w-full border-collapse">
+      <table className="w-full min-w-[1076px] border-collapse">
         <thead>
           <tr>
             <th className="text-secondary rounded-tl-xl rounded-bl-xl bg-[#F1F4F9] px-6 py-4 text-left text-sm font-bold">

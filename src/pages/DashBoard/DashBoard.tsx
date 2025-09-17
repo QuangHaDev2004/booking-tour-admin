@@ -31,7 +31,7 @@ export const DashBoard = () => {
     <>
       <PageTitle title="Tổng quan" />
 
-      <div className="mb-[30px] grid grid-cols-3 gap-[30px]">
+      <div className="mb-[30px] grid gap-[30px] md:grid-cols-2 xl:grid-cols-3">
         {stats.map((item) => (
           <StatCard
             key={item.id}
@@ -45,13 +45,13 @@ export const DashBoard = () => {
       <RevenueChart />
 
       <div
-        className="rounded-[14px] bg-white p-8"
+        className="rounded-[14px] bg-white p-6 sm:p-8"
         style={{
           boxShadow: "6px 6px 54px 0px #0000000D",
         }}
       >
         <BoxTitle text="Đơn hàng mới" />
-        <div>
+        <div className="primary-table overflow-x-auto">
           <PrimaryTable />
         </div>
       </div>
