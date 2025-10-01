@@ -51,7 +51,7 @@ export const DashBoard = () => {
         }}
       >
         <BoxTitle text="Đơn hàng mới" />
-        <div className="primary-table overflow-x-auto">
+        <div className="srcoll-table overflow-x-auto">
           <PrimaryTable />
         </div>
       </div>
