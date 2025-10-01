@@ -3,7 +3,7 @@ import { FaChevronDown } from "react-icons/fa6";
 
 export const Pagination = () => {
   return (
-    <div className="flex items-center gap-5 mb-[30px]">
+    <div className="flex items-center gap-5">
       <div className="text-secondary text-sm font-semibold">
         Hiển thị 1 - 9 của 78
       </div>

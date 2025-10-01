@@ -10,8 +10,6 @@ type SidebarProps = {
 
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const { pathname } = useLocation();
-  console.log(pathname);
-  
 
   return (
     <>
@@ -23,7 +21,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             <li key={item.to}>
               <Link
                 to={item.to}
-                className={`nav-item ${pathname === item.to ? "active bg-primary text-white" : "text-secondary"}`}
+                className={`nav-item ${pathname === item.to || pathname.startsWith(item.to) ? "active bg-primary text-white" : "text-secondary"}`}
               >
                 <item.icon className="text-lg" />
                 {item.label}
