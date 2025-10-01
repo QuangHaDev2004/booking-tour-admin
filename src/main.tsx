@@ -4,18 +4,24 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import { DefaultLayout } from "./layouts/DefaultLayout.tsx";
 import { DashBoard } from "./pages/DashBoard/DashBoard.tsx";
 import { CategoryList } from "./pages/Category/CategoryList.tsx";
+import { CategoryCreate } from "./pages/Category/CategoryCreate.tsx";
+import { pathAdmin } from "./constants/path.ts";
 
 const router = createBrowserRouter([
   {
     element: <DefaultLayout />,
     children: [
       {
-        path: "/admin/dashboard",
+        path: `/${pathAdmin}/dashboard`,
         element: <DashBoard />,
       },
       {
-        path: "/admin/category",
+        path: `/${pathAdmin}/category`,
         element: <CategoryList />,
+      },
+      {
+        path: `/${pathAdmin}/category/create`,
+        element: <CategoryCreate />,
       },
     ],
   },
