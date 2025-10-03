@@ -1,6 +1,6 @@
-import { BoxTitle } from "../../components/BoxTitle/BoxTitle";
-import { PageTitle } from "../../components/PageTitle/PageTitle";
-import { PrimaryTable } from "../../components/Table/PrimaryTable";
+import { BoxTitle } from "../../components/boxTitle/BoxTitle";
+import { PageTitle } from "../../components/pageTitle/PageTitle";
+import { PrimaryTable } from "../../components/table/PrimaryTable";
 import { RevenueChart } from "./RevenueChart";
 
 import { StatCard } from "./StatCard";

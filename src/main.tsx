@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         element: <DashBoard />,
       },
       {
-        path: `/${pathAdmin}/category`,
+        path: `/${pathAdmin}/category/list`,
         element: <CategoryList />,
       },
       {

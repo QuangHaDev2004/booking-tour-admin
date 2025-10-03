@@ -16,22 +16,22 @@ export const mainMenus = [
     icon: FaGaugeHigh,
   },
   {
-    to: "/admin/category",
+    to: "/admin/category/list",
     label: "Quản lý danh mục",
     icon: FaTable,
   },
   {
-    to: "/admin/tour",
+    to: "/admin/tour/list",
     label: "Quản lý tour",
     icon: FaList,
   },
   {
-    to: "/admin/order",
+    to: "/admin/order/list",
     label: "Quản lý đơn hàng",
     icon: FaListCheck,
   },
   {
-    to: "/admin/user",
+    to: "/admin/user/list",
     label: "Quản lý người dùng",
     icon: FaUser,
   },

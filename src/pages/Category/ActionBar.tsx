@@ -10,14 +10,14 @@ export const ActionBar = () => {
         <div className="relative">
           <Select
             name=""
-            className="appearance-none border-r border-[#D5D5D5] p-4 pr-12 lg:p-6"
+            className="appearance-none border-r border-[#D5D5D5] p-4 pr-12 lg:p-6 lg:pr-12"
           >
             <option value="">-- Hành động --</option>
             <option value="active">Hoạt động</option>
             <option value="inactive">Tạm dừng</option>
             <option value="delete">Xóa</option>
           </Select>
-          <FaChevronDown className="text-secondary pointer-events-none absolute top-1/2 right-6 -translate-y-1/2 text-[12px]" />
+          <FaChevronDown className="text-secondary pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-[12px]" />
         </div>
         <button className="cursor-pointer p-4 font-semibold text-[#EA0234] lg:p-6">
           Áp dụng
