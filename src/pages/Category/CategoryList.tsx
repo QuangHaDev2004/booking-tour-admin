@@ -1,6 +1,6 @@
-import { PageTitle } from "../../components/PageTitle/PageTitle";
-import { SecondaryTable } from "../../components/Table/SecondaryTable";
-import { Pagination } from "../../components/Pagination/Pagination";
+import { PageTitle } from "../../components/pageTitle/PageTitle";
+import { SecondaryTable } from "../../components/table/SecondaryTable";
+import { Pagination } from "../../components/pagination/Pagination";
 import { FilterBar } from "./FilterBar";
 import { ActionBar } from "./ActionBar";
 

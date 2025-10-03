@@ -1,8 +1,8 @@
 import { Link } from "react-router";
-import { CustomCheckbox } from "../Common/Checkbox";
+import { CustomCheckbox } from "../common/Checkbox";
 import { FaPenToSquare } from "react-icons/fa6";
-import { Badge } from "../Common/Badge";
-import { ButtonDelete } from "../Common/ButtonDelete";
+import { Badge } from "../common/Badge";
+import { ButtonDelete } from "../common/ButtonDelete";
 
 export const SecondaryTable = () => {
   return (
