@@ -10,3 +10,8 @@ export const categoryFormSchema = z.object({
 });
 
 export type CategoryFormInputs = z.infer<typeof categoryFormSchema>;
+
+export type Option = {
+  label: string;
+  value: string;
+};

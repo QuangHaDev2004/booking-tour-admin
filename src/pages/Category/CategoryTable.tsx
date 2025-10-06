@@ -1,13 +1,14 @@
 import { Link } from "react-router";
-import { CustomCheckbox } from "../common/Checkbox";
+import { CustomCheckbox } from "../../components/common/Checkbox";
+import { Badge } from "../../components/common/Badge";
 import { FaPenToSquare } from "react-icons/fa6";
-import { Badge } from "../common/Badge";
-import { ButtonDelete } from "../common/ButtonDelete";
+import { ButtonDelete } from "../../components/common/ButtonDelete";
+import { pathAdmin } from "../../constants/path";
 
-export const SecondaryTable = () => {
+export const CategoryTable = () => {
   return (
-    <>
-      <table className="w-full min-w-[1076px] border-collapse text-secondary">
+    <div className="srcoll-table mb-[15px] overflow-hidden overflow-x-auto rounded-[14px] border border-[#D5D5D5] bg-white">
+      <table className="text-secondary w-full min-w-[1141px] border-collapse">
         <thead>
           <tr>
             <th className="border-b border-[#D5D5D5] py-[15px] pl-[32px]">
@@ -68,8 +69,11 @@ export const SecondaryTable = () => {
               <div>16:30 - 20/10/2024</div>
             </td>
             <td className="border-b border-[#D5D5D5] px-[15px] py-[8px] text-left text-sm font-semibold">
-              <div className="inline-flex items-center bg-[#FAFBFD] border border-[#D5D5D5] rounded-lg">
-                <Link to={""} className="py-[10px] px-[16.5px] border-r border-[#D5D5D5]">
+              <div className="inline-flex items-center rounded-lg border border-[#D5D5D5] bg-[#FAFBFD]">
+                <Link
+                  to={`/${pathAdmin}/category/edit`}
+                  className="border-r border-[#D5D5D5] px-[16.5px] py-[10px]"
+                >
                   <FaPenToSquare className="text-[15px]" />
                 </Link>
                 <ButtonDelete />
@@ -78,6 +82,6 @@ export const SecondaryTable = () => {
           </tr>
         </tbody>
       </table>
-    </>
+    </div>
   );
 };

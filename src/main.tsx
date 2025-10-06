@@ -6,6 +6,7 @@ import { DashBoard } from "./pages/DashBoard/DashBoard.tsx";
 import { CategoryList } from "./pages/Category/CategoryList.tsx";
 import { CategoryCreate } from "./pages/Category/CategoryCreate.tsx";
 import { pathAdmin } from "./constants/path.ts";
+import { TourList } from "./pages/Tour/TourList.tsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/category/create`,
         element: <CategoryCreate />,
+      },
+      {
+        path: `/${pathAdmin}/tour/list`,
+        element: <TourList />,
       },
     ],
   },
