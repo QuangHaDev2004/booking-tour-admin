@@ -1,4 +1,4 @@
-export const PrimaryTable = () => {
+export const DashBoardTable = () => {
   return (
     <>
       <table className="w-full min-w-[1076px] border-collapse">

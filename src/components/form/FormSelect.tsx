@@ -1,11 +1,7 @@
 import { Select } from "@headlessui/react";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { FaChevronDown } from "react-icons/fa6";
-
-type Option = {
-  label: string;
-  value: string;
-};
+import type { Option } from "../../types";
 
 type FormSelectProps = {
   id: string;

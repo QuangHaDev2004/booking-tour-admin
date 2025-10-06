@@ -1,6 +1,6 @@
 import { BoxTitle } from "../../components/boxTitle/BoxTitle";
 import { PageTitle } from "../../components/pageTitle/PageTitle";
-import { PrimaryTable } from "../../components/table/PrimaryTable";
+import { DashBoardTable } from "./DashboardTable";
 import { RevenueChart } from "./RevenueChart";
 
 import { StatCard } from "./StatCard";
@@ -52,7 +52,7 @@ export const DashBoard = () => {
       >
         <BoxTitle text="Đơn hàng mới" />
         <div className="srcoll-table overflow-x-auto">
-          <PrimaryTable />
+          <DashBoardTable />
         </div>
       </div>
     </>
