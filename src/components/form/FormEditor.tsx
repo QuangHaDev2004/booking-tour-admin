@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller, type Control, type FieldPath } from "react-hook-form";
 import { EditorMCE } from "../editor/EditorMCE";
 import { useRef } from "react";
-import type { CategoryFormInputs } from "../../types";
 
 type FormEditorProps = {
-  id: FieldPath<CategoryFormInputs>;
+  id: FieldPath<any>;
   label: string;
-  control: Control<CategoryFormInputs>;
+  control: Control<any>;
 };
 
 export const FormEditor = ({ id, label, control }: FormEditorProps) => {
