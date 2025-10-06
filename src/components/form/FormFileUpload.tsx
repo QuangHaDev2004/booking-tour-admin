@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import "../../libs/filepondConfig";
 import { FilePond } from "react-filepond";
 import { Controller, type Control, type FieldPath } from "react-hook-form";
-import type { CategoryFormInputs } from "../../types";
 
 type FormFileUploadProps = {
-  id: FieldPath<CategoryFormInputs>;
+  id: FieldPath<any>;
   label: string;
-  control: Control<CategoryFormInputs>;
+  control: Control<any>;
 };
 
 export const FormFileUpload = ({ id, label, control }: FormFileUploadProps) => {
@@ -23,7 +24,9 @@ export const FormFileUpload = ({ id, label, control }: FormFileUploadProps) => {
         render={({ field: { onChange, value } }) => (
           <FilePond
             files={value}
-            onupdatefiles={onChange}
+            onupdatefiles={(fileItems) =>
+              onChange(fileItems.map((f) => f.file))
+            }
             id={id}
             allowRemove={true}
             acceptedFileTypes={["image/*"]}
