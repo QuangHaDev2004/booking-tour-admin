@@ -7,6 +7,7 @@ import { CategoryCreate } from "../pages/Category/CategoryCreate";
 import { TourList } from "../pages/Tour/TourList";
 import { TourCreate } from "../pages/Tour/TourCreate";
 import { TourTrash } from "../pages/Tour/TourTrash";
+import { OrderList } from "../pages/Order/OrderList";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/tour/trash`,
         element: <TourTrash />,
+      },
+      {
+        path: `/${pathAdmin}/order/list`,
+        element: <OrderList />,
       },
     ],
   },
