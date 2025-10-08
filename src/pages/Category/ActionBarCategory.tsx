@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { pathAdmin } from "../../constants/path";
+import { pathAdmin } from "../../config/path";
 import { Search } from "../../components/common/Search";
 import { ActionSelect } from "../../components/common/ActionSelect";
 

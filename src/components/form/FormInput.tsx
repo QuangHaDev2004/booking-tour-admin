@@ -7,6 +7,8 @@ type FormInputProps = {
   error?: FieldError;
   type?: string;
   placeholder?: string;
+  readOnly?: boolean;
+  value?: string
 };
 
 export const FormInput = ({
@@ -16,6 +18,8 @@ export const FormInput = ({
   error,
   type = "text",
   placeholder,
+  readOnly,
+  value
 }: FormInputProps) => {
   return (
     <div>
@@ -31,6 +35,8 @@ export const FormInput = ({
         type={type}
         placeholder={placeholder}
         autoComplete="off"
+        readOnly={readOnly}
+        value={value}
         className={`${error ? "border-error" : "border-four"} text-secondary bg-three h-[52px] w-full rounded-sm border px-[22px] text-sm font-medium`}
       />
       {error && (

@@ -3,7 +3,7 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import { PageTitle } from "../../components/pageTitle/PageTitle";
-import { pathAdmin } from "../../constants/path";
+import { pathAdmin } from "../../config/path";
 import { registerPlugin } from "react-filepond";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

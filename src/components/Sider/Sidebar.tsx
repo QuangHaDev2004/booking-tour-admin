@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { FaPowerOff } from "react-icons/fa6";
 import { useLocation } from "react-router";
-import { mainMenus, settingsMenus } from "../../constants/menu";
+import { mainMenus, settingsMenus } from "../../config/menu";
 import { checkActive } from "../../helpers/checkActive";
 
 type SidebarProps = {

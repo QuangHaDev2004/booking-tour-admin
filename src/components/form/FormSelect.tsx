@@ -40,7 +40,7 @@ export const FormSelect = ({
             </option>
           ))}
         </Select>
-        <FaChevronDown className="text-secondary pointer-events-none absolute top-1/2 right-[22px] -translate-y-1/2 text-[12px]" />
+        <FaChevronDown className="text-[#A6A6A6] pointer-events-none absolute top-1/2 right-[22px] -translate-y-1/2 text-[12px]" />
       </div>
       {error && (
         <p className="text-error mt-1 text-xs font-medium">{error.message}</p>
