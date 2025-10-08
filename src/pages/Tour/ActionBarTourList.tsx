@@ -3,7 +3,7 @@ import { pathAdmin } from "../../constants/path";
 import { Search } from "../../components/common/Search";
 import { ActionSelect } from "../../components/common/ActionSelect";
 
-export const ActionBarTour = () => {
+export const ActionBarTourList = () => {
   const ACTION_OPTIONS = [
     {
       label: "Hoạt động",

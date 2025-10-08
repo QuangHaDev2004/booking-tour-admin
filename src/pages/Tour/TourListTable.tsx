@@ -5,7 +5,7 @@ import { FaPenToSquare } from "react-icons/fa6";
 import { ButtonDelete } from "../../components/common/ButtonDelete";
 import { pathAdmin } from "../../constants/path";
 
-export const TourTable = () => {
+export const TourListTable = () => {
   return (
     <div className="srcoll-table mb-[15px] overflow-hidden overflow-x-auto rounded-[14px] border border-[#D5D5D5] bg-white">
       <table className="text-secondary w-full min-w-[1141px] border-collapse">
