@@ -3,7 +3,7 @@ import { CustomCheckbox } from "../../components/common/Checkbox";
 import { Badge } from "../../components/common/Badge";
 import { FaPenToSquare } from "react-icons/fa6";
 import { ButtonDelete } from "../../components/common/ButtonDelete";
-import { pathAdmin } from "../../constants/path";
+import { pathAdmin } from "../../config/path";
 
 export const CategoryTable = () => {
   return (

@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import { pathAdmin } from "../constants/path";
+import { pathAdmin } from "../config/path";
 import { DefaultLayout } from "../layouts/DefaultLayout";
 import { DashBoard } from "../pages/DashBoard/DashBoard";
 import { CategoryList } from "../pages/Category/CategoryList";
@@ -8,6 +8,7 @@ import { TourList } from "../pages/Tour/TourList";
 import { TourCreate } from "../pages/Tour/TourCreate";
 import { TourTrash } from "../pages/Tour/TourTrash";
 import { OrderList } from "../pages/Order/OrderList";
+import { OrderEdit } from "../pages/Order/OrderEdit";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/order/list`,
         element: <OrderList />,
+      },
+      {
+        path: `/${pathAdmin}/order/edit`,
+        element: <OrderEdit />,
       },
     ],
   },

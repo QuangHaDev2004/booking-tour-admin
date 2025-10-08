@@ -9,7 +9,7 @@ import { FormFileUpload } from "../../components/form/FormFileUpload";
 import { FormInputGroup } from "../../components/form/FormInputGroup";
 import { CustomCheckbox } from "../../components/common/Checkbox";
 import { useRef, useState } from "react";
-import { pathAdmin } from "../../constants/path";
+import { pathAdmin } from "../../config/path";
 import { FormEditor } from "../../components/form/FormEditor";
 import { EditorMCE } from "../../components/editor/EditorMCE";
 import {
@@ -66,6 +66,7 @@ export const TourCreate = () => {
           <FormInput
             id="position"
             label="Vị trí"
+            type="number"
             register={register("position")}
             error={errors.position}
             placeholder="Note: Tự động tăng"

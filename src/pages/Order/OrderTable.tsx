@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { pathAdmin } from "../../constants/path";
+import { pathAdmin } from "../../config/path";
 import { FaPenToSquare } from "react-icons/fa6";
 import { ButtonDelete } from "../../components/common/ButtonDelete";
 
