@@ -36,7 +36,7 @@ export const mainMenus = [
     icon: FaUser,
   },
   {
-    to: "/admin/contact",
+    to: "/admin/contact/list",
     label: "Thông tin liên hệ",
     icon: FaUserGroup,
   },
@@ -44,12 +44,12 @@ export const mainMenus = [
 
 export const settingsMenus = [
   {
-    to: "/admin/setting",
+    to: "/admin/setting/list",
     label: "Cài đặt chung",
     icon: FaGear,
   },
   {
-    to: "/admin/profile",
+    to: "/admin/profile/edit",
     label: "Thông tin cá nhân",
     icon: FaUserGear,
   },
