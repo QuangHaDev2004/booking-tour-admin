@@ -33,7 +33,7 @@ export const SettingList = () => {
           <Link
             key={item.id}
             to={item.to}
-            className="flex items-center justify-center gap-5 rounded-[14px] bg-white p-[25px] transition-all duration-300 hover:shadow-md hover:scale-[1.02]"
+            className="flex items-center justify-center gap-5 rounded-[14px] bg-white p-[25px] transition-all duration-300 hover:scale-[1.02] hover:shadow-md"
           >
             <div className="flex h-[70px] w-[70px] items-center justify-center rounded-full bg-[#E7EDFF]">
               <item.icon className="text-[30px] text-[#396AFF]" />
