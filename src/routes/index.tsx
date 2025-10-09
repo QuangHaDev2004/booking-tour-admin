@@ -12,6 +12,7 @@ import { OrderEdit } from "../pages/Order/OrderEdit";
 import { UserList } from "../pages/User/UserList";
 import { ContactList } from "../pages/Contact/ContactList";
 import { SettingList } from "../pages/Setting/SettingList";
+import { SettingWebsiteInfo } from "../pages/Setting/SettingWebsiteInfo";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/setting/list`,
         element: <SettingList />,
+      },
+      {
+        path: `/${pathAdmin}/setting/website-info`,
+        element: <SettingWebsiteInfo />,
       },
     ],
   },

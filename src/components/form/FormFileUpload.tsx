@@ -1,39 +1,41 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import "../../libs/filepondConfig";
 import { FilePond } from "react-filepond";
-import { Controller, type Control, type FieldPath } from "react-hook-form";
 
 type FormFileUploadProps = {
-  id: FieldPath<any>;
+  name: string;
   label: string;
-  control: Control<any>;
+  files: any;
+  setFiles: any;
+  allowMultiple?: boolean;
+  oneCol?: boolean;
 };
 
-export const FormFileUpload = ({ id, label, control }: FormFileUploadProps) => {
+export const FormFileUpload = ({
+  name,
+  label,
+  files,
+  setFiles,
+  allowMultiple = false,
+  oneCol,
+}: FormFileUploadProps) => {
   return (
-    <div className="col-span-1 md:col-span-2">
+    <div className={`col-span-1 ${oneCol ? "" : "md:col-span-2"}`}>
       <label
-        htmlFor={id}
+        htmlFor={name}
         className="text-label mb-[10px] block text-sm font-semibold"
       >
         {label}
       </label>
-      <Controller
-        control={control}
-        name={id}
-        render={({ field: { onChange, value } }) => (
-          <FilePond
-            files={value}
-            onupdatefiles={(fileItems) =>
-              onChange(fileItems.map((f) => f.file))
-            }
-            id={id}
-            allowRemove={true}
-            acceptedFileTypes={["image/*"]}
-            labelIdle="+"
-            className="inner-upload-image"
-          />
-        )}
+      <FilePond
+        name={name}
+        allowMultiple={allowMultiple}
+        allowRemove={true}
+        labelIdle="+"
+        acceptedFileTypes={["image/*"]}
+        className="inner-upload-image"
+        files={files}
+        onupdatefiles={setFiles}
       />
     </div>
   );

@@ -72,3 +72,21 @@ export const orderFormSchema = z.object({
 });
 
 export type OrderFormInputs = z.infer<typeof orderFormSchema>;
+
+// Setting Website Info
+export const websiteInfoSchema = z.object({
+  websiteName: z.string().min(1, "Vui lòng nhập tên website!"),
+  phone: z
+    .string()
+    .regex(
+      /^(0|\+84)(3[2-9]|5[6|8|9]|7[0|6-9]|8[1-6|8|9]|9[0-9])[0-9]{7}$/,
+      "Số điện thoại không đúng định dạng!",
+    )
+    .or(z.literal("")),
+  email: z.string().email("Email không đúng định dạng!").or(z.literal("")),
+  address: z.string().or(z.literal("")),
+  logo: z.any(),
+  favicon: z.any(),
+});
+
+export type WebsiteInfoInputs = z.infer<typeof websiteInfoSchema>;
