@@ -11,6 +11,7 @@ import { OrderList } from "../pages/Order/OrderList";
 import { OrderEdit } from "../pages/Order/OrderEdit";
 import { UserList } from "../pages/User/UserList";
 import { ContactList } from "../pages/Contact/ContactList";
+import { SettingList } from "../pages/Setting/SettingList";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/contact/list`,
         element: <ContactList />,
+      },
+      {
+        path: `/${pathAdmin}/setting/list`,
+        element: <SettingList />,
       },
     ],
   },
