@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { CustomCheckbox } from "../../components/common/Checkbox";
+import { CustomCheckbox } from "../../components/common/checkbox/Checkbox";
 import { Badge } from "../../components/common/Badge";
 import { FaArrowRotateLeft } from "react-icons/fa6";
 import { ButtonDelete } from "../../components/common/ButtonDelete";

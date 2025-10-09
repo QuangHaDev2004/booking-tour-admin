@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { CustomCheckbox } from "../../../components/common/Checkbox";
+import { CustomCheckbox } from "../../../components/common/checkbox/Checkbox";
 import { Badge } from "../../../components/common/Badge";
 import { pathAdmin } from "../../../config/path";
 import { FaPenToSquare } from "react-icons/fa6";

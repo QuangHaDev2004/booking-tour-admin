@@ -7,7 +7,7 @@ import { ButtonSubmit } from "../../components/common/ButtonSubmit";
 import { FormSelect } from "../../components/form/FormSelect";
 import { FormFileUpload } from "../../components/form/FormFileUpload";
 import { FormInputGroup } from "../../components/form/FormInputGroup";
-import { CustomCheckbox } from "../../components/common/Checkbox";
+import { CustomCheckbox } from "../../components/common/checkbox/Checkbox";
 import { useRef, useState } from "react";
 import { pathAdmin } from "../../config/path";
 import { FormEditor } from "../../components/form/FormEditor";

@@ -84,7 +84,7 @@ export const websiteInfoSchema = z.object({
     )
     .or(z.literal("")),
   email: z.string().email("Email không đúng định dạng!").or(z.literal("")),
-  address: z.string().or(z.literal("")),
+  address: z.string().optional(),
   logo: z.any(),
   favicon: z.any(),
 });
@@ -109,9 +109,9 @@ export const accountAdminSchema = z.object({
       /^(0|\+84)(3[2-9]|5[6|8|9]|7[0|6-9]|8[1-6|8|9]|9[0-9])[0-9]{7}$/,
       "Số điện thoại không đúng định dạng!",
     ),
-  role: z.string().or(z.literal("")),
+  role: z.string().optional(),
   positionCompany: z.string().min(1, "Vui lòng nhập chức vụ!"),
-  status: z.string().or(z.literal("")),
+  status: z.string().optional(),
   password: z
     .string()
     .min(1, "Vui lòng nhập mật khẩu!")
@@ -124,3 +124,12 @@ export const accountAdminSchema = z.object({
 });
 
 export type AccountAdminInputs = z.infer<typeof accountAdminSchema>;
+
+// Setting Role
+export const roleSchema = z.object({
+  name: z.string().min(1, "Vui lòng nhập nhóm quyền!"),
+  description: z.string().optional(),
+  permissions: z.array(z.string()).optional(),
+});
+
+export type RoleInputs = z.infer<typeof roleSchema>;
