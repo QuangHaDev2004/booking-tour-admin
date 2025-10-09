@@ -13,6 +13,7 @@ import { UserList } from "../pages/User/UserList";
 import { ContactList } from "../pages/Contact/ContactList";
 import { SettingList } from "../pages/Setting/SettingList";
 import { SettingWebsiteInfo } from "../pages/Setting/SettingWebsiteInfo";
+import { SettingAccountAdminList } from "../pages/Setting/AccountAdmin/SettingAccountAdminList";
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/setting/website-info`,
         element: <SettingWebsiteInfo />,
+      },
+      {
+        path: `/${pathAdmin}/setting/account-admin/list`,
+        element: <SettingAccountAdminList />,
       },
     ],
   },
