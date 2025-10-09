@@ -10,6 +10,7 @@ import { TourTrash } from "../pages/Tour/TourTrash";
 import { OrderList } from "../pages/Order/OrderList";
 import { OrderEdit } from "../pages/Order/OrderEdit";
 import { UserList } from "../pages/User/UserList";
+import { ContactList } from "../pages/Contact/ContactList";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/user/list`,
         element: <UserList />,
+      },
+      {
+        path: `/${pathAdmin}/contact/list`,
+        element: <ContactList />,
       },
     ],
   },
