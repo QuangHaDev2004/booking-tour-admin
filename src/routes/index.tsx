@@ -14,6 +14,7 @@ import { ContactList } from "../pages/Contact/ContactList";
 import { SettingList } from "../pages/Setting/SettingList";
 import { SettingWebsiteInfo } from "../pages/Setting/SettingWebsiteInfo";
 import { SettingAccountAdminList } from "../pages/Setting/AccountAdmin/SettingAccountAdminList";
+import { SettingAccountAdminCreate } from "../pages/Setting/AccountAdmin/SettingAccountAdminCreate";
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/setting/account-admin/list`,
         element: <SettingAccountAdminList />,
+      },
+      {
+        path: `/${pathAdmin}/setting/account-admin/create`,
+        element: <SettingAccountAdminCreate />,
       },
     ],
   },
