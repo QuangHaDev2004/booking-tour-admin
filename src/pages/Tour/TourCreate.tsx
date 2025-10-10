@@ -12,12 +12,12 @@ import { useRef, useState } from "react";
 import { pathAdmin } from "../../config/path";
 import { FormEditor } from "../../components/form/FormEditor";
 import { EditorMCE } from "../../components/editor/EditorMCE";
+import { ContextLink } from "../../components/common/ContextLink";
 import {
   FaChevronDown,
   FaRegTrashCan,
   FaUpDownLeftRight,
 } from "react-icons/fa6";
-import { BackToList } from "../../components/common/BackToList";
 
 export const TourCreate = () => {
   const [checked, setChecked] = useState(false);
@@ -225,7 +225,7 @@ export const TourCreate = () => {
 
           <ButtonSubmit />
         </form>
-        <BackToList to={`/${pathAdmin}/tour/list`} />
+        <ContextLink text="Quay lại danh sách" to={`/${pathAdmin}/category/list`} />
       </div>
     </>
   );

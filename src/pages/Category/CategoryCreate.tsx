@@ -13,7 +13,7 @@ import { FormSelect } from "../../components/form/FormSelect";
 import { FormFileUpload } from "../../components/form/FormFileUpload";
 import { FormEditor } from "../../components/form/FormEditor";
 import { ButtonSubmit } from "../../components/common/ButtonSubmit";
-import { BackToList } from "../../components/common/BackToList";
+import { ContextLink } from "../../components/common/ContextLink";
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginFileValidateType);
 
@@ -83,7 +83,7 @@ export const CategoryCreate = () => {
 
           <ButtonSubmit />
         </form>
-        <BackToList to={`/${pathAdmin}/category/list`} />
+        <ContextLink text="Quay lại danh sách" to={`/${pathAdmin}/category/list`} />
       </div>
     </>
   );
