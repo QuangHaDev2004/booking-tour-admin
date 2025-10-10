@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { BackToList } from "../../../components/common/BackToList";
+import { ContextLink } from "../../../components/common/ContextLink";
 import { ButtonSubmit } from "../../../components/common/ButtonSubmit";
 import { PageTitle } from "../../../components/pageTitle/PageTitle";
 import { pathAdmin } from "../../../config/path";
@@ -106,7 +106,10 @@ export const SettingAccountAdminCreate = () => {
 
           <ButtonSubmit />
         </form>
-        <BackToList to={`/${pathAdmin}/setting/account-admin/list`} />
+        <ContextLink
+          text="Quay lại danh sách"
+          to={`/${pathAdmin}/category/list`}
+        />
       </div>
     </>
   );

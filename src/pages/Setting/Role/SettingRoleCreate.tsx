@@ -4,7 +4,7 @@ import { roleSchema, type RoleInputs } from "../../../types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormInput } from "../../../components/form/FormInput";
 import { ButtonSubmit } from "../../../components/common/ButtonSubmit";
-import { BackToList } from "../../../components/common/BackToList";
+import { ContextLink } from "../../../components/common/ContextLink";
 import { pathAdmin } from "../../../config/path";
 import { CheckboxGroup } from "../../../components/common/checkbox/CheckboxGroup";
 import { permissionList } from "../../../config/permissions";
@@ -75,7 +75,10 @@ export const SettingRoleCreate = () => {
 
           <ButtonSubmit />
         </form>
-        <BackToList to={`/${pathAdmin}/setting/role/list`} />
+        <ContextLink
+          text="Quay lại danh sách"
+          to={`/${pathAdmin}/category/list`}
+        />
       </div>
     </>
   );

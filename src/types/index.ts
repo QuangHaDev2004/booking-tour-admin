@@ -133,3 +133,26 @@ export const roleSchema = z.object({
 });
 
 export type RoleInputs = z.infer<typeof roleSchema>;
+
+// Profile
+export const profileEditSchema = z.object({
+  fullName: z
+    .string()
+    .min(1, "Vui lòng nhập họ tên!")
+    .min(5, "Họ tên phải có ít nhất 5 ký tự!")
+    .max(50, "Họ tên không được vượt quá 50 ký tự!"),
+  email: z
+    .string()
+    .min(1, "Vui lòng nhập email!")
+    .email("Email không đúng định dạng!"),
+  phone: z
+    .string()
+    .min(1, "Vui lòng nhập số điện thoại!")
+    .regex(
+      /^(0|\+84)(3[2-9]|5[6|8|9]|7[0|6-9]|8[1-6|8|9]|9[0-9])[0-9]{7}$/,
+      "Số điện thoại không đúng định dạng!",
+    ),
+  avatar: z.any(),
+});
+
+export type ProfileEditInputs = z.infer<typeof profileEditSchema>;

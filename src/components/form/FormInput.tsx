@@ -3,7 +3,7 @@ import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 type FormInputProps = {
   id: string;
   label: string;
-  register: UseFormRegisterReturn;
+  register?: UseFormRegisterReturn;
   error?: FieldError;
   type?: string;
   placeholder?: string;

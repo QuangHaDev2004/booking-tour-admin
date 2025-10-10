@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { BackToList } from "../../components/common/BackToList";
+import { ContextLink } from "../../components/common/ContextLink";
 import { ButtonSubmit } from "../../components/common/ButtonSubmit";
 import { PageTitle } from "../../components/pageTitle/PageTitle";
 import { pathAdmin } from "../../config/path";
@@ -176,7 +176,7 @@ export const OrderEdit = () => {
 
           <ButtonSubmit text="Cập nhật" />
         </form>
-        <BackToList to={`/${pathAdmin}/order/list`} />
+        <ContextLink text="Quay lại danh sách" to={`/${pathAdmin}/category/list`} />
       </div>
     </>
   );
