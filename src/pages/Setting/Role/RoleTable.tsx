@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { CustomCheckbox } from "../../../components/common/Checkbox";
+import { CustomCheckbox } from "../../../components/common/checkbox/Checkbox";
 import { pathAdmin } from "../../../config/path";
 import { FaPenToSquare } from "react-icons/fa6";
 import { ButtonDelete } from "../../../components/common/ButtonDelete";
@@ -41,7 +41,7 @@ export const RoleTable = () => {
                   to={`/${pathAdmin}/setting/role/edit`}
                   className="border-r border-[#D5D5D5] px-[16.5px] py-[10px]"
                 >
-                  <FaPenToSquare className="text-[15px] text-black/40" />
+                  <FaPenToSquare className="text-[15px] text-black/60" />
                 </Link>
                 <ButtonDelete />
               </div>

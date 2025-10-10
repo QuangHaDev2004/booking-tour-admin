@@ -1,5 +1,5 @@
 import { FaRegClipboard } from "react-icons/fa6";
-import { CustomCheckbox } from "../../components/common/Checkbox";
+import { CustomCheckbox } from "../../components/common/checkbox/Checkbox";
 import { ButtonDelete } from "../../components/common/ButtonDelete";
 
 export const ContactTable = () => {

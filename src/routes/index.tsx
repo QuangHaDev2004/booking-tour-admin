@@ -16,6 +16,7 @@ import { SettingWebsiteInfo } from "../pages/Setting/SettingWebsiteInfo";
 import { SettingAccountAdminList } from "../pages/Setting/AccountAdmin/SettingAccountAdminList";
 import { SettingAccountAdminCreate } from "../pages/Setting/AccountAdmin/SettingAccountAdminCreate";
 import { SettingRoleList } from "../pages/Setting/Role/SettingRoleList";
+import { SettingRoleCreate } from "../pages/Setting/Role/SettingRoleCreate";
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/setting/role/list`,
         element: <SettingRoleList />,
+      },
+      {
+        path: `/${pathAdmin}/setting/role/create`,
+        element: <SettingRoleCreate />,
       },
     ],
   },
