@@ -225,7 +225,7 @@ export const TourCreate = () => {
 
           <ButtonSubmit />
         </form>
-        <ContextLink text="Quay lại danh sách" to={`/${pathAdmin}/category/list`} />
+        <ContextLink text="Quay lại danh sách" to={`/${pathAdmin}/tour/list`} />
       </div>
     </>
   );

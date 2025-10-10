@@ -19,10 +19,12 @@ import { SettingRoleList } from "../pages/Setting/Role/SettingRoleList";
 import { SettingRoleCreate } from "../pages/Setting/Role/SettingRoleCreate";
 import { ProfileEdit } from "../pages/Profile/ProfileEdit";
 import { ProfileChangePassword } from "../pages/Profile/ProfileChangePassword";
+import { NotFound } from "../pages/Errors/NotFound";
 
 export const router = createBrowserRouter([
   {
     element: <DefaultLayout />,
+    errorElement: <NotFound />,
     children: [
       {
         path: `/${pathAdmin}/dashboard`,
