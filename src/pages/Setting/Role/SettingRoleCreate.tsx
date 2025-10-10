@@ -77,7 +77,7 @@ export const SettingRoleCreate = () => {
         </form>
         <ContextLink
           text="Quay lại danh sách"
-          to={`/${pathAdmin}/category/list`}
+          to={`/${pathAdmin}/setting/role/list`}
         />
       </div>
     </>

@@ -108,7 +108,7 @@ export const SettingAccountAdminCreate = () => {
         </form>
         <ContextLink
           text="Quay lại danh sách"
-          to={`/${pathAdmin}/category/list`}
+          to={`/${pathAdmin}/setting/account-admin/list`}
         />
       </div>
     </>

@@ -100,7 +100,7 @@ export const SettingWebsiteInfo = () => {
         </form>
         <ContextLink
           text="Quay lại danh sách"
-          to={`/${pathAdmin}/category/list`}
+          to={`/${pathAdmin}/setting/list`}
         />
       </div>
     </>
