@@ -1,4 +1,5 @@
 import {
+  FaDisplay,
   FaGaugeHigh,
   FaGear,
   FaList,
@@ -52,5 +53,10 @@ export const settingsMenus = [
     to: "/admin/profile/edit",
     label: "Thông tin cá nhân",
     icon: FaUserGear,
+  },
+  {
+    to: "/admin/template",
+    label: "Giao diện",
+    icon: FaDisplay,
   },
 ];

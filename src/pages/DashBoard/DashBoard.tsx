@@ -1,9 +1,7 @@
-import { BoxTitle } from "../../components/boxTitle/BoxTitle";
-import { PageTitle } from "../../components/pageTitle/PageTitle";
-import { DashBoardTable } from "./DashboardTable";
-import { RevenueChart } from "./RevenueChart";
-
+import { PageTitle } from "@/components/pageTitle/PageTitle";
 import { StatCard } from "./StatCard";
+import { RevenueChart } from "./RevenueChart";
+import { DashBoardTable } from "./DashBoardTable";
 
 const stats = [
   {
@@ -50,7 +48,9 @@ export const DashBoard = () => {
           boxShadow: "6px 6px 54px 0px #0000000D",
         }}
       >
-        <BoxTitle text="Đơn hàng mới" />
+        <h2 className="text-secondary mb-[30px] text-2xl font-bold">
+          Đơn hàng mới
+        </h2>
         <div className="srcoll-table overflow-x-auto">
           <DashBoardTable />
         </div>
