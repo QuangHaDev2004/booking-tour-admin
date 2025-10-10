@@ -7,7 +7,7 @@
   --color-three: #f5f6fa;
   --color-four: #d5d5d5;
   --color-label: #606060;
-  --color-error: #fb2c36
+  --color-error: #fb2c36;
 }
 
 * {
@@ -126,4 +126,20 @@ textarea {
 /* Tiny MCE */
 .tox-statusbar__branding {
   display: none;
+}
+
+/* Badge */
+.badge-green {
+  background-color: rgba(0, 182, 155, 0.2);
+  color: #00b69b;
+}
+
+.badge-yellow {
+  background-color: rgba(255, 168, 86, 0.2);
+  color: #ffa756;
+}
+
+.badge-red {
+  background-color: rgba(239, 55, 38, 0.2);
+  color: #EF3826;
 }

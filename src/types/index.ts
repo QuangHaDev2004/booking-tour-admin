@@ -177,3 +177,11 @@ export const profileChangePasswordSchema = z
 export type ProfileChangePasswordInputs = z.infer<
   typeof profileChangePasswordSchema
 >;
+
+// Template
+export const templateSchema = z.object({
+  dataSection4: z.string().optional(),
+  dataSection6: z.string().optional(),
+});
+
+export type TemplateInputs = z.infer<typeof templateSchema>;
