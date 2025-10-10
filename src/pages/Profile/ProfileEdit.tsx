@@ -21,7 +21,7 @@ export const ProfileEdit = () => {
     resolver: zodResolver(profileEditSchema),
   });
 
-  const handleProfileForm: SubmitHandler<ProfileEditInputs> = (data) => {
+  const handleProfileEditForm: SubmitHandler<ProfileEditInputs> = (data) => {
     let avatar = null;
     if (avatars.length > 0) {
       avatar = avatars[0].file;
@@ -41,7 +41,7 @@ export const ProfileEdit = () => {
       <PageTitle title="Thông tin cá nhân" />
       <div className="border-four overflow-hidden rounded-[14px] border bg-white p-[30px] md:p-[50px]">
         <form
-          onSubmit={handleSubmit(handleProfileForm)}
+          onSubmit={handleSubmit(handleProfileEditForm)}
           className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-[30px]"
         >
           <FormInput

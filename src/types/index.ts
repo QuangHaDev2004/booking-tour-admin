@@ -156,3 +156,24 @@ export const profileEditSchema = z.object({
 });
 
 export type ProfileEditInputs = z.infer<typeof profileEditSchema>;
+
+export const profileChangePasswordSchema = z
+  .object({
+    password: z
+      .string()
+      .min(1, "Vui lòng nhập mật khẩu!")
+      .min(8, "Mật khẩu phải chứa ít nhất 8 ký tự!")
+      .regex(/[A-Z]/, "Mật khẩu phải chứa ký tự viết hoa!")
+      .regex(/[a-z]/, "Mật khẩu phải chứa ký tự viết thường!")
+      .regex(/[0-9]/, "Mật khẩu phải chứa chữ số!")
+      .regex(/[^a-zA-Z0-9\s]/, "Mật khẩu phải chứa ký tự đặc biệt!"),
+    confirmPassword: z.string().min(1, "Vui lòng nhập xác nhận mật khẩu!"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"], // báo lỗi tại trường confirmPassword
+    message: "Mật khẩu xác nhận không khớp!",
+  });
+
+export type ProfileChangePasswordInputs = z.infer<
+  typeof profileChangePasswordSchema
+>;
