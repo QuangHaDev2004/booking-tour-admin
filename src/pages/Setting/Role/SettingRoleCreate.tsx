@@ -3,11 +3,11 @@ import { PageTitle } from "../../../components/pageTitle/PageTitle";
 import { roleSchema, type RoleInputs } from "../../../types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormInput } from "../../../components/form/FormInput";
-import { ButtonSubmit } from "../../../components/common/ButtonSubmit";
+import { ButtonSubmit } from "../../../components/button/ButtonSubmit";
 import { ContextLink } from "../../../components/common/ContextLink";
 import { pathAdmin } from "../../../config/path";
-import { CheckboxGroup } from "../../../components/common/checkbox/CheckboxGroup";
-import { permissionList } from "../../../config/permissions";
+import { CheckboxGroup } from "../../../components/checkbox/CheckboxGroup";
+import { permissionList } from "../../../constants/permissions";
 import { useState } from "react";
 
 export const SettingRoleCreate = () => {

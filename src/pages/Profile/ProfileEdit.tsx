@@ -4,7 +4,7 @@ import { PageTitle } from "../../components/pageTitle/PageTitle";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormInput } from "../../components/form/FormInput";
 import { FormFileUpload } from "../../components/form/FormFileUpload";
-import { ButtonSubmit } from "../../components/common/ButtonSubmit";
+import { ButtonSubmit } from "../../components/button/ButtonSubmit";
 import { pathAdmin } from "../../config/path";
 import { ContextLink } from "../../components/common/ContextLink";
 import { useState } from "react";

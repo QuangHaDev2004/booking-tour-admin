@@ -8,7 +8,8 @@ type FormInputProps = {
   type?: string;
   placeholder?: string;
   readOnly?: boolean;
-  value?: string
+  value?: string;
+  isRequired?: boolean;
 };
 
 export const FormInput = ({
@@ -19,7 +20,8 @@ export const FormInput = ({
   type = "text",
   placeholder,
   readOnly,
-  value
+  value,
+  isRequired,
 }: FormInputProps) => {
   return (
     <div>
@@ -27,7 +29,8 @@ export const FormInput = ({
         htmlFor={id}
         className="text-label mb-[10px] block text-sm font-semibold"
       >
-        {label}
+        <span>{label}</span>
+        {isRequired && <span className="text-error ml-1">*</span>}
       </label>
       <input
         {...register}
@@ -37,6 +40,7 @@ export const FormInput = ({
         autoComplete="off"
         readOnly={readOnly}
         value={value}
+        onWheel={(e) => e.currentTarget.blur()}
         className={`${error ? "border-error" : "border-four"} text-secondary bg-three h-[52px] w-full rounded-sm border px-[22px] text-sm font-medium`}
       />
       {error && (

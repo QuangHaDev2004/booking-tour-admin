@@ -43,7 +43,7 @@ export const mainMenus = [
   },
 ];
 
-export const settingsMenus = [
+export const settingMenus = [
   {
     to: "/admin/setting/list",
     label: "Cài đặt chung",

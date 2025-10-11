@@ -6,7 +6,7 @@ export const categoryFormSchema = z.object({
   parent: z.string().optional(),
   position: z.string().optional(),
   status: z.string().optional(),
-  avatar: z.any().optional(),
+  avatar: z.any(),
   description: z.string().optional(),
 });
 

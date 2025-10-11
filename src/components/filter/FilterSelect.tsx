@@ -1,17 +1,38 @@
 import { Select } from "@headlessui/react";
 import { FaChevronDown } from "react-icons/fa6";
 import type { Option } from "../../types";
+import { useSearchParams } from "react-router";
 
 export const FilterSelect = ({
+  paramKey,
   placeholder,
   options,
 }: {
+  paramKey: string;
   placeholder: string;
   options: Option[];
 }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentValue = searchParams.get(paramKey) || "";
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    const newParams = new URLSearchParams(searchParams);
+    if (value) {
+      newParams.set(paramKey, value);
+    } else {
+      newParams.delete(paramKey);
+    }
+    setSearchParams(newParams);
+  };
+
   return (
     <div className="relative">
-      <Select className="appearance-none border-r border-[#D5D5D5] p-4 pr-12 lg:p-6 lg:pr-12">
+      <Select
+        value={currentValue}
+        onChange={handleChange}
+        className="border-four cursor-pointer appearance-none border-r py-4 pr-12 pl-4"
+      >
         <option value="">{placeholder}</option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>

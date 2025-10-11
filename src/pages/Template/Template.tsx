@@ -2,7 +2,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { PageTitle } from "../../components/pageTitle/PageTitle";
 import { templateSchema, type TemplateInputs } from "../../types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ButtonSubmit } from "../../components/common/ButtonSubmit";
+import { ButtonSubmit } from "../../components/button/ButtonSubmit";
 import { FormSelect } from "../../components/form/FormSelect";
 
 export const Template = () => {

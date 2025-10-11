@@ -1,27 +1,27 @@
 import { Badge } from "@/components/badge/Badge";
 
-export const DashBoardTable = () => {
+export const DashboardTable = () => {
   return (
     <>
       <table className="text-secondary w-full min-w-[1076px] border-collapse">
         <thead>
           <tr>
-            <th className="rounded-tl-xl rounded-bl-xl bg-[#F1F4F9] px-6 py-4 text-left text-sm font-bold">
+            <th className="bg-table-head rounded-tl-xl rounded-bl-xl px-6 py-4 text-left text-sm font-bold">
               Mã
             </th>
-            <th className="bg-[#F1F4F9] px-6 py-4 text-left text-sm font-bold">
+            <th className="bg-table-head px-6 py-4 text-left text-sm font-bold">
               Thông tin khách
             </th>
-            <th className="bg-[#F1F4F9] px-6 py-4 text-left text-sm font-bold">
+            <th className="bg-table-head px-6 py-4 text-left text-sm font-bold">
               Danh sách tour
             </th>
-            <th className="bg-[#F1F4F9] px-6 py-4 text-left text-sm font-bold">
+            <th className="bg-table-head px-6 py-4 text-left text-sm font-bold">
               Thanh toán
             </th>
-            <th className="bg-[#F1F4F9] px-6 py-4 text-left text-sm font-bold">
+            <th className="bg-table-head px-6 py-4 text-left text-sm font-bold">
               Trạng thái
             </th>
-            <th className="rounded-tr-xl rounded-br-xl bg-[#F1F4F9] px-6 py-4 text-right text-sm font-bold">
+            <th className="bg-table-head rounded-tr-xl rounded-br-xl px-6 py-4 text-right text-sm font-bold">
               Ngày đặt
             </th>
           </tr>

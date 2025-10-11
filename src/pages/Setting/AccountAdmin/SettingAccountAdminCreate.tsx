@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { ContextLink } from "../../../components/common/ContextLink";
-import { ButtonSubmit } from "../../../components/common/ButtonSubmit";
+import { ButtonSubmit } from "../../../components/button/ButtonSubmit";
 import { PageTitle } from "../../../components/pageTitle/PageTitle";
 import { pathAdmin } from "../../../config/path";
 import { FormInput } from "../../../components/form/FormInput";
