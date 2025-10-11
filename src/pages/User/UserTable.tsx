@@ -1,8 +1,8 @@
 import { Link } from "react-router";
-import { CustomCheckbox } from "../../components/common/checkbox/Checkbox";
+import { CustomCheckbox } from "../../components/checkbox/Checkbox";
 import { Badge } from "../../components/badge/Badge";
 import { FaPenToSquare } from "react-icons/fa6";
-import { ButtonDelete } from "../../components/common/ButtonDelete";
+import { ButtonDelete } from "../../components/button/ButtonDelete";
 import { pathAdmin } from "../../config/path";
 
 export const UserTable = () => {

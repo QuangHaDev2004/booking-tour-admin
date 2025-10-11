@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-import { ActionSelect } from "../../../components/common/ActionSelect";
-import { Search } from "../../../components/common/Search";
+// import { ActionSelect } from "../../../components/tableActions/ChangeMultiSelect";
+import { Search } from "../../../components/actionBar/Search";
 import { pathAdmin } from "../../../config/path";
 
 export const ActionBarAccountAdmin = () => {
@@ -25,7 +25,7 @@ export const ActionBarAccountAdmin = () => {
 
   return (
     <div className="mb-[30px] flex flex-wrap items-center gap-4">
-      <ActionSelect options={ACTION_OPTIONS} />
+      {/* <ActionSelect options={ACTION_OPTIONS} /> */}
       <Search />
       <Link
         to={`/${pathAdmin}/setting/account-admin/create`}

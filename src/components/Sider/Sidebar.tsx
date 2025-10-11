@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import { FaPowerOff } from "react-icons/fa6";
 import { useLocation } from "react-router";
-import { mainMenus, settingsMenus } from "../../config/menu";
-import { checkActive } from "../../helpers/checkActive";
+import { mainMenus, settingMenus } from "@/constants/menus";
+import { checkActive } from "@/helpers/checkActive";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -35,7 +35,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         </ul>
         <hr className="my-4 border border-[#E0E0E0]" />
         <ul>
-          {settingsMenus.map((item) => {
+          {settingMenus.map((item) => {
             const isActive = checkActive(pathname, item.to);
             return (
               <li key={item.to}>

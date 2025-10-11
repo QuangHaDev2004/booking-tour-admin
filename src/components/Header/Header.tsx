@@ -1,3 +1,4 @@
+import { pathAdmin } from "@/config/path";
 import { FaBars } from "react-icons/fa6";
 import { Link } from "react-router";
 
@@ -10,7 +11,7 @@ export const Header = ({ onOpenSidebar }: HeaderProps) => {
     <>
       <div className="fixed top-0 left-0 z-[997] flex h-[70px] w-full items-center border-b border-[#E0E0E0] bg-white">
         <Link
-          to={"/"}
+          to={`${pathAdmin}/dashboard`}
           className="ml-[15px] flex h-full w-auto items-center justify-center text-2xl font-extrabold transition-all duration-200 sm:ml-0 sm:w-60"
         >
           <span className="text-primary">HW</span>

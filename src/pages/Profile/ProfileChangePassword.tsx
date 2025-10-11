@@ -5,7 +5,7 @@ import {
   type ProfileChangePasswordInputs,
 } from "../../types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ButtonSubmit } from "../../components/common/ButtonSubmit";
+import { ButtonSubmit } from "../../components/button/ButtonSubmit";
 import { FormInput } from "../../components/form/FormInput";
 
 export const ProfileChangePassword = () => {

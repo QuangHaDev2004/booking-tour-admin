@@ -1,9 +1,6 @@
 import { createBrowserRouter } from "react-router";
-import { pathAdmin } from "../config/path";
+import { pathAdmin } from "@/config/path";
 import { DefaultLayout } from "../layouts/DefaultLayout";
-import { DashBoard } from "../pages/DashBoard/DashBoard";
-import { CategoryList } from "../pages/Category/CategoryList";
-import { CategoryCreate } from "../pages/Category/CategoryCreate";
 import { TourList } from "../pages/Tour/TourList";
 import { TourCreate } from "../pages/Tour/TourCreate";
 import { TourTrash } from "../pages/Tour/TourTrash";
@@ -21,6 +18,9 @@ import { ProfileEdit } from "../pages/Profile/ProfileEdit";
 import { ProfileChangePassword } from "../pages/Profile/ProfileChangePassword";
 import { NotFound } from "../pages/Errors/NotFound";
 import { Template } from "../pages/Template/Template";
+import { Dashboard } from "@/features/dashboard/Dashboard";
+import { CategoryList } from "@/features/category/CategoryList";
+import { CategoryCreate } from "@/features/category/CategoryCreate";
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: `/${pathAdmin}/dashboard`,
-        element: <DashBoard />,
+        element: <Dashboard />,
       },
       {
         path: `/${pathAdmin}/category/list`,
