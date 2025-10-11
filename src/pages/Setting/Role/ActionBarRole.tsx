@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 // import { ActionSelect } from "../../../components/tableActions/ChangeMultiSelect";
-import { Search } from "../../../components/actionBar/Search";
+import { Search } from "../../../components/common/Search";
 import { pathAdmin } from "../../../config/path";
 
 export const ActionBarRole = () => {

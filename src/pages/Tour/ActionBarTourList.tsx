@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { pathAdmin } from "../../config/path";
-import { Search } from "../../components/actionBar/Search";
+import { Search } from "../../components/common/Search";
 // import { ActionSelect } from "../../components/tableActions/ChangeMultiSelect";
 
 export const ActionBarTourList = () => {

@@ -1,4 +1,4 @@
-import { Search } from "../../components/actionBar/Search";
+import { Search } from "../../components/common/Search";
 import { PageTitle } from "../../components/pageTitle/PageTitle";
 import { Pagination } from "../../components/pagination/Pagination";
 import { FilterBarOrder } from "./FilterBarOrder";

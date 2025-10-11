@@ -36,11 +36,11 @@ export const ChangeMultiSelect = ({
   };
 
   return (
-    <div className="text-secondary inline-flex items-center overflow-hidden rounded-lg border border-[#D5D5D5] bg-white text-sm font-bold">
+    <div className="text-secondary border-four inline-flex items-center overflow-hidden rounded-lg border bg-white text-sm font-bold">
       <div className="relative">
         <Select
           onChange={handleChange}
-          className="cursor-pointer appearance-none border-r border-[#D5D5D5] py-4 pr-12 pl-6"
+          className="border-four cursor-pointer appearance-none border-r py-4 pr-12 pl-4"
         >
           <option value="">-- Hành động --</option>
           {options.map((option) => (
