@@ -1,7 +1,22 @@
 import { Select } from "@headlessui/react";
 import { FaChevronDown } from "react-icons/fa6";
+import { useSearchParams } from "react-router";
 
 export const Pagination = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentPageParam = searchParams.get("page") || "";
+
+  const handlePageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    const newParams = new URLSearchParams(searchParams);
+    if (value) {
+      newParams.set("page", value);
+    } else {
+      newParams.delete("page");
+    }
+    setSearchParams(newParams);
+  };
+
   return (
     <div className="flex items-center gap-5">
       <div className="text-secondary/60 text-sm font-semibold">
@@ -9,12 +24,13 @@ export const Pagination = () => {
       </div>
       <div className="relative">
         <Select
-          name=""
-          className="appearance-none rounded-lg border border-[#D5D5D5] py-1.5 pr-12 pl-[14px] text-secondary/60 font-semibold"
+          value={currentPageParam}
+          onChange={handlePageChange}
+          className="text-secondary/60 border-four cursor-pointer appearance-none rounded-lg border py-1.5 pr-12 pl-[14px] font-semibold"
         >
-          <option value="">Trang 1</option>
-          <option value="">Trang 2</option>
-          <option value="">Trang 3</option>
+          <option value="1">Trang 1</option>
+          <option value="2">Trang 2</option>
+          <option value="3">Trang 3</option>
         </Select>
         <FaChevronDown className="text-secondary/60 pointer-events-none absolute top-1/2 right-[14px] -translate-y-1/2 text-[12px]" />
       </div>

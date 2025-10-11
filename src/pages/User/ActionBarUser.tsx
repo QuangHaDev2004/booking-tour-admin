@@ -1,4 +1,4 @@
-import { Search } from "../../components/actionBar/Search";
+import { Search } from "../../components/common/Search";
 // import { ActionSelect } from "../../components/tableActions/ChangeMultiSelect";
 
 export const ActionBarUser = () => {
