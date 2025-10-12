@@ -4,7 +4,7 @@ import { FilterDateRange } from "@/components/filter/FilterDateRange";
 import { FilterButtonReset } from "@/components/filter/FilterButtonReset";
 import { FilterBar } from "@/components/filter/FilterBar";
 
-export const FilterBarCategory = () => {
+export const CategoryFilterBar = () => {
   return (
     <FilterBar>
       <FilterSelect

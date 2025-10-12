@@ -3,9 +3,10 @@ import { ButtonEdit } from "@/components/button/ButtonEdit";
 import { ButtonDelete } from "@/components/button/ButtonDelete";
 import { CustomCheckbox } from "@/components/checkbox/Checkbox";
 import { pathAdmin } from "@/config/path";
-import { useEffect, useState } from "react";
 import { actionOptions } from "@/constants/actionOptions";
-import { ChangeMultiSelect } from "@/components/tableActions/ChangeMultiSelect";
+import { TableActionBar } from "@/components/table/TableActionBar";
+import { EmptyTableRow } from "@/components/table/EmptyTableRow";
+import { useCheckbox } from "@/hooks/useCheckbox";
 
 export const CategoryTable = () => {
   const categoryData = [
@@ -56,53 +57,26 @@ export const CategoryTable = () => {
     },
   ];
 
-  const [checkAll, setCheckAll] = useState(false);
-  const [checkItems, setCheckItems] = useState<string[]>([]);
-
-  const handleCheckAll = (checked: boolean) => {
-    setCheckAll(checked);
-    if (checked) {
-      setCheckItems(categoryData.map((item) => item.id));
-    } else {
-      setCheckItems([]);
-    }
-  };
-
-  const handleCheckItem = (id: string, checked: boolean) => {
-    if (checked) {
-      setCheckItems((prev) => [...prev, id]);
-    } else {
-      setCheckItems((prev) => prev.filter((itemId) => itemId !== id));
-    }
-  };
-
-  // Cập nhật trạng thái CheckAll khi tất cả item được check
-  useEffect(() => {
-    if (checkItems.length === categoryData.length) {
-      setCheckAll(true);
-    } else {
-      setCheckAll(false);
-    }
-  }, [categoryData.length, checkItems.length]);
+  const { checkAll, checkItems, handleCheckAll, handleCheckItem } = useCheckbox(
+    { data: categoryData },
+  );
 
   return (
     <div className="srcoll-table border-four mb-[15px] overflow-hidden overflow-x-auto rounded-[14px] border bg-white">
-      <div className="bg-table-head min-w-[1141px] px-6 py-4 shadow-md">
-        <ChangeMultiSelect
-          options={[
-            actionOptions.active,
-            actionOptions.inactive,
-            actionOptions.delete,
-          ]}
-          endpoint={`/${pathAdmin}/category/change-multi`}
-          checkAll={checkAll}
-          checkItems={checkItems}
-        />
-      </div>
+      <TableActionBar
+        options={[
+          actionOptions.active,
+          actionOptions.inactive,
+          actionOptions.delete,
+        ]}
+        endpoint={`/${pathAdmin}/category/change-multi`}
+        checkAll={checkAll}
+        checkItems={checkItems}
+      />
       <table className="text-secondary w-full min-w-[1141px] border-collapse">
         <thead>
           <tr>
-            <th className="border-four border-b py-[15px] pl-[32px]">
+            <th className="border-four border-b py-[15px] pl-6">
               <CustomCheckbox checked={checkAll} setChecked={handleCheckAll} />
             </th>
             <th className="border-four border-b p-[15px] text-left text-sm font-extrabold">
@@ -129,53 +103,61 @@ export const CategoryTable = () => {
           </tr>
         </thead>
         <tbody>
-          {categoryData.map((item) => (
-            <tr key={item.id} className="last:[&>td]:border-0">
-              <td className="border-four border-b py-[8px] pl-[32px]">
-                <CustomCheckbox
-                  checked={checkItems.includes(item.id)}
-                  setChecked={(checked: boolean) =>
-                    handleCheckItem(item.id, checked)
-                  }
-                />
-              </td>
-              <td className="border-four border-b px-[15px] py-[8px] text-left text-sm font-semibold">
-                {item.name}
-              </td>
-              <td className="border-four border-b px-[15px] py-[8px] text-center text-sm font-semibold">
-                <img
-                  src="/assets/images/ha-long.jpg"
-                  className="mx-auto h-[60px] w-[60px] rounded-md object-cover"
-                />
-              </td>
-              <td className="border-four border-b px-[15px] py-[8px] text-center text-sm font-semibold">
-                {item.position}
-              </td>
-              <td className="border-four border-b px-[15px] py-[8px] text-center text-sm font-semibold">
-                {item.status.value === "active" ? (
-                  <Badge className="badge-green" content="Hoạt động" />
-                ) : (
-                  <Badge className="badge-red" content="Tạm dừng" />
-                )}
-              </td>
-              <td className="border-four border-b px-[15px] py-[8px] text-left text-sm font-semibold">
-                <div>Lê Văn A</div>
-                <div>16:30 - 20/10/2024</div>
-              </td>
-              <td className="border-four border-b px-[15px] py-[8px] text-left text-sm font-semibold">
-                <div>Lê Văn A</div>
-                <div>16:30 - 20/10/2024</div>
-              </td>
-              <td className="border-four border-b px-[15px] py-[8px] text-left text-sm font-semibold">
-                <div className="border-four inline-flex items-center rounded-lg border bg-[#FAFBFD]">
-                  <ButtonEdit to={`/${pathAdmin}/category/edit/${item.id}`} />
-                  <ButtonDelete
-                    dataApi={`/${pathAdmin}/category/delete/${item.id}`}
-                  />
-                </div>
-              </td>
-            </tr>
-          ))}
+          {categoryData.length > 0 ? (
+            <>
+              {categoryData.map((item) => (
+                <tr key={item.id} className="last:[&>td]:border-0">
+                  <td className="border-four border-b py-[8px] pl-6">
+                    <CustomCheckbox
+                      checked={checkItems.includes(item.id)}
+                      setChecked={(checked: boolean) =>
+                        handleCheckItem(item.id, checked)
+                      }
+                    />
+                  </td>
+                  <td className="border-four border-b px-[15px] py-[8px] text-left text-sm font-semibold">
+                    {item.name}
+                  </td>
+                  <td className="border-four border-b px-[15px] py-[8px] text-center text-sm font-semibold">
+                    <img
+                      src="/assets/images/ha-long.jpg"
+                      className="mx-auto h-[60px] w-[60px] rounded-md object-cover"
+                    />
+                  </td>
+                  <td className="border-four border-b px-[15px] py-[8px] text-center text-sm font-semibold">
+                    {item.position}
+                  </td>
+                  <td className="border-four border-b px-[15px] py-[8px] text-center text-sm font-semibold">
+                    {item.status.value === "active" ? (
+                      <Badge className="badge-green" content="Hoạt động" />
+                    ) : (
+                      <Badge className="badge-red" content="Tạm dừng" />
+                    )}
+                  </td>
+                  <td className="border-four border-b px-[15px] py-[8px] text-left text-sm font-semibold">
+                    <div>Lê Văn A</div>
+                    <div>16:30 - 20/10/2024</div>
+                  </td>
+                  <td className="border-four border-b px-[15px] py-[8px] text-left text-sm font-semibold">
+                    <div>Lê Văn A</div>
+                    <div>16:30 - 20/10/2024</div>
+                  </td>
+                  <td className="border-four border-b px-[15px] py-[8px] text-left text-sm font-semibold">
+                    <div className="border-four inline-flex items-center rounded-lg border bg-[#FAFBFD]">
+                      <ButtonEdit
+                        to={`/${pathAdmin}/category/edit/${item.id}`}
+                      />
+                      <ButtonDelete
+                        endpoint={`/${pathAdmin}/category/delete/${item.id}`}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </>
+          ) : (
+            <EmptyTableRow colSpan={8} />
+          )}
         </tbody>
       </table>
     </div>

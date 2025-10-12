@@ -5,8 +5,8 @@ export const CustomCheckbox = ({
   checked,
   setChecked,
 }: {
-  checked?: boolean;
-  setChecked?:
+  checked: boolean;
+  setChecked:
     | React.Dispatch<React.SetStateAction<boolean>>
     | ((checked: boolean) => void);
 }) => {
