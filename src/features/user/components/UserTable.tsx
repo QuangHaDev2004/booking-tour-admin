@@ -1,7 +1,7 @@
 import { Badge } from "@/components/badge/Badge";
 import { ButtonDelete } from "@/components/button/ButtonDelete";
 import { ButtonEdit } from "@/components/button/ButtonEdit";
-import { CustomCheckbox } from "@/components/checkbox/Checkbox";
+// import { CustomCheckbox } from "@/components/checkbox/Checkbox";
 import { pathAdmin } from "@/config/path";
 
 export const UserTable = () => {
@@ -11,7 +11,7 @@ export const UserTable = () => {
         <thead>
           <tr>
             <th className="border-b border-[#D5D5D5] py-[15px] pl-[32px]">
-              <CustomCheckbox />
+              {/* <CustomCheckbox /> */}
             </th>
             <th className="border-b border-[#D5D5D5] p-[15px] text-left text-sm font-extrabold">
               Họ tên
@@ -39,7 +39,7 @@ export const UserTable = () => {
         <tbody>
           <tr>
             <td className="border-b border-[#D5D5D5] py-[8px] pl-[32px]">
-              <CustomCheckbox />
+              {/* <CustomCheckbox /> */}
             </td>
             <td className="border-b border-[#D5D5D5] px-[15px] py-[8px] text-left text-sm font-semibold">
               Lê Văn A
