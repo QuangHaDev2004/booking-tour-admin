@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import { pathAdmin } from "@/config/path";
-import { DefaultLayout } from "../layouts/DefaultLayout";
-import { UserList } from "../pages/User/UserList";
+import { DefaultLayout } from "@/layouts/DefaultLayout";
 import { ContactList } from "../pages/Contact/ContactList";
 import { SettingList } from "../pages/Setting/SettingList";
 import { SettingWebsiteInfo } from "../pages/Setting/SettingWebsiteInfo";
@@ -21,6 +20,7 @@ import { TourCreate } from "@/features/tour/TourCreate";
 import { TourTrash } from "@/features/tour/TourTrash";
 import { OrderList } from "@/features/order/OrderList";
 import { OrderEdit } from "@/features/order/OrderEdit";
+import { UserList } from "@/features/user/UserList";
 
 export const router = createBrowserRouter([
   {
