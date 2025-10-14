@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { PageTitle } from "../../components/pageTitle/PageTitle";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormInput } from "../../components/form/FormInput";
-import { FormFileUpload } from "../../components/form/FormFileUpload";
-import { ButtonSubmit } from "../../components/button/ButtonSubmit";
-import { pathAdmin } from "../../config/path";
-import { ContextLink } from "../../components/common/ContextLink";
 import { useState } from "react";
-import { profileEditSchema, type ProfileEditInputs } from "../../types";
+import { profileEditSchema, type ProfileEditInputs } from "@/types";
+import { PageTitle } from "@/components/pageTitle/PageTitle";
+import { FormInput } from "@/components/form/FormInput";
+import { FormFileUpload } from "@/components/form/FormFileUpload";
+import { ButtonSubmit } from "@/components/button/ButtonSubmit";
+import { ContextLink } from "@/components/common/ContextLink";
+import { pathAdmin } from "@/config/path";
 
 export const ProfileEdit = () => {
   const [avatars, setAvatars] = useState<any[]>([]);
@@ -22,16 +22,16 @@ export const ProfileEdit = () => {
   });
 
   const handleProfileEditForm: SubmitHandler<ProfileEditInputs> = (data) => {
-    let avatar = null;
+    data.avatar = null;
     if (avatars.length > 0) {
-      avatar = avatars[0].file;
+      data.avatar = avatars[0].file;
     }
 
     const formData = new FormData();
     formData.append("fullName", data.fullName);
     formData.append("email", data.email);
     formData.append("phone", data.phone);
-    formData.append("avatar", avatar);
+    formData.append("avatar", data.avatar);
 
     console.log(data);
   };
@@ -49,6 +49,7 @@ export const ProfileEdit = () => {
             label="Họ tên"
             register={register("fullName")}
             error={errors.fullName}
+            isRequired
           />
 
           <FormInput
@@ -56,6 +57,7 @@ export const ProfileEdit = () => {
             label="Email"
             register={register("email")}
             error={errors.email}
+            isRequired
           />
 
           <FormInput
@@ -63,6 +65,7 @@ export const ProfileEdit = () => {
             label="Số điện thoại"
             register={register("phone")}
             error={errors.phone}
+            isRequired
           />
 
           <FormInput id="positionCompany" label="Chức vụ" readOnly />

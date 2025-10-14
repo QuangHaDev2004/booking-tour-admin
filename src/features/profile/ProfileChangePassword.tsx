@@ -1,12 +1,12 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { PageTitle } from "../../components/pageTitle/PageTitle";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { PageTitle } from "@/components/pageTitle/PageTitle";
+import { FormInput } from "@/components/form/FormInput";
+import { ButtonSubmit } from "@/components/button/ButtonSubmit";
 import {
   profileChangePasswordSchema,
   type ProfileChangePasswordInputs,
-} from "../../types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ButtonSubmit } from "../../components/button/ButtonSubmit";
-import { FormInput } from "../../components/form/FormInput";
+} from "@/types";
 
 export const ProfileChangePassword = () => {
   const {
@@ -39,6 +39,7 @@ export const ProfileChangePassword = () => {
             label="Mật khẩu"
             register={register("password")}
             error={errors.password}
+            isRequired
           />
 
           <FormInput
@@ -46,6 +47,7 @@ export const ProfileChangePassword = () => {
             label="Nhập lại mật khẩu mới"
             register={register("confirmPassword")}
             error={errors.confirmPassword}
+            isRequired
           />
 
           <ButtonSubmit text="Đổi mật khẩu" />
