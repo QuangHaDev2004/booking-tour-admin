@@ -1,9 +1,8 @@
-import { Link } from "react-router";
-import { CustomCheckbox } from "../../components/checkbox/Checkbox";
-import { Badge } from "../../components/badge/Badge";
-import { FaPenToSquare } from "react-icons/fa6";
-import { ButtonDelete } from "../../components/button/ButtonDelete";
-import { pathAdmin } from "../../config/path";
+import { Badge } from "@/components/badge/Badge";
+import { ButtonDelete } from "@/components/button/ButtonDelete";
+import { ButtonEdit } from "@/components/button/ButtonEdit";
+import { CustomCheckbox } from "@/components/checkbox/Checkbox";
+import { pathAdmin } from "@/config/path";
 
 export const UserTable = () => {
   return (
@@ -68,13 +67,8 @@ export const UserTable = () => {
             </td>
             <td className="border-b border-[#D5D5D5] px-[15px] py-[8px] text-left text-sm font-semibold">
               <div className="inline-flex items-center rounded-lg border border-[#D5D5D5] bg-[#FAFBFD]">
-                <Link
-                  to={`/${pathAdmin}/user/edit`}
-                  className="border-r border-[#D5D5D5] px-[16.5px] py-[10px]"
-                >
-                  <FaPenToSquare className="text-[15px]" />
-                </Link>
-                <ButtonDelete />
+                <ButtonEdit to={`/${pathAdmin}/user/edit`} />
+                <ButtonDelete endpoint={`/${pathAdmin}/user/delete`} />
               </div>
             </td>
           </tr>
