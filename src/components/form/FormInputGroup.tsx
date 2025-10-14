@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { UseFormRegister } from "react-hook-form";
+import {
+  Controller,
+  type Control,
+  type UseFormRegister,
+} from "react-hook-form";
+import CurrencyInput from "react-currency-input-field";
 
 type InputItem = {
   id: string;
@@ -11,9 +16,19 @@ type FormInputProps = {
   title: string;
   items: InputItem[];
   register: UseFormRegister<any>;
+  control: Control<any>;
+  isPrice?: boolean;
+  type?: string;
 };
 
-export const FormInputGroup = ({ title, items, register }: FormInputProps) => {
+export const FormInputGroup = ({
+  title,
+  items,
+  register,
+  control,
+  isPrice,
+  type = "text",
+}: FormInputProps) => {
   return (
     <div>
       <label className="text-label mb-[10px] block text-sm font-semibold">
@@ -28,14 +43,35 @@ export const FormInputGroup = ({ title, items, register }: FormInputProps) => {
             >
               {item.label}
             </label>
-            <input
-              id={item.id}
-              {...register(item.id)}
-              type="text"
-              autoComplete="off"
-              placeholder={item.placeholder}
-              className="border-four text-secondary bg-three h-[52px] w-full flex-1 rounded-sm border px-[22px] text-sm font-medium"
-            />
+            {isPrice ? (
+              <Controller
+                name={item.id}
+                control={control}
+                render={({ field }) => (
+                  <CurrencyInput
+                    id={item.id}
+                    value={field.value || ""}
+                    onValueChange={(value) => field.onChange(value || "")}
+                    intlConfig={{ locale: "vi-VN" }}
+                    allowNegativeValue={false}
+                    onWheel={(e) => e.currentTarget.blur()}
+                    autoComplete="off"
+                    className="border-four text-secondary bg-three h-[52px] w-full flex-1 rounded-sm border px-[22px] text-sm font-medium"
+                  />
+                )}
+              />
+            ) : (
+              <input
+                id={item.id}
+                {...register(item.id)}
+                type={type}
+                autoComplete="off"
+                onWheel={(e) => e.currentTarget.blur()}
+                placeholder={item.placeholder}
+                min={0}
+                className="border-four text-secondary bg-three h-[52px] w-full flex-1 rounded-sm border px-[22px] text-sm font-medium"
+              />
+            )}
           </div>
         ))}
       </div>

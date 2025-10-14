@@ -1,27 +1,32 @@
-import { Controller, useForm, type SubmitHandler } from "react-hook-form";
-import { FormInput } from "../../components/form/FormInput";
-import { PageTitle } from "../../components/pageTitle/PageTitle";
-import { tourFormSchema, type TourFormInputs } from "../../types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ButtonSubmit } from "../../components/button/ButtonSubmit";
-import { FormSelect } from "../../components/form/FormSelect";
-import { FormFileUpload } from "../../components/form/FormFileUpload";
-import { FormInputGroup } from "../../components/form/FormInputGroup";
-import { CustomCheckbox } from "../../components/checkbox/Checkbox";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef, useState } from "react";
-import { pathAdmin } from "../../config/path";
-import { FormEditor } from "../../components/form/FormEditor";
-import { EditorMCE } from "../../components/editor/EditorMCE";
-import { ContextLink } from "../../components/common/ContextLink";
-import {
-  FaChevronDown,
-  FaRegTrashCan,
-  FaUpDownLeftRight,
-} from "react-icons/fa6";
+import { pathAdmin } from "@/config/path";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { tourFormSchema, type TourFormInputs } from "@/types";
+import { PageTitle } from "@/components/pageTitle/PageTitle";
+import { FormInput } from "@/components/form/FormInput";
+import { FormSelect } from "@/components/form/FormSelect";
+import { FormFileUpload } from "@/components/form/FormFileUpload";
+import { FormInputGroup } from "@/components/form/FormInputGroup";
+import { FormEditor } from "@/components/form/FormEditor";
+import { ButtonSubmit } from "@/components/button/ButtonSubmit";
+import { ContextLink } from "@/components/common/ContextLink";
+import { CheckboxGroup } from "@/components/checkbox/CheckboxGroup";
+import { useCheckboxGroup } from "@/hooks/useCheckboxGroup";
+import { TourSchedules } from "./components/TourSchedules";
+
+const City = [
+  { id: "1", label: "Hà Nội" },
+  { id: "2", label: "Hồ Chí Minh" },
+  { id: "3", label: "Đà Nẵng" },
+];
 
 export const TourCreate = () => {
-  const [checked, setChecked] = useState(false);
-  const editorRef = useRef(null);
+  const informationRef = useRef<any>(null);
+  const [avatars, setAvatars] = useState<any[]>([]);
+  const [schedules, setSchedules] = useState([{ title: "", description: "" }]);
+  const { checkedItems, handleCheckboxChange } = useCheckboxGroup();
 
   const {
     register,
@@ -30,10 +35,29 @@ export const TourCreate = () => {
     formState: { errors },
   } = useForm<TourFormInputs>({
     resolver: zodResolver(tourFormSchema),
+    defaultValues: {
+      priceAdult: "",
+      priceChildren: "",
+      priceBaby: "",
+      priceNewAdult: "",
+      priceNewChildren: "",
+      priceNewBaby: "",
+    },
   });
 
   const handleTourForm: SubmitHandler<TourFormInputs> = (data) => {
+    data.avatar = null;
+    if (avatars.length > 0) {
+      data.avatar = avatars[0].file;
+    }
+    data.information = "";
+    if (informationRef.current) {
+      data.information = informationRef.current?.getContent() || "";
+    }
+
     console.log(data);
+    console.log(checkedItems);
+    console.log(schedules);
   };
 
   return (
@@ -49,6 +73,7 @@ export const TourCreate = () => {
             label="Tên tour"
             register={register("name")}
             error={errors.name}
+            isRequired
           />
 
           <FormSelect
@@ -83,7 +108,12 @@ export const TourCreate = () => {
             ]}
           />
 
-          <FormFileUpload id="avatar" label="Ảnh đại diện" control={control} />
+          <FormFileUpload
+            name="avatar"
+            label="Ảnh đại diện"
+            files={avatars}
+            setFiles={setAvatars}
+          />
 
           <FormInputGroup
             title="Giá cũ"
@@ -93,6 +123,8 @@ export const TourCreate = () => {
               { id: "priceBaby", label: "Em bé" },
             ]}
             register={register}
+            control={control}
+            isPrice
           />
 
           <FormInputGroup
@@ -103,6 +135,8 @@ export const TourCreate = () => {
               { id: "priceNewBaby", label: "Em bé" },
             ]}
             register={register}
+            control={control}
+            isPrice
           />
 
           <FormInputGroup
@@ -113,6 +147,8 @@ export const TourCreate = () => {
               { id: "stockBaby", label: "Em bé" },
             ]}
             register={register}
+            control={control}
+            type="number"
           />
 
           <div>
@@ -120,33 +156,14 @@ export const TourCreate = () => {
               Những địa điểm có tour
             </label>
             <div className="border-four bg-three flex h-[166px] flex-col gap-2 overflow-y-auto rounded-sm border px-[23px] py-[14px]">
-              <div className="flex items-center gap-[14px]">
-                <CustomCheckbox checked={checked} setChecked={setChecked} />
-                <label
-                  className="text-secondary text-sm font-medium"
-                  onClick={() => setChecked(!checked)}
-                >
-                  Hà Nội
-                </label>
-              </div>
-              <div className="flex items-center gap-[14px]">
-                <CustomCheckbox checked={checked} setChecked={setChecked} />
-                <label
-                  className="text-secondary text-sm font-medium"
-                  onClick={() => setChecked(!checked)}
-                >
-                  Đà Nẵng
-                </label>
-              </div>
-              <div className="flex items-center gap-[14px]">
-                <CustomCheckbox checked={checked} setChecked={setChecked} />
-                <label
-                  className="text-secondary text-sm font-medium"
-                  onClick={() => setChecked(!checked)}
-                >
-                  Hồ Chí Minh
-                </label>
-              </div>
+              {City.map((item) => (
+                <CheckboxGroup
+                  key={item.id}
+                  label={item.label}
+                  value={item.id}
+                  handleCheckboxChange={handleCheckboxChange}
+                />
+              ))}
             </div>
           </div>
 
@@ -174,54 +191,24 @@ export const TourCreate = () => {
             type="date"
           />
 
-          <FormEditor
-            id="information"
-            label="Thông tin tour"
-            control={control}
+          <FormSelect
+            id="feature"
+            label="Nổi bật"
+            register={register("feature")}
+            error={errors.feature}
+            options={[
+              { value: "false", label: "Không" },
+              { value: "true", label: "Nổi bật" },
+            ]}
           />
 
-          <div className="col-span-1 md:col-span-2">
-            <label className="text-label mb-[10px] block text-sm font-semibold">
-              Lịch trình tour
-            </label>
-            <div className="border-four rounded-sm border bg-white p-5">
-              <div className="mb-[15px] flex flex-wrap items-center gap-[15px]">
-                <div className="bg-three border-four flex h-[52px] w-[52px] cursor-move items-center justify-center rounded-sm border">
-                  <FaUpDownLeftRight className="text-[18px] text-[#A6A6A6]" />
-                </div>
-                <input
-                  type="text"
-                  {...register("schedules.0.title")}
-                  className="border-four text-secondary bg-three order-1 h-[52px] w-full flex-none rounded-sm border px-[18px] text-sm font-medium sm:order-none sm:flex-1"
-                />
-                <div className="bg-three border-four flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-sm border">
-                  <FaRegTrashCan className="text-[18px] text-[#EF3826]" />
-                </div>
-                <div className="bg-three border-four flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-sm border">
-                  <FaChevronDown className="text-[18px] text-[#A6A6A6]" />
-                </div>
-              </div>
-              <div className="">
-                <Controller
-                  control={control}
-                  name="schedules.0.description"
-                  render={({ field: { value } }) => (
-                    <EditorMCE
-                      editorRef={editorRef}
-                      id="description"
-                      value={value}
-                    />
-                  )}
-                />
-              </div>
-            </div>
-            <button
-              type="button"
-              className="bg-four/90 text-secondary mt-[15px] block h-10 cursor-pointer rounded-sm px-5 py-[10px] text-sm font-bold"
-            >
-              + Thêm lich trình
-            </button>
-          </div>
+          <FormEditor
+            editorRef={informationRef}
+            id="information"
+            label="Thông tin tour"
+          />
+
+          <TourSchedules setSchedules={setSchedules} />
 
           <ButtonSubmit />
         </form>

@@ -41,6 +41,7 @@ export const FormInput = ({
         readOnly={readOnly}
         value={value}
         onWheel={(e) => e.currentTarget.blur()}
+        min={0}
         className={`${error ? "border-error" : "border-four"} text-secondary bg-three h-[52px] w-full rounded-sm border px-[22px] text-sm font-medium`}
       />
       {error && (

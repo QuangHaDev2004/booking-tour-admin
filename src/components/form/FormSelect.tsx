@@ -1,7 +1,7 @@
+import type { Option } from "@/types";
 import { Select } from "@headlessui/react";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { FaChevronDown } from "react-icons/fa6";
-import type { Option } from "../../types";
 
 type FormSelectProps = {
   id: string;
@@ -40,7 +40,7 @@ export const FormSelect = ({
             </option>
           ))}
         </Select>
-        <FaChevronDown className="text-[#A6A6A6] pointer-events-none absolute top-1/2 right-[22px] -translate-y-1/2 text-[12px]" />
+        <FaChevronDown className="pointer-events-none absolute top-1/2 right-[22px] -translate-y-1/2 size-3 text-[#A6A6A6]" />
       </div>
       {error && (
         <p className="text-error mt-1 text-xs font-medium">{error.message}</p>
