@@ -7,8 +7,8 @@
   --color-three: #f5f6fa;
   --color-four: #d5d5d5;
   --color-label: #606060;
-  --color-error: #EF3826;
-  --color-table-head: #F1F4F9
+  --color-error: #ef3826;
+  --color-table-head: #f1f4f9;
 }
 
 * {
@@ -143,4 +143,11 @@ textarea {
 .badge-red {
   background-color: rgba(239, 55, 38, 0.2);
   color: var(--color-error);
+}
+
+/* Input number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

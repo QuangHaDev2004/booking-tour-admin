@@ -8,10 +8,10 @@ import { ContextLink } from "../../../components/common/ContextLink";
 import { pathAdmin } from "../../../config/path";
 import { CheckboxGroup } from "../../../components/checkbox/CheckboxGroup";
 import { permissionList } from "../../../constants/permissions";
-import { useState } from "react";
+import { useCheckboxGroup } from "@/hooks/useCheckboxGroup";
 
 export const SettingRoleCreate = () => {
-  const [permissions, setPermissions] = useState<string[]>([]);
+  const { checkedItems, handleCheckboxChange } = useCheckboxGroup();
 
   const {
     register,
@@ -21,16 +21,10 @@ export const SettingRoleCreate = () => {
     resolver: zodResolver(roleSchema),
   });
 
-  const handleChangePermission = (value: string, checked: boolean) => {
-    setPermissions((prev) =>
-      checked ? [...prev, value] : prev.filter((item) => item !== value),
-    );
-  };
-
   const handleRoleForm: SubmitHandler<RoleInputs> = (data) => {
     const dataFinal = {
       ...data,
-      permissions,
+      checkedItems,
     };
     console.log(dataFinal);
   };
@@ -67,7 +61,7 @@ export const SettingRoleCreate = () => {
                   key={item.value}
                   label={item.label}
                   value={item.value}
-                  handleChange={handleChangePermission}
+                  handleCheckboxChange={handleCheckboxChange}
                 />
               ))}
             </div>
