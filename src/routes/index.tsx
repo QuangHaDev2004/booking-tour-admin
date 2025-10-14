@@ -1,8 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import { pathAdmin } from "@/config/path";
 import { DefaultLayout } from "../layouts/DefaultLayout";
-import { OrderList } from "../pages/Order/OrderList";
-import { OrderEdit } from "../pages/Order/OrderEdit";
 import { UserList } from "../pages/User/UserList";
 import { ContactList } from "../pages/Contact/ContactList";
 import { SettingList } from "../pages/Setting/SettingList";
@@ -21,6 +19,8 @@ import { CategoryCreate } from "@/features/category/CategoryCreate";
 import { TourList } from "@/features/tour/TourList";
 import { TourCreate } from "@/features/tour/TourCreate";
 import { TourTrash } from "@/features/tour/TourTrash";
+import { OrderList } from "@/features/order/OrderList";
+import { OrderEdit } from "@/features/order/OrderEdit";
 
 export const router = createBrowserRouter([
   {
