@@ -4,4 +4,5 @@ export const actionOptions = {
   delete: { label: "Xóa", value: "delete" },
   undo: { label: "Khôi phục", value: "undo" },
   destroy: { label: "Xóa vĩnh viễn", value: "destroy" },
+  initial: { label: "Khởi tạo", value: "initial" },
 };
