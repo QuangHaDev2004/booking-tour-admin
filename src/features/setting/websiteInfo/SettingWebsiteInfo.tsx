@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { ContextLink } from "../../components/common/ContextLink";
-import { ButtonSubmit } from "../../components/button/ButtonSubmit";
-import { PageTitle } from "../../components/pageTitle/PageTitle";
-import { pathAdmin } from "../../config/path";
-import { FormInput } from "../../components/form/FormInput";
-import { websiteInfoSchema, type WebsiteInfoInputs } from "../../types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FormFileUpload } from "../../components/form/FormFileUpload";
 import { useState } from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { websiteInfoSchema, type WebsiteInfoInputs } from "@/types";
+import { PageTitle } from "@/components/pageTitle/PageTitle";
+import { FormInput } from "@/components/form/FormInput";
+import { FormFileUpload } from "@/components/form/FormFileUpload";
+import { ButtonSubmit } from "@/components/button/ButtonSubmit";
+import { ContextLink } from "@/components/common/ContextLink";
+import { pathAdmin } from "@/config/path";
 
 export const SettingWebsiteInfo = () => {
   const [logos, setLogos] = useState<any[]>([]);
@@ -23,23 +23,23 @@ export const SettingWebsiteInfo = () => {
   });
 
   const handleWebsiteInfoForm: SubmitHandler<WebsiteInfoInputs> = (data) => {
-    let logo = null;
+    data.logo = null;
     if (logos.length > 0) {
-      logo = logos[0].file;
+      data.logo = logos[0].file;
     }
 
-    let favicon = null;
+    data.favicon = null;
     if (favicons.length > 0) {
-      favicon = favicons[0].file;
+      data.favicon = favicons[0].file;
     }
 
     const formData = new FormData();
     formData.append("websiteName", data.websiteName);
     formData.append("phone", data.phone);
     formData.append("email", data.email);
-    formData.append("address", data.address);
-    formData.append("logo", logo);
-    formData.append("favicon", favicon);
+    formData.append("address", data.address || "");
+    formData.append("logo", data.logo);
+    formData.append("favicon", data.favicon);
 
     console.log(Array.from(formData.entries()));
   };
@@ -57,6 +57,7 @@ export const SettingWebsiteInfo = () => {
             label="Tên website"
             register={register("websiteName")}
             error={errors.websiteName}
+            isRequired
           />
 
           <FormInput
