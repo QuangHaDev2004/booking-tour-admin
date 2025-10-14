@@ -1,12 +1,8 @@
 import { createBrowserRouter } from "react-router";
 import { pathAdmin } from "@/config/path";
 import { DefaultLayout } from "@/layouts/DefaultLayout";
-import { SettingList } from "../pages/Setting/SettingList";
-import { SettingWebsiteInfo } from "../pages/Setting/SettingWebsiteInfo";
-import { SettingAccountAdminList } from "../pages/Setting/AccountAdmin/SettingAccountAdminList";
-import { SettingAccountAdminCreate } from "../pages/Setting/AccountAdmin/SettingAccountAdminCreate";
-import { SettingRoleList } from "../pages/Setting/Role/SettingRoleList";
-import { SettingRoleCreate } from "../pages/Setting/Role/SettingRoleCreate";
+import { SettingRoleList } from "../features/setting/role/SettingRoleList";
+import { SettingRoleCreate } from "../features/setting/role/SettingRoleCreate";
 import { ProfileEdit } from "../pages/Profile/ProfileEdit";
 import { ProfileChangePassword } from "../pages/Profile/ProfileChangePassword";
 import { NotFound } from "../pages/Errors/NotFound";
@@ -21,6 +17,10 @@ import { OrderList } from "@/features/order/OrderList";
 import { OrderEdit } from "@/features/order/OrderEdit";
 import { UserList } from "@/features/user/UserList";
 import { ContactList } from "@/features/contact/ContactList";
+import { SettingList } from "@/features/setting/SettingList";
+import { SettingWebsiteInfo } from "@/features/setting/websiteInfo/SettingWebsiteInfo";
+import { SettingAccountAdminList } from "@/features/setting/account/SettingAccountAdminList";
+import { SettingAccountAdminCreate } from "@/features/setting/account/SettingAccountAdminCreate";
 
 export const router = createBrowserRouter([
   {

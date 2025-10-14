@@ -6,7 +6,7 @@ import {
   ORDER_STATUS_LIST,
   PAYMENT_METHOD_LIST,
   PAYMENT_STATUS_LIST,
-} from "../constants/order.constants";
+} from "../constants/order";
 
 export const OrderFilterBar = () => {
   return (

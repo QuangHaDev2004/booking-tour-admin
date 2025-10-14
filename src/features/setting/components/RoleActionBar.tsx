@@ -3,20 +3,8 @@ import { Link } from "react-router";
 import { Search } from "../../../components/common/Search";
 import { pathAdmin } from "../../../config/path";
 
-export const ActionBarAccountAdmin = () => {
+export const RoleActionBar = () => {
   const ACTION_OPTIONS = [
-    {
-      label: "Khởi tạo",
-      value: "initial",
-    },
-    {
-      label: "Hoạt động",
-      value: "active",
-    },
-    {
-      label: "Tạm dừng",
-      value: "inactive",
-    },
     {
       label: "Xóa",
       value: "delete",
@@ -28,7 +16,7 @@ export const ActionBarAccountAdmin = () => {
       {/* <ActionSelect options={ACTION_OPTIONS} /> */}
       <Search />
       <Link
-        to={`/${pathAdmin}/setting/account-admin/create`}
+        to={`/${pathAdmin}/setting/role/create`}
         className="bg-primary inline-block rounded-[14px] px-8 py-4 text-sm font-bold text-white lg:px-11 lg:py-[25px]"
       >
         + Tạo mới
