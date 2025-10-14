@@ -1,8 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import { pathAdmin } from "@/config/path";
 import { DefaultLayout } from "@/layouts/DefaultLayout";
-import { ProfileEdit } from "../pages/Profile/ProfileEdit";
-import { ProfileChangePassword } from "../pages/Profile/ProfileChangePassword";
 import { NotFound } from "../pages/Errors/NotFound";
 import { Template } from "../pages/Template/Template";
 import { Dashboard } from "@/features/dashboard/Dashboard";
@@ -21,6 +19,8 @@ import { SettingAccountAdminList } from "@/features/setting/account/SettingAccou
 import { SettingAccountAdminCreate } from "@/features/setting/account/SettingAccountAdminCreate";
 import { SettingRoleList } from "@/features/setting/role/SettingRoleList";
 import { SettingRoleCreate } from "@/features/setting/role/SettingRoleCreate";
+import { ProfileEdit } from "@/features/profile/ProfileEdit";
+import { ProfileChangePassword } from "@/features/profile/ProfileChangePassword";
 
 export const router = createBrowserRouter([
   {
