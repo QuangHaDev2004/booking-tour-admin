@@ -1,15 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { ContextLink } from "../../components/common/ContextLink";
-import { ButtonSubmit } from "../../components/button/ButtonSubmit";
-import { PageTitle } from "../../components/pageTitle/PageTitle";
-import { pathAdmin } from "../../config/path";
-import { FormInput } from "../../components/form/FormInput";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { orderFormSchema, type OrderFormInputs } from "../../types";
-import { FormEditor } from "../../components/form/FormEditor";
 import { useRef } from "react";
-import { FormSelect } from "../../components/form/FormSelect";
+import { pathAdmin } from "@/config/path";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { orderFormSchema, type OrderFormInputs } from "@/types";
+import { PageTitle } from "@/components/pageTitle/PageTitle";
+import { FormInput } from "@/components/form/FormInput";
+import { FormEditor } from "@/components/form/FormEditor";
+import { FormSelect } from "@/components/form/FormSelect";
+import { ButtonSubmit } from "@/components/button/ButtonSubmit";
+import { ContextLink } from "@/components/common/ContextLink";
+import { OrderTourList } from "./components/OrderTourList";
+import { OrderSummary } from "./components/OrderSummary";
+import {
+  ORDER_STATUS_LIST,
+  PAYMENT_METHOD_LIST,
+  PAYMENT_STATUS_LIST,
+} from "./constants/order.constants";
 
 export const OrderEdit = () => {
   const editorRef = useRef<any>(null);
@@ -23,7 +30,10 @@ export const OrderEdit = () => {
   });
 
   const handleOrderForm: SubmitHandler<OrderFormInputs> = (data) => {
-    data.note = editorRef.current?.getContent() || "";
+    data.note = "";
+    if (editorRef.current) {
+      data.note = editorRef.current?.getContent();
+    }
 
     console.log(data);
   };
@@ -41,6 +51,7 @@ export const OrderEdit = () => {
             label="Tên khách hàng"
             register={register("fullName")}
             error={errors.fullName}
+            isRequired
           />
 
           <FormInput
@@ -48,6 +59,7 @@ export const OrderEdit = () => {
             label="Số điện thoại"
             register={register("phone")}
             error={errors.phone}
+            isRequired
           />
 
           <FormEditor editorRef={editorRef} id="note" label="Ghi chú" />
@@ -57,10 +69,7 @@ export const OrderEdit = () => {
             label="Phương thức thanh toán"
             register={register("paymentMethod")}
             error={errors.paymentMethod}
-            options={[
-              { label: "pt1", value: "1" },
-              { label: "pt2", value: "2" },
-            ]}
+            options={PAYMENT_METHOD_LIST}
           />
 
           <FormSelect
@@ -68,10 +77,7 @@ export const OrderEdit = () => {
             label="Trạng thái thanh toán"
             register={register("paymentStatus")}
             error={errors.paymentStatus}
-            options={[
-              { label: "tt1", value: "1" },
-              { label: "tt2", value: "2" },
-            ]}
+            options={PAYMENT_STATUS_LIST}
           />
 
           <FormSelect
@@ -79,10 +85,7 @@ export const OrderEdit = () => {
             label="Trạng thái"
             register={register("status")}
             error={errors.status}
-            options={[
-              { value: "active", label: "Hoạt động" },
-              { value: "inactive", label: "Tạm dừng" },
-            ]}
+            options={ORDER_STATUS_LIST}
           />
 
           <FormInput
@@ -95,88 +98,16 @@ export const OrderEdit = () => {
             value="2025-04-14T10:30"
           />
 
-          <div>
-            <label className="text-label mb-[10px] block text-sm font-semibold">
-              Danh sách tour
-            </label>
-            <div className="flex flex-col gap-4">
-              <div className="flex gap-3">
-                <div className="h-[115px] w-[115px] overflow-hidden rounded-md">
-                  <img
-                    src="/assets/images/ha-long.jpg"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div className="flex flex-col gap-[3px]">
-                  <div className="text-secondary/80 text-sm font-semibold">
-                    Tour Hạ Long
-                  </div>
-                  <div className="text-secondary/80 text-xs font-semibold">
-                    Người lớn: 3 x 1.500.000đ
-                  </div>
-                  <div className="text-secondary/80 text-xs font-semibold">
-                    Trẻ em: 2 x 1.300.000đ
-                  </div>
-                  <div className="text-secondary/80 text-xs font-semibold">
-                    Em bé: 2 x 1.000.000đ
-                  </div>
-                  <div className="text-secondary/80 text-xs font-semibold">
-                    Ngày khởi hành: 20/10/2024
-                  </div>
-                  <div className="text-secondary/80 text-xs font-semibold">
-                    Khởi hành tại: Hà Nội
-                  </div>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <div className="h-[115px] w-[115px] overflow-hidden rounded-md">
-                  <img
-                    src="/assets/images/ha-long.jpg"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div className="flex flex-col gap-[3px]">
-                  <div className="text-secondary/80 text-sm font-semibold">
-                    Tour Hạ Long
-                  </div>
-                  <div className="text-secondary/80 text-xs font-semibold">
-                    Người lớn: 3 x 1.500.000đ
-                  </div>
-                  <div className="text-secondary/80 text-xs font-semibold">
-                    Trẻ em: 2 x 1.300.000đ
-                  </div>
-                  <div className="text-secondary/80 text-xs font-semibold">
-                    Em bé: 2 x 1.000.000đ
-                  </div>
-                  <div className="text-secondary/80 text-xs font-semibold">
-                    Ngày khởi hành: 20/10/2024
-                  </div>
-                  <div className="text-secondary/80 text-xs font-semibold">
-                    Khởi hành tại: Hà Nội
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <OrderTourList />
 
-          <div>
-            <label className="text-label mb-[10px] block text-sm font-semibold">
-              Thanh toán
-            </label>
-            <div className="flex flex-col gap-[3px] font-semibold text-sm text-secondary">
-              <div className="">Tổng tiền: 10.000.000đ</div>
-              <div className="">Giảm: 400.000đ</div>
-              <div className="">Mã giảm: TOURMUAHE2024</div>
-              <div className="">
-                <span>Thanh toán: </span>
-                <span className="font-bold text-[#EF3826]">9.600.000đ</span>
-              </div>
-            </div>
-          </div>
+          <OrderSummary />
 
           <ButtonSubmit text="Cập nhật" />
         </form>
-        <ContextLink text="Quay lại danh sách" to={`/${pathAdmin}/category/list`} />
+        <ContextLink
+          text="Quay lại danh sách"
+          to={`/${pathAdmin}/order/list`}
+        />
       </div>
     </>
   );
