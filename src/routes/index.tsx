@@ -1,8 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import { pathAdmin } from "@/config/path";
 import { DefaultLayout } from "@/layouts/DefaultLayout";
-import { NotFound } from "../pages/Errors/NotFound";
-import { Template } from "../pages/Template/Template";
 import { Dashboard } from "@/features/dashboard/Dashboard";
 import { CategoryList } from "@/features/category/CategoryList";
 import { CategoryCreate } from "@/features/category/CategoryCreate";
@@ -21,6 +19,8 @@ import { SettingRoleList } from "@/features/setting/role/SettingRoleList";
 import { SettingRoleCreate } from "@/features/setting/role/SettingRoleCreate";
 import { ProfileEdit } from "@/features/profile/ProfileEdit";
 import { ProfileChangePassword } from "@/features/profile/ProfileChangePassword";
+import { Template } from "@/features/template/Template";
+import { NotFound } from "@/features/error/NotFound";
 
 export const router = createBrowserRouter([
   {

@@ -1,5 +1,5 @@
+import { pathAdmin } from "@/config/path";
 import { Link } from "react-router";
-import { pathAdmin } from "../../config/path";
 
 export const NotFound = () => {
   return (
