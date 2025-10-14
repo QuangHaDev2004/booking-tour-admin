@@ -1,14 +1,14 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { PageTitle } from "../../../components/pageTitle/PageTitle";
-import { roleSchema, type RoleInputs } from "../../../types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormInput } from "../../../components/form/FormInput";
-import { ButtonSubmit } from "../../../components/button/ButtonSubmit";
-import { ContextLink } from "../../../components/common/ContextLink";
-import { pathAdmin } from "../../../config/path";
-import { CheckboxGroup } from "../../../components/checkbox/CheckboxGroup";
-import { permissionList } from "../../../constants/permissions";
 import { useCheckboxGroup } from "@/hooks/useCheckboxGroup";
+import { roleSchema, type RoleInputs } from "@/types";
+import { PageTitle } from "@/components/pageTitle/PageTitle";
+import { FormInput } from "@/components/form/FormInput";
+import { permissionList } from "@/constants/permissions";
+import { CheckboxGroup } from "@/components/checkbox/CheckboxGroup";
+import { ButtonSubmit } from "@/components/button/ButtonSubmit";
+import { ContextLink } from "@/components/common/ContextLink";
+import { pathAdmin } from "@/config/path";
 
 export const SettingRoleCreate = () => {
   const { checkedItems, handleCheckboxChange } = useCheckboxGroup();
@@ -42,6 +42,7 @@ export const SettingRoleCreate = () => {
             label="Tên nhóm quyền"
             register={register("name")}
             error={errors.name}
+            isRequired
           />
 
           <FormInput
