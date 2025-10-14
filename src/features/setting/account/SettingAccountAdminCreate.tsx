@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { ContextLink } from "../../../components/common/ContextLink";
-import { ButtonSubmit } from "../../../components/button/ButtonSubmit";
-import { PageTitle } from "../../../components/pageTitle/PageTitle";
-import { pathAdmin } from "../../../config/path";
-import { FormInput } from "../../../components/form/FormInput";
-import { accountAdminSchema, type AccountAdminInputs } from "../../../types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormFileUpload } from "../../../components/form/FormFileUpload";
 import { useState } from "react";
-import { FormSelect } from "../../../components/form/FormSelect";
+import { accountAdminSchema, type AccountAdminInputs } from "@/types";
+import { PageTitle } from "@/components/pageTitle/PageTitle";
+import { FormInput } from "@/components/form/FormInput";
+import { FormSelect } from "@/components/form/FormSelect";
+import { FormFileUpload } from "@/components/form/FormFileUpload";
+import { ButtonSubmit } from "@/components/button/ButtonSubmit";
+import { ContextLink } from "@/components/common/ContextLink";
+import { pathAdmin } from "@/config/path";
 
 export const SettingAccountAdminCreate = () => {
   const [avatars, setAvatars] = useState<any[]>([]);
@@ -23,12 +23,11 @@ export const SettingAccountAdminCreate = () => {
   });
 
   const handleWebsiteInfoForm: SubmitHandler<AccountAdminInputs> = (data) => {
-    let avatar = null;
+    data.avatar = null;
     if (avatars.length > 0) {
-      avatar = avatars[0].file;
+      data.avatar = avatars[0].file;
     }
 
-    console.log(avatar);
     console.log(data);
   };
 
@@ -45,6 +44,7 @@ export const SettingAccountAdminCreate = () => {
             label="Họ tên"
             register={register("fullName")}
             error={errors.fullName}
+            isRequired
           />
 
           <FormInput
@@ -52,6 +52,7 @@ export const SettingAccountAdminCreate = () => {
             label="Email"
             register={register("email")}
             error={errors.email}
+            isRequired
           />
 
           <FormInput
@@ -59,6 +60,7 @@ export const SettingAccountAdminCreate = () => {
             label="Số điện thoại"
             register={register("phone")}
             error={errors.phone}
+            isRequired
           />
 
           <FormSelect
@@ -77,6 +79,7 @@ export const SettingAccountAdminCreate = () => {
             label="Chức vụ"
             register={register("positionCompany")}
             error={errors.positionCompany}
+            isRequired
           />
 
           <FormSelect
@@ -95,6 +98,7 @@ export const SettingAccountAdminCreate = () => {
             label="Mật khẩu"
             register={register("password")}
             error={errors.password}
+            isRequired
           />
 
           <FormFileUpload
