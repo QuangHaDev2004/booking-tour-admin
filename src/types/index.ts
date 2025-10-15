@@ -193,6 +193,23 @@ export const loginSchema = z.object({
     .string()
     .min(1, "Vui lòng nhập email!")
     .email("Email không đúng định dạng!"),
+  password: z.string().min(1, "Vui lòng nhập mật khẩu!"),
+  rememberPassword: z.string().optional(),
+});
+
+export type LoginInputs = z.infer<typeof loginSchema>;
+
+// Register
+export const registerSchema = z.object({
+  fullName: z
+    .string()
+    .min(1, "Vui lòng nhập họ tên!")
+    .min(5, "Họ tên phải có ít nhất 5 ký tự!")
+    .max(50, "Họ tên không được vượt quá 50 ký tự!"),
+  email: z
+    .string()
+    .min(1, "Vui lòng nhập email!")
+    .email("Email không đúng định dạng!"),
   password: z
     .string()
     .min(1, "Vui lòng nhập mật khẩu!")
@@ -201,7 +218,6 @@ export const loginSchema = z.object({
     .regex(/[a-z]/, "Mật khẩu phải chứa ký tự viết thường!")
     .regex(/[0-9]/, "Mật khẩu phải chứa chữ số!")
     .regex(/[^a-zA-Z0-9\s]/, "Mật khẩu phải chứa ký tự đặc biệt!"),
-  rememberPassword: z.string().optional()
 });
 
-export type LoginInputs = z.infer<typeof loginSchema>
+export type RegisterInputs = z.infer<typeof registerSchema>
