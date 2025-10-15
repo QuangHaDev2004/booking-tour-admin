@@ -19,7 +19,7 @@ import { ProfileChangePassword, ProfileEdit } from "@/features/profile";
 import { Template } from "@/features/template";
 import { NotFound } from "@/features/error";
 import { AccountLayout } from "@/layouts/AccountLayout";
-import { Login } from "@/features/auth";
+import { Login, Register } from "@/features/auth";
 
 export const router = createBrowserRouter([
   {
@@ -111,6 +111,10 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/account/login`,
         element: <Login />,
+      },
+      {
+        path: `/${pathAdmin}/account/register`,
+        element: <Register />,
       },
     ],
   },
