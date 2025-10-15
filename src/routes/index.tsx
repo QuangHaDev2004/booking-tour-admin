@@ -19,7 +19,13 @@ import { ProfileChangePassword, ProfileEdit } from "@/features/profile";
 import { Template } from "@/features/template";
 import { NotFound } from "@/features/error";
 import { AccountLayout } from "@/layouts/AccountLayout";
-import { Login, Register } from "@/features/auth";
+import {
+  ForgotPassword,
+  Login,
+  OtpPassword,
+  Register,
+  ResetPassword,
+} from "@/features/auth";
 
 export const router = createBrowserRouter([
   {
@@ -115,6 +121,18 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/account/register`,
         element: <Register />,
+      },
+      {
+        path: `/${pathAdmin}/account/forgot-password`,
+        element: <ForgotPassword />,
+      },
+      {
+        path: `/${pathAdmin}/account/otp-password`,
+        element: <OtpPassword />,
+      },
+      {
+        path: `/${pathAdmin}/account/reset-password`,
+        element: <ResetPassword />,
       },
     ],
   },

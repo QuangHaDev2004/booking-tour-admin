@@ -19,7 +19,7 @@ export const TextInput = ({
     <div>
       <label
         htmlFor={id}
-        className="text-secondary/80 mb-[15px] inline-block text-lg font-semibold"
+        className="text-secondary/80 mb-2 inline-block text-lg font-semibold"
       >
         {label}
       </label>
