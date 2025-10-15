@@ -1,6 +1,6 @@
 import { PageTitle } from "@/components/pageTitle/PageTitle";
-import { RoleActionBar } from "../components/RoleActionBar";
-import { RoleTable } from "../components/RoleTable";
+import { RoleActionBar } from "./components/RoleActionBar";
+import { RoleTable } from "./components/RoleTable";
 
 export const SettingRoleList = () => {
   return (

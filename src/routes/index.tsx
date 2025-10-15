@@ -1,26 +1,25 @@
 import { createBrowserRouter } from "react-router";
 import { pathAdmin } from "@/config/path";
 import { DefaultLayout } from "@/layouts/DefaultLayout";
-import { Dashboard } from "@/features/dashboard/Dashboard";
-import { CategoryList } from "@/features/category/CategoryList";
-import { CategoryCreate } from "@/features/category/CategoryCreate";
-import { TourList } from "@/features/tour/TourList";
-import { TourCreate } from "@/features/tour/TourCreate";
-import { TourTrash } from "@/features/tour/TourTrash";
-import { OrderList } from "@/features/order/OrderList";
-import { OrderEdit } from "@/features/order/OrderEdit";
-import { UserList } from "@/features/user/UserList";
-import { ContactList } from "@/features/contact/ContactList";
-import { SettingList } from "@/features/setting/SettingList";
-import { SettingWebsiteInfo } from "@/features/setting/websiteInfo/SettingWebsiteInfo";
-import { SettingAccountAdminList } from "@/features/setting/account/SettingAccountAdminList";
-import { SettingAccountAdminCreate } from "@/features/setting/account/SettingAccountAdminCreate";
-import { SettingRoleList } from "@/features/setting/role/SettingRoleList";
-import { SettingRoleCreate } from "@/features/setting/role/SettingRoleCreate";
-import { ProfileEdit } from "@/features/profile/ProfileEdit";
-import { ProfileChangePassword } from "@/features/profile/ProfileChangePassword";
-import { Template } from "@/features/template/Template";
-import { NotFound } from "@/features/error/NotFound";
+import { Dashboard } from "@/features/dashboard";
+import { CategoryCreate, CategoryList } from "@/features/category";
+import { TourCreate, TourList, TourTrash } from "@/features/tour";
+import { OrderEdit, OrderList } from "@/features/order";
+import { UserList } from "@/features/user";
+import { ContactList } from "@/features/contact";
+import {
+  SettingAccountAdminCreate,
+  SettingAccountAdminList,
+  SettingList,
+  SettingRoleCreate,
+  SettingRoleList,
+  SettingWebsiteInfo,
+} from "@/features/setting";
+import { ProfileChangePassword, ProfileEdit } from "@/features/profile";
+import { Template } from "@/features/template";
+import { NotFound } from "@/features/error";
+import { AccountLayout } from "@/layouts/AccountLayout";
+import { Login } from "@/features/auth";
 
 export const router = createBrowserRouter([
   {
@@ -102,6 +101,16 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/template`,
         element: <Template />,
+      },
+    ],
+  },
+  {
+    element: <AccountLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: `/${pathAdmin}/account/login`,
+        element: <Login />,
       },
     ],
   },
