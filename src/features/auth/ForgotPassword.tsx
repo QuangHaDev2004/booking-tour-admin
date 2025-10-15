@@ -2,16 +2,16 @@ import { pathAdmin } from "@/config/path";
 import { AuthBottomLink } from "./components/AuthBottomLink";
 import { AuthDescription } from "./components/AuthDescription";
 import { AuthTitle } from "./components/AuthTitle";
-import { FormRegister } from "./components/forms/FormRegister";
+import { FormForgotPassword } from "./components/forms/FormForgotPassword";
 
-export const Register = () => {
+export const ForgotPassword = () => {
   return (
     <>
-      <AuthTitle title="Đăng ký" />
-      <AuthDescription text="Tạo một tài khoản để tiếp tục" />
-      <FormRegister />
+      <AuthTitle title="Quên mật khẩu" />
+      <AuthDescription text="Vui lòng nhập email để tiếp tục" />
+      <FormForgotPassword />
       <AuthBottomLink
-        text="Bạn đã có tài khoản?"
+        text="Bạn đã nhớ mật khẩu?"
         to={`/${pathAdmin}/account/login`}
         textTo="Đăng nhập"
       />

@@ -172,7 +172,7 @@ export const profileChangePasswordSchema = z
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"], // báo lỗi tại trường confirmPassword
-    message: "Mật khẩu xác nhận không khớp!",
+    error: "Mật khẩu xác nhận không khớp!",
   });
 
 export type ProfileChangePasswordInputs = z.infer<
@@ -218,6 +218,48 @@ export const registerSchema = z.object({
     .regex(/[a-z]/, "Mật khẩu phải chứa ký tự viết thường!")
     .regex(/[0-9]/, "Mật khẩu phải chứa chữ số!")
     .regex(/[^a-zA-Z0-9\s]/, "Mật khẩu phải chứa ký tự đặc biệt!"),
+  agree: z.boolean().refine((value) => value === true, {
+    error: "Bạn phải đồng ý với các điều khoản và điều kiện!",
+  }),
 });
 
-export type RegisterInputs = z.infer<typeof registerSchema>
+export type RegisterInputs = z.infer<typeof registerSchema>;
+
+// Forgot Password
+export const forgotPasswordSchema = z.object({
+  email: z
+    .string()
+    .min(1, "Vui lòng nhập email!")
+    .email("Email không đúng định dạng!"),
+});
+
+export type ForgotPasswordInputs = z.infer<typeof forgotPasswordSchema>;
+
+// OTP Password
+export const otpPasswordSchema = z.object({
+  otp: z.string().min(1, "Vui lòng nhập mã OTP!"),
+});
+
+export type otpPasswordInputs = z.infer<typeof otpPasswordSchema>;
+
+// Reset Password
+export const resetPasswordSchema = z
+  .object({
+    password: z
+      .string()
+      .min(1, "Vui lòng nhập mật khẩu!")
+      .min(8, "Mật khẩu phải chứa ít nhất 8 ký tự!")
+      .regex(/[A-Z]/, "Mật khẩu phải chứa ký tự viết hoa!")
+      .regex(/[a-z]/, "Mật khẩu phải chứa ký tự viết thường!")
+      .regex(/[0-9]/, "Mật khẩu phải chứa chữ số!")
+      .regex(/[^a-zA-Z0-9\s]/, "Mật khẩu phải chứa ký tự đặc biệt!"),
+    confirmPassword: z.string().min(1, "Vui lòng nhập xác nhận mật khẩu!"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"], // báo lỗi tại trường confirmPassword
+    error: "Mật khẩu xác nhận không khớp!",
+  });
+
+export type ResetPasswordInputs = z.infer<
+  typeof resetPasswordSchema
+>;

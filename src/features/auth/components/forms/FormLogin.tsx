@@ -2,10 +2,10 @@ import { loginSchema, type LoginInputs } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { TextInput } from "./inputs/TextInput";
-import { PasswordInput } from "./inputs/PasswordInput";
-import { RememberPasswordField } from "./RememberPasswordField";
-import { ButtonSubmit } from "./buttons/ButtonSubmit";
+import { TextInput } from "../inputs/TextInput";
+import { PasswordInput } from "../inputs/PasswordInput";
+import { RememberPasswordField } from "../RememberPasswordField";
+import { ButtonSubmit } from "../buttons/ButtonSubmit";
 
 export const FormLogin = () => {
   const [rememberPassword, setRememberPassword] = useState(false);
