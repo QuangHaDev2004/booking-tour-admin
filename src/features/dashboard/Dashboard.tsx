@@ -1,8 +1,8 @@
 import { PageTitle } from "@/components/pageTitle/PageTitle";
-import { dashboardStats } from "@/constants/dashboardStats";
 import { StatCard } from "./components/StatCard";
 import { RevenueChart } from "./components/RevenueChart";
 import { DashboardTable } from "./components/DashboardTable";
+import { dashboardStats } from "./constants/dashboardStats";
 
 export const Dashboard = () => {
   return (
