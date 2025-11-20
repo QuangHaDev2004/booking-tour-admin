@@ -2,7 +2,7 @@ import { pathAdmin } from "@/config/path";
 import { AuthBottomLink } from "./components/AuthBottomLink";
 import { AuthDescription } from "./components/AuthDescription";
 import { AuthTitle } from "./components/AuthTitle";
-import { FormForgotPassword } from "./components/forms/FormForgotPassword";
+import { FormForgotPassword } from "./components/form/FormForgotPassword";
 
 export const ForgotPassword = () => {
   return (

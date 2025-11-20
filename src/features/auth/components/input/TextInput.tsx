@@ -19,7 +19,7 @@ export const TextInput = ({
     <div>
       <label
         htmlFor={id}
-        className="text-secondary/80 mb-2 inline-block text-lg font-semibold"
+        className="text-travel-secondary/80 mb-1 inline-block text-sm font-semibold"
       >
         {label}
       </label>
@@ -27,11 +27,10 @@ export const TextInput = ({
         id={id}
         type={type}
         {...register}
-        autoComplete="off"
-        className={`bg-three h-14 w-full rounded-lg border p-4 text-lg font-semibold ${error ? "border-error" : "border-four"}`}
+        className={`bg-travel-three h-12 w-full rounded-lg border p-4 text-sm font-semibold ${error ? "border-travel-error" : "border-travel-four"}`}
       />
       {error && (
-        <p className="text-error mt-1 text-xs font-semibold">{error.message}</p>
+        <p className="text-travel-error mt-1 text-sm font-semibold">{error.message}</p>
       )}
     </div>
   );

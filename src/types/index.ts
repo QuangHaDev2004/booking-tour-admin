@@ -194,7 +194,7 @@ export const loginSchema = z.object({
     .min(1, "Vui lòng nhập email!")
     .email("Email không đúng định dạng!"),
   password: z.string().min(1, "Vui lòng nhập mật khẩu!"),
-  rememberPassword: z.string().optional(),
+  rememberPassword: z.boolean().optional(),
 });
 
 export type LoginInputs = z.infer<typeof loginSchema>;
@@ -260,6 +260,4 @@ export const resetPasswordSchema = z
     error: "Mật khẩu xác nhận không khớp!",
   });
 
-export type ResetPasswordInputs = z.infer<
-  typeof resetPasswordSchema
->;
+export type ResetPasswordInputs = z.infer<typeof resetPasswordSchema>;

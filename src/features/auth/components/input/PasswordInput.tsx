@@ -21,7 +21,7 @@ export const PasswordInput = ({
     <div>
       <label
         htmlFor={id}
-        className="text-secondary/80 mb-2 inline-block text-lg font-semibold"
+        className="text-travel-secondary/80 mb-1 inline-block text-sm font-semibold"
       >
         {label}
       </label>
@@ -30,12 +30,11 @@ export const PasswordInput = ({
           id={id}
           type={visible ? "text" : "password"}
           {...register}
-          autoComplete="off"
-          className={`bg-three h-14 w-full rounded-lg border p-4 text-lg font-semibold ${error ? "border-error" : "border-four"}`}
+          className={`bg-travel-three h-11 w-full rounded-lg border p-4 text-sm font-semibold ${error ? "border-travel-error" : "border-travel-four"}`}
         />
         <div
           onClick={() => setVisible(!visible)}
-          className="text-secondary/60 absolute top-1/2 right-4 size-5 -translate-y-1/2 cursor-pointer"
+          className="text-travel-secondary/60 absolute top-1/2 right-4 size-5 -translate-y-1/2 cursor-pointer"
         >
           {visible ? (
             <FaRegEyeSlash className="size-5" />
@@ -45,7 +44,7 @@ export const PasswordInput = ({
         </div>
       </div>
       {error && (
-        <p className="text-error mt-1 text-xs font-semibold">{error.message}</p>
+        <p className="text-error mt-1 text-sm font-semibold">{error.message}</p>
       )}
     </div>
   );

@@ -1,14 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
 @import "tailwindcss";
+@plugin "daisyui" {
+  exclude: scrollbar;
+}
 
 @theme {
-  --color-primary: #4880ff;
-  --color-secondary: #202224;
-  --color-three: #f5f6fa;
-  --color-four: #d5d5d5;
-  --color-label: #606060;
-  --color-error: #ef3826;
-  --color-table-head: #f1f4f9;
+  --color-travel-primary: #4880ff;
+  --color-travel-secondary: #202224;
+  --color-travel-three: #f5f6fa;
+  --color-travel-four: #d5d5d5;
+  --color-travel-label: #606060;
+  --color-travel-error: #ef3826;
+  --color-travel-table-head: #f1f4f9;
 }
 
 * {
@@ -16,7 +19,7 @@
 }
 
 body {
-  background-color: var(--color-three);
+  background-color: var(--color-travel-three);
 }
 
 button,
@@ -24,6 +27,17 @@ input,
 select,
 textarea {
   outline: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background-color: #d9d9d9;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #b1b1b1;
 }
 
 .sider::-webkit-scrollbar {
@@ -142,7 +156,7 @@ textarea {
 
 .badge-red {
   background-color: rgba(239, 55, 38, 0.2);
-  color: var(--color-error);
+  color: var(--color-travel-error);
 }
 
 /* Input number */

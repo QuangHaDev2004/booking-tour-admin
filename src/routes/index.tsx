@@ -24,6 +24,7 @@ import {
   Login,
   OtpPassword,
   Register,
+  RegisterInitial,
   ResetPassword,
 } from "@/features/auth";
 
@@ -133,6 +134,10 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/account/reset-password`,
         element: <ResetPassword />,
+      },
+      {
+        path: `/${pathAdmin}/account/register-initial`,
+        element: <RegisterInitial />,
       },
     ],
   },

@@ -1,8 +1,8 @@
 import { forgotPasswordSchema, type ForgotPasswordInputs } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { TextInput } from "../inputs/TextInput";
-import { ButtonSubmit } from "../buttons/ButtonSubmit";
+import { TextInput } from "../input/TextInput";
+import { ButtonSubmit } from "../button/ButtonSubmit";
 
 export const FormForgotPassword = () => {
   const {
