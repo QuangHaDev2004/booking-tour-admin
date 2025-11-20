@@ -10,9 +10,9 @@ export const AuthBottomLink = ({
   textTo: string;
 }) => {
   return (
-    <div className="mt-[30px] flex items-center justify-center gap-2.5 text-lg">
-      <span className="text-secondary/65 font-semibold">{text}</span>
-      <Link to={to} className="text-primary font-bold underline">
+    <div className="mt-4 flex items-center justify-center gap-2.5 text-lg">
+      <span className="text-travel-secondary/65 font-semibold">{text}</span>
+      <Link to={to} className="text-travel-primary font-bold underline">
         {textTo}
       </Link>
     </div>

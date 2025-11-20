@@ -1,8 +1,8 @@
 import { resetPasswordSchema, type ResetPasswordInputs } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { PasswordInput } from "../inputs/PasswordInput";
-import { ButtonSubmit } from "../buttons/ButtonSubmit";
+import { PasswordInput } from "../input/PasswordInput";
+import { ButtonSubmit } from "../button/ButtonSubmit";
 
 export const FormResetPassword = () => {
   const {

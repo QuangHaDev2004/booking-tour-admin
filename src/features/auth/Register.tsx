@@ -2,7 +2,7 @@ import { pathAdmin } from "@/config/path";
 import { AuthBottomLink } from "./components/AuthBottomLink";
 import { AuthDescription } from "./components/AuthDescription";
 import { AuthTitle } from "./components/AuthTitle";
-import { FormRegister } from "./components/forms/FormRegister";
+import { FormRegister } from "./components/form/FormRegister";
 
 export const Register = () => {
   return (

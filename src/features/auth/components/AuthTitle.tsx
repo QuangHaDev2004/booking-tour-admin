@@ -1,7 +1,7 @@
 export const AuthTitle = ({ title }: { title: string }) => {
   return (
     <>
-      <h1 className="text-secondary mb-[15px] text-center text-[32px] font-bold">
+      <h1 className="text-travel-secondary mb-2 text-center text-3xl font-bold">
         {title}
       </h1>
     </>
