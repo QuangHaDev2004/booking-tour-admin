@@ -27,10 +27,15 @@ import {
   RegisterInitial,
   ResetPassword,
 } from "@/features/auth";
+import { ProtectedRoute } from "@/features/auth/components/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
-    element: <DefaultLayout />,
+    element: (
+      <ProtectedRoute>
+        <DefaultLayout />
+      </ProtectedRoute>
+    ),
     errorElement: <NotFound />,
     children: [
       {
