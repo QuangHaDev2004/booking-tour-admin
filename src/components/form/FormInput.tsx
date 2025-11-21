@@ -27,10 +27,10 @@ export const FormInput = ({
     <div>
       <label
         htmlFor={id}
-        className="text-label mb-[10px] block text-sm font-semibold"
+        className="text-travel-label mb-[10px] block text-sm font-semibold"
       >
         <span>{label}</span>
-        {isRequired && <span className="text-error ml-1">*</span>}
+        {isRequired && <span className="text-travel-error ml-1">*</span>}
       </label>
       <input
         {...register}
@@ -42,10 +42,10 @@ export const FormInput = ({
         value={value}
         onWheel={(e) => e.currentTarget.blur()}
         min={0}
-        className={`${error ? "border-error" : "border-four"} text-secondary bg-three h-[52px] w-full rounded-sm border px-[22px] text-sm font-medium`}
+        className={`${error ? "border-travel-error" : "border-travel-four"} text-travel-secondary bg-travel-three h-[52px] w-full rounded-sm border px-[22px] text-sm font-medium`}
       />
       {error && (
-        <p className="text-error mt-1 text-xs font-medium">{error.message}</p>
+        <p className="text-travel-error mt-1 text-sm font-medium">{error.message}</p>
       )}
     </div>
   );
