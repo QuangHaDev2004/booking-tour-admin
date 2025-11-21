@@ -7,8 +7,14 @@ import { actionOptions } from "@/constants/actionOptions";
 import { TableActionBar } from "@/components/table/TableActionBar";
 import { EmptyTableRow } from "@/components/table/EmptyTableRow";
 import { useCheckbox } from "@/hooks/useCheckbox";
+import { useCategoryList } from "../hooks/useCategoryList";
+import type { CategoryItem } from "@/types/category";
+import dayjs from "dayjs";
 
 export const CategoryTable = () => {
+  const { categoryList } = useCategoryList();
+  // console.log(categoryList);
+
   const categoryData = [
     {
       id: "1",
@@ -62,7 +68,7 @@ export const CategoryTable = () => {
   );
 
   return (
-    <div className="srcoll-table border-four mb-[15px] overflow-hidden overflow-x-auto rounded-[14px] border bg-white">
+    <div className="srcoll-table border-travel-four mb-[15px] overflow-hidden overflow-x-auto rounded-[14px] border bg-white">
       <TableActionBar
         options={[
           actionOptions.active,
@@ -73,41 +79,41 @@ export const CategoryTable = () => {
         checkAll={checkAll}
         checkItems={checkItems}
       />
-      <table className="text-secondary w-full min-w-[1141px] border-collapse">
+      <table className="text-travel-secondary w-full min-w-[1141px] border-collapse">
         <thead>
           <tr>
-            <th className="border-four border-b py-[15px] pl-6">
+            <th className="border-travel-four border-b py-[15px] pl-6">
               <CustomCheckbox checked={checkAll} setChecked={handleCheckAll} />
             </th>
-            <th className="border-four border-b p-[15px] text-left text-sm font-extrabold">
+            <th className="border-travel-four border-b p-[15px] text-left text-sm font-extrabold">
               Tên danh mục
             </th>
-            <th className="border-four border-b p-[15px] text-center text-sm font-extrabold">
+            <th className="border-travel-four border-b p-[15px] text-center text-sm font-extrabold">
               Ảnh đại diện
             </th>
-            <th className="border-four border-b p-[15px] text-center text-sm font-extrabold">
+            <th className="border-travel-four border-b p-[15px] text-center text-sm font-extrabold">
               Vị trí
             </th>
-            <th className="border-four border-b p-[15px] text-center text-sm font-extrabold">
+            <th className="border-travel-four border-b p-[15px] text-center text-sm font-extrabold">
               Trạng thái
             </th>
-            <th className="border-four border-b p-[15px] text-left text-sm font-extrabold">
+            <th className="border-travel-four border-b p-[15px] text-left text-sm font-extrabold">
               Tạo bởi
             </th>
-            <th className="border-four border-b p-[15px] text-left text-sm font-extrabold">
+            <th className="border-travel-four border-b p-[15px] text-left text-sm font-extrabold">
               Cập nhật bởi
             </th>
-            <th className="border-four border-b p-[15px] text-left text-sm font-extrabold">
+            <th className="border-travel-four border-b p-[15px] text-left text-sm font-extrabold">
               Hành động
             </th>
           </tr>
         </thead>
         <tbody>
-          {categoryData.length > 0 ? (
+          {categoryList.length > 0 ? (
             <>
-              {categoryData.map((item) => (
+              {categoryList.map((item: CategoryItem) => (
                 <tr key={item.id} className="last:[&>td]:border-0">
-                  <td className="border-four border-b py-[8px] pl-6">
+                  <td className="border-travel-four border-b py-[8px] pl-6">
                     <CustomCheckbox
                       checked={checkItems.includes(item.id)}
                       setChecked={(checked: boolean) =>
@@ -115,35 +121,42 @@ export const CategoryTable = () => {
                       }
                     />
                   </td>
-                  <td className="border-four border-b px-[15px] py-[8px] text-left text-sm font-semibold">
+                  <td className="border-travel-four border-b px-[15px] py-[8px] text-left text-sm font-semibold">
                     {item.name}
                   </td>
-                  <td className="border-four border-b px-[15px] py-[8px] text-center text-sm font-semibold">
+                  <td className="border-travel-four border-b px-[15px] py-[8px] text-center text-sm font-semibold">
                     <img
-                      src="/assets/images/ha-long.jpg"
-                      className="mx-auto h-[60px] w-[60px] rounded-md object-cover"
+                      src={
+                        item.avatar ||
+                        "https://placehold.co/60x60/white/black?text=No+Image"
+                      }
+                      className="border-travel-four mx-auto h-[60px] w-[60px] rounded-md border object-cover"
                     />
                   </td>
-                  <td className="border-four border-b px-[15px] py-[8px] text-center text-sm font-semibold">
+                  <td className="border-travel-four border-b px-[15px] py-[8px] text-center text-sm font-semibold">
                     {item.position}
                   </td>
-                  <td className="border-four border-b px-[15px] py-[8px] text-center text-sm font-semibold">
-                    {item.status.value === "active" ? (
+                  <td className="border-travel-four border-b px-[15px] py-[8px] text-center text-sm font-semibold">
+                    {item.status === "active" ? (
                       <Badge className="badge-green" content="Hoạt động" />
                     ) : (
                       <Badge className="badge-red" content="Tạm dừng" />
                     )}
                   </td>
-                  <td className="border-four border-b px-[15px] py-[8px] text-left text-sm font-semibold">
-                    <div>Lê Văn A</div>
-                    <div>16:30 - 20/10/2024</div>
+                  <td className="border-travel-four border-b px-[15px] py-2 text-left text-sm font-semibold">
+                    <div>{item.createdByFullName}</div>
+                    <div>
+                      {dayjs(item.createdAt).format("HH:mm - DD/MM/YYYY")}
+                    </div>
                   </td>
-                  <td className="border-four border-b px-[15px] py-[8px] text-left text-sm font-semibold">
-                    <div>Lê Văn A</div>
-                    <div>16:30 - 20/10/2024</div>
+                  <td className="border-travel-four border-b px-[15px] py-2 text-left text-sm font-semibold">
+                    <div>{item.updatedByFullName}</div>
+                    <div>
+                      {dayjs(item.updatedAt).format("HH:mm - DD/MM/YYYY")}
+                    </div>
                   </td>
-                  <td className="border-four border-b px-[15px] py-[8px] text-left text-sm font-semibold">
-                    <div className="border-four inline-flex items-center rounded-lg border bg-[#FAFBFD]">
+                  <td className="border-travel-four border-b px-[15px] py-2 text-left text-sm font-semibold">
+                    <div className="border-travel-four inline-flex items-center rounded-lg border bg-[#FAFBFD]">
                       <ButtonEdit
                         to={`/${pathAdmin}/category/edit/${item.id}`}
                       />

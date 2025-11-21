@@ -14,8 +14,8 @@ import { useMutation } from "@tanstack/react-query";
 import { createCategoryService } from "@/services/category";
 import { toast } from "sonner";
 import type { AxiosError } from "axios";
-import { useGetCategories } from "@/hooks/useGetCategories";
-import { renderOptions } from "@/utils/RenderOptions";
+import { useCategoryList } from "./hooks/useCategoryList";
+import { renderOptions } from "@/utils/renderOptions";
 
 export const CategoryCreate = () => {
   const editorRef = useRef<any>(null);
@@ -27,11 +27,10 @@ export const CategoryCreate = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<CategoryFormInputs>({
-    resolver: zodResolver(categoryFormSchema),
+    resolver: zodResolver(categoryFormSchema) as any,
   });
 
-  const { categoryList } = useGetCategories();
-  console.log(categoryList);
+  const { categoryTree } = useCategoryList();
 
   const { mutate, isPending } = useMutation({
     mutationFn: createCategoryService,
@@ -58,7 +57,7 @@ export const CategoryCreate = () => {
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("parent", data.parent || "");
-    formData.append("position", data.position || "");
+    formData.append("position", String(data.position || ""));
     formData.append("status", data.status || "");
     formData.append("avatar", data.avatar);
     formData.append("description", data.description || "");
@@ -94,7 +93,7 @@ export const CategoryCreate = () => {
               className="select bg-travel-three text-travel-secondary h-[52px] w-full px-[22px] text-sm font-medium"
             >
               <option value="">-- Chọn danh mục --</option>
-              {renderOptions(categoryList)}
+              {renderOptions(categoryTree)}
             </select>
           </div>
 

@@ -7,7 +7,7 @@ export const Badge = ({
 }) => {
   return (
     <div
-      className={`inline-block rounded-[4.5px] px-5 py-[6px] text-xs font-bold ${className}`}
+      className={`inline-block rounded-[4.5px] px-5 py-1.5 text-xs font-bold ${className}`}
     >
       {content}
     </div>

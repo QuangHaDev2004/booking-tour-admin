@@ -32,8 +32,8 @@ export const Search = ({ placeholder }: { placeholder: string }) => {
   };
 
   return (
-    <div className="border-four inline-flex w-[366px] items-center gap-4 rounded-lg border bg-white p-4 text-sm font-bold">
-      <IoSearch className="text-secondary/60 text-[20px]" />
+    <div className="border-travel-four inline-flex w-[366px] items-center gap-4 rounded-lg border bg-white p-4 text-sm font-bold">
+      <IoSearch className="text-travel-secondary/60 text-[20px]" />
       <input
         type="text"
         value={keyword}
@@ -45,7 +45,7 @@ export const Search = ({ placeholder }: { placeholder: string }) => {
       {keyword && (
         <FaRegCircleXmark
           onClick={handleClear}
-          className="text-secondary/60 cursor-pointer text-lg"
+          className="text-travel-secondary/60 cursor-pointer text-lg"
         />
       )}
     </div>
