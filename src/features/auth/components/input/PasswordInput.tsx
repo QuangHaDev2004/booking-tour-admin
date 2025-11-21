@@ -44,7 +44,7 @@ export const PasswordInput = ({
         </div>
       </div>
       {error && (
-        <p className="text-error mt-1 text-sm font-semibold">{error.message}</p>
+        <p className="text-travel-error mt-1 text-sm font-semibold">{error.message}</p>
       )}
     </div>
   );

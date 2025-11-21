@@ -54,7 +54,7 @@ textarea {
 
 .nav-item.active::before {
   content: "";
-  @apply bg-primary absolute top-0 left-[-24px] h-full w-[4.5px] rounded-tr-sm rounded-br-sm;
+  @apply bg-travel-primary absolute top-0 left-[-24px] h-full w-[4.5px] rounded-tr-sm rounded-br-sm;
 }
 
 /* Table */
@@ -91,7 +91,7 @@ textarea {
 }
 
 .filepond--root .filepond--action-remove-item {
-  background-color: var(--color-error);
+  background-color: var(--color-travel-error);
   cursor: pointer;
 }
 

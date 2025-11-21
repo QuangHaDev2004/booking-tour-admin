@@ -1,4 +1,5 @@
 import { pathAdmin } from "@/config/path";
+import { useAuthStore } from "@/stores/useAuthStore";
 import { FaBars } from "react-icons/fa6";
 import { Link } from "react-router";
 
@@ -7,6 +8,8 @@ type HeaderProps = {
 };
 
 export const Header = ({ onOpenSidebar }: HeaderProps) => {
+  const account = useAuthStore((s) => s.account); // component chỉ render lại khi account thay đổi
+
   return (
     <>
       <div className="fixed top-0 left-0 z-[997] flex h-[70px] w-full items-center border-b border-[#E0E0E0] bg-white">
@@ -14,8 +17,8 @@ export const Header = ({ onOpenSidebar }: HeaderProps) => {
           to={`${pathAdmin}/dashboard`}
           className="ml-[15px] flex h-full w-auto items-center justify-center text-2xl font-extrabold transition-all duration-200 sm:ml-0 sm:w-60"
         >
-          <span className="text-primary">HW</span>
-          <span className="text-secondary">Admin</span>
+          <span className="text-travel-primary">36</span>
+          <span className="text-travel-secondary">Admin</span>
         </Link>
         <div className="mr-[15px] flex flex-1 items-center justify-end gap-5 sm:mr-[30px] sm:gap-10">
           <div className="relative h-[25px] cursor-pointer">
@@ -35,7 +38,9 @@ export const Header = ({ onOpenSidebar }: HeaderProps) => {
               />
             </div>
             <div className="flex flex-1 flex-col gap-[3px]">
-              <div className="text-sm font-bold text-[#404040]">Full Name</div>
+              <div className="text-sm font-bold text-[#404040]">
+                {account?.fullName}
+              </div>
               <div className="text-[12px] font-semibold text-[#565656]">
                 Role
               </div>

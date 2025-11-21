@@ -1,8 +1,10 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FaPowerOff } from "react-icons/fa6";
 import { useLocation } from "react-router";
 import { mainMenus, settingMenus } from "@/constants/menus";
 import { checkActive } from "@/helpers/checkActive";
+import { useAuthStore } from "@/stores/useAuthStore";
+import { pathAdmin } from "@/config/path";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -11,6 +13,13 @@ type SidebarProps = {
 
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuthStore();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate(`/${pathAdmin}/account/login`);
+  };
 
   return (
     <>
@@ -24,7 +33,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
               <li key={item.to}>
                 <Link
                   to={item.to}
-                  className={`nav-item ${isActive ? "active bg-primary text-white" : "text-secondary"}`}
+                  className={`nav-item ${isActive ? "active bg-travel-primary text-white" : "text-travel-secondary"}`}
                 >
                   <item.icon className="text-lg" />
                   {item.label}
@@ -41,7 +50,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
               <li key={item.to}>
                 <Link
                   to={item.to}
-                  className={`nav-item ${isActive ? "active bg-primary text-white" : "text-secondary"}`}
+                  className={`nav-item ${isActive ? "active bg-travel-primary text-white" : "text-travel-secondary"}`}
                 >
                   <item.icon className="text-lg" />
                   {item.label}
@@ -49,7 +58,10 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
               </li>
             );
           })}
-          <button className="nav-item cursor-pointer text-[#F93C65]">
+          <button
+            onClick={handleLogout}
+            className="nav-item cursor-pointer text-[#F93C65]"
+          >
             <FaPowerOff className="text-lg" /> Đăng xuất
           </button>
         </ul>

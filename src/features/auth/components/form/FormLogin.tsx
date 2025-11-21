@@ -5,15 +5,37 @@ import { TextInput } from "../input/TextInput";
 import { PasswordInput } from "../input/PasswordInput";
 import { ButtonSubmit } from "../button/ButtonSubmit";
 import { pathAdmin } from "@/config/path";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useMutation } from "@tanstack/react-query";
+import { loginService } from "@/services/auth";
+import type { AxiosError } from "axios";
+import { toast } from "sonner";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 export const FormLogin = () => {
+  const navigate = useNavigate();
+  const { setAccessToken, fetchMe } = useAuthStore();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginInputs>({
     resolver: zodResolver(loginSchema),
+  });
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: loginService,
+    onSuccess: async (data) => {
+      setAccessToken(data.accessToken);
+      await fetchMe();
+
+      toast.success(data.message);
+      navigate(`/${pathAdmin}/dashboard`);
+    },
+    onError: (errors: AxiosError<{ message: string }>) => {
+      toast.error(errors?.response?.data?.message);
+    },
   });
 
   const handleLoginForm: SubmitHandler<LoginInputs> = (data) => {
@@ -23,7 +45,7 @@ export const FormLogin = () => {
       rememberPassword: data.rememberPassword,
     };
 
-    console.log(dataFinal);
+    mutate(dataFinal);
   };
 
   return (
@@ -62,7 +84,7 @@ export const FormLogin = () => {
         </Link>
       </div>
 
-      <ButtonSubmit label="Đăng nhập" />
+      <ButtonSubmit label="Đăng nhập" isPending={isPending} />
     </form>
   );
 };
