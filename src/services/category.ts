@@ -23,3 +23,8 @@ export const editCategoryService = async (
   const res = await api.patch(`/${pathAdmin}/category/edit/${id}`, dataFinal);
   return res.data;
 };
+
+export const deleteCategoryService = async (id: string) => {
+  const res = await api.patch(`/${pathAdmin}/category/delete/${id}`);
+  return res.data;
+};

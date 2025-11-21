@@ -10,9 +10,11 @@ import { useCheckbox } from "@/hooks/useCheckbox";
 import { useCategoryList } from "../hooks/useCategoryList";
 import type { CategoryItem } from "@/types/category";
 import dayjs from "dayjs";
+import { useCategoryDelete } from "../hooks/useCategoryDelete";
 
 export const CategoryTable = () => {
   const { categoryList } = useCategoryList();
+  const { mutate, isPending } = useCategoryDelete();
   // console.log(categoryList);
 
   const categoryData = [
@@ -161,7 +163,9 @@ export const CategoryTable = () => {
                         to={`/${pathAdmin}/category/edit/${item.id}`}
                       />
                       <ButtonDelete
-                        endpoint={`/${pathAdmin}/category/delete/${item.id}`}
+                        id={item.id}
+                        isPending={isPending}
+                        onDelete={(id) => mutate(id)}
                       />
                     </div>
                   </td>
