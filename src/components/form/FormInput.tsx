@@ -10,6 +10,7 @@ type FormInputProps = {
   readOnly?: boolean;
   value?: string;
   isRequired?: boolean;
+  defaultValue?: string | number;
 };
 
 export const FormInput = ({
@@ -22,6 +23,7 @@ export const FormInput = ({
   readOnly,
   value,
   isRequired,
+  defaultValue,
 }: FormInputProps) => {
   return (
     <div>
@@ -37,6 +39,7 @@ export const FormInput = ({
         id={id}
         type={type}
         placeholder={placeholder}
+        defaultValue={defaultValue}
         autoComplete="off"
         readOnly={readOnly}
         value={value}
@@ -45,7 +48,9 @@ export const FormInput = ({
         className={`${error ? "border-travel-error" : "border-travel-four"} text-travel-secondary bg-travel-three h-[52px] w-full rounded-sm border px-[22px] text-sm font-medium`}
       />
       {error && (
-        <p className="text-travel-error mt-1 text-sm font-medium">{error.message}</p>
+        <p className="text-travel-error mt-1 text-sm font-medium">
+          {error.message}
+        </p>
       )}
     </div>
   );

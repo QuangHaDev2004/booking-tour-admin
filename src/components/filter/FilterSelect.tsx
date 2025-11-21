@@ -31,7 +31,7 @@ export const FilterSelect = ({
       <Select
         value={currentValue}
         onChange={handleChange}
-        className="border-four cursor-pointer appearance-none border-r py-4 pr-12 pl-4"
+        className="border-travel-four cursor-pointer appearance-none border-r py-4 pr-12 pl-4"
       >
         <option value="">{placeholder}</option>
         {options.map((option) => (

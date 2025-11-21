@@ -6,7 +6,20 @@ export const createCategoryService = async (dataFinal: FormData) => {
   return res.data;
 };
 
-export const getCategoriesService = async () => {
+export const getCategoryListService = async () => {
   const res = await api.get(`/${pathAdmin}/category/list`);
+  return res.data;
+};
+
+export const getCategoryDetailService = async (id: string | undefined) => {
+  const res = await api.get(`/${pathAdmin}/category/edit/${id}`);
+  return res.data;
+};
+
+export const editCategoryService = async (
+  id: string | undefined,
+  dataFinal: FormData,
+) => {
+  const res = await api.patch(`/${pathAdmin}/category/edit/${id}`, dataFinal);
   return res.data;
 };

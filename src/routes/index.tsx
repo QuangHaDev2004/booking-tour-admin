@@ -2,7 +2,11 @@ import { createBrowserRouter } from "react-router";
 import { pathAdmin } from "@/config/path";
 import { DefaultLayout } from "@/layouts/DefaultLayout";
 import { Dashboard } from "@/features/dashboard";
-import { CategoryCreate, CategoryList } from "@/features/category";
+import {
+  CategoryCreate,
+  CategoryEdit,
+  CategoryList,
+} from "@/features/category";
 import { TourCreate, TourList, TourTrash } from "@/features/tour";
 import { OrderEdit, OrderList } from "@/features/order";
 import { UserList } from "@/features/user";
@@ -49,6 +53,10 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/category/create`,
         element: <CategoryCreate />,
+      },
+      {
+        path: `/${pathAdmin}/category/edit/:id`,
+        element: <CategoryEdit />,
       },
       {
         path: `/${pathAdmin}/tour/list`,

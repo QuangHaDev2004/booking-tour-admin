@@ -4,7 +4,7 @@ import { z } from "zod";
 export const categoryFormSchema = z.object({
   name: z.string().min(1, "Vui lòng nhập tên danh mục!"),
   parent: z.string().optional(),
-  position: z.string().optional(),
+  position: z.coerce.number().optional(),
   status: z.string().optional(),
   avatar: z.any(),
   description: z.string().optional(),
