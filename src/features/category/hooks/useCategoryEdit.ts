@@ -14,7 +14,7 @@ export const useCategoryEdit = (id?: string) => {
         queryKey: ["categoryDetail"],
         exact: false,
       });
-      queryClient.invalidateQueries({ queryKey: ["categories"] });
+      queryClient.invalidateQueries({ queryKey: ["categoryList"] });
     },
     onError: (errors: AxiosError<{ message: string }>) => {
       toast.error(errors?.response?.data?.message);
