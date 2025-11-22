@@ -1,39 +1,50 @@
-import { Select } from "@headlessui/react";
-import { FaChevronDown } from "react-icons/fa6";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSearchParams } from "react-router";
 
-export const Pagination = () => {
+export const Pagination = ({
+  pagination,
+  list,
+}: {
+  pagination: {
+    skip: number;
+    totalRecord: number;
+    totalPage: number;
+  };
+  list: any;
+}) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentPageParam = searchParams.get("page") || "";
+  const page = searchParams.get("page") || "";
 
   const handlePageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-    const newParams = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams);
     if (value) {
-      newParams.set("page", value);
+      params.set("page", value);
     } else {
-      newParams.delete("page");
+      params.delete("page");
     }
-    setSearchParams(newParams);
+    setSearchParams(params);
   };
 
   return (
     <div className="flex items-center gap-5">
       <div className="text-travel-secondary/60 text-sm font-semibold">
-        Hiển thị 1 - 9 của 78
+        Hiển thị {pagination.skip + 1} - {pagination.skip + list.length} của{" "}
+        {pagination.totalRecord}
       </div>
-      <div className="relative">
-        <Select
-          value={currentPageParam}
-          onChange={handlePageChange}
-          className="text-travel-secondary/60 border-travel-four cursor-pointer appearance-none rounded-lg border py-1.5 pr-12 pl-[14px] font-semibold"
-        >
-          <option value="1">Trang 1</option>
-          <option value="2">Trang 2</option>
-          <option value="3">Trang 3</option>
-        </Select>
-        <FaChevronDown className="text-travel-secondary/60 pointer-events-none absolute top-1/2 right-[14px] -translate-y-1/2 text-[12px]" />
-      </div>
+      <select
+        value={page}
+        onChange={handlePageChange}
+        className="select border-travel-secondary/20 h-10 w-32 rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md"
+      >
+        {Array(pagination.totalPage)
+          .fill("")
+          .map((_, index) => (
+            <option key={index} value={index + 1}>
+              Trang {index + 1}
+            </option>
+          ))}
+      </select>
     </div>
   );
 };
