@@ -67,7 +67,9 @@ export const CategoryCreate = () => {
 
   return (
     <>
-      <PageTitle title="Tạo danh mục" />
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-2">
+        <PageTitle title="Tạo danh mục" />
+      </div>
       <div className="border-travel-four overflow-hidden rounded-[14px] border bg-white p-[30px] md:p-[50px]">
         <form
           onSubmit={handleSubmit(handleCategoryForm)}
