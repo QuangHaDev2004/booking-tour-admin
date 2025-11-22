@@ -18,7 +18,6 @@ export const CategoryTable = () => {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [action, setAction] = useState<string>("");
   const { mutate: changeMulti } = useCategoryChangeMulti();
-  // console.log(categoryList);
 
   const handleCheckAll = (event: any) => {
     const checked = event.target.checked;

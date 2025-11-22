@@ -67,8 +67,12 @@ export const CategoryCreate = () => {
 
   return (
     <>
-      <div className="mb-5 flex flex-wrap items-center justify-between gap-2">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
         <PageTitle title="Tạo danh mục" />
+        <ContextLink
+          text="Quay lại danh sách"
+          to={`/${pathAdmin}/category/list`}
+        />
       </div>
       <div className="border-travel-four overflow-hidden rounded-[14px] border bg-white p-[30px] md:p-[50px]">
         <form
@@ -135,10 +139,6 @@ export const CategoryCreate = () => {
 
           <ButtonSubmit isPending={isPending} />
         </form>
-        <ContextLink
-          text="Quay lại danh sách"
-          to={`/${pathAdmin}/category/list`}
-        />
       </div>
     </>
   );

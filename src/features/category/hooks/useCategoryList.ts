@@ -19,10 +19,12 @@ export const useCategoryList = () => {
   const categoryTree = data?.categoryTree ?? [];
   const categoryList = data?.categoryList ?? [];
   const accountAdminList = data?.accountAdminList ?? [];
+  const pagination = data?.pagination ?? {};
 
   return {
     categoryTree,
     categoryList,
     accountAdminList,
+    pagination,
   };
 };
