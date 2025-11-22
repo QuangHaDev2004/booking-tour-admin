@@ -30,3 +30,11 @@ export const deleteCategoryService = async (id: string) => {
   const res = await api.patch(`/${pathAdmin}/category/delete/${id}`);
   return res.data;
 };
+
+export const changeMultiCategoryService = async (dataFinal: {
+  action: string;
+  ids: string[];
+}) => {
+  const res = await api.patch(`/${pathAdmin}/category/change-multi`, dataFinal);
+  return res.data;
+};

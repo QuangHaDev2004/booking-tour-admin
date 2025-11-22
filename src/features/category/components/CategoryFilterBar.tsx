@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FaRotateLeft } from "react-icons/fa6";
+import { FaRotateLeft, FaSliders } from "react-icons/fa6";
 import { useSearchParams } from "react-router";
-import { IoFilter } from "react-icons/io5";
 import { useCategoryList } from "../hooks/useCategoryList";
 import type { AccountAdminItem } from "@/types/account";
 
@@ -31,14 +30,14 @@ export const CategoryFilterBar = () => {
 
   return (
     <>
-      <div className="text-travel-secondary mb-2 flex items-center gap-3 text-lg font-semibold italic">
-        <IoFilter className="size-5" /> Bộ lọc
-      </div>
-      <div className="mb-6 flex flex-wrap gap-4">
+      <div className="mb-6 flex flex-wrap items-center gap-4">
+        <div className="text-travel-secondary flex items-center gap-3 text-lg font-semibold italic">
+          <FaSliders className="size-5" /> Bộ lọc
+        </div>
         <select
           value={status}
           onChange={(event) => handleCategoryFilter("status", event)}
-          className="select border-travel-secondary/20 text-travel-secondary h-10 w-[140px] rounded-4xl border px-4 text-sm font-semibold"
+          className="select border-travel-secondary/20 text-travel-secondary h-10 w-[140px] rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md"
         >
           <option value="">Trạng thái</option>
           <option value="active">Hoạt động</option>
@@ -48,7 +47,7 @@ export const CategoryFilterBar = () => {
         <select
           value={createdBy}
           onChange={(event) => handleCategoryFilter("createdBy", event)}
-          className="select border-travel-secondary/20 text-travel-secondary h-10 w-[160px] rounded-4xl border px-4 text-sm font-semibold"
+          className="select border-travel-secondary/20 text-travel-secondary h-10 w-[160px] rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md"
         >
           <option value="">Người tạo</option>
           {accountAdminList.map((item: AccountAdminItem) => (
@@ -58,7 +57,7 @@ export const CategoryFilterBar = () => {
           ))}
         </select>
 
-        <div className="border-travel-secondary/20 text-travel-secondary flex h-10 items-center gap-4 rounded-4xl border px-4 text-sm font-semibold">
+        <div className="border-travel-secondary/20 text-travel-secondary flex h-10 items-center gap-4 rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md">
           <input
             type="date"
             className="w-28"
@@ -76,7 +75,7 @@ export const CategoryFilterBar = () => {
 
         <button
           onClick={handleReset}
-          className="text-travel-red border-travel-red flex h-10 cursor-pointer items-center gap-3 rounded-4xl border px-4 text-sm font-semibold"
+          className="text-travel-red border-travel-red flex h-10 cursor-pointer items-center gap-3 rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md"
         >
           <FaRotateLeft className="size-4" />
           Xóa bộ lọc

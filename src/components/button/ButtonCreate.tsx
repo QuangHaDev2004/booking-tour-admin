@@ -11,7 +11,7 @@ export const ButtonCreate = ({
   return (
     <Link
       to={to}
-      className="bg-travel-primary hover:bg-travel-primary/90 flex items-center gap-2 rounded-lg px-8 py-4 text-sm font-bold text-white transition-all duration-300"
+      className="border-travel-primary text-travel-primary flex items-center gap-2 rounded-sm border px-6 py-2.5 text-sm font-bold transition-all duration-300 hover:bg-travel-primary/10 shadow-md bg-white"
     >
       <FaPlus className="text-sm" />
       <span>{text}</span>
