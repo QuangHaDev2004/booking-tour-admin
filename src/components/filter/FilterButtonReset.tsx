@@ -11,7 +11,7 @@ export const FilterButtonReset = () => {
   return (
     <button
       onClick={handleReset}
-      className="text-error hover:bg-error/20 flex cursor-pointer items-center gap-3 p-4 transition-all duration-300"
+      className="text-travel-error hover:bg-travel-error/10 flex cursor-pointer items-center gap-3 p-4 transition-all duration-300"
     >
       <FaRotateLeft className="text-lg" />
       Xóa bộ lọc

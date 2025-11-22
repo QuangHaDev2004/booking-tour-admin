@@ -11,6 +11,7 @@
   --color-travel-four: #d5d5d5;
   --color-travel-label: #606060;
   --color-travel-error: #ef3826;
+  --color-travel-red: #ef3826;
   --color-travel-table-head: #f1f4f9;
 }
 
@@ -19,7 +20,7 @@
 }
 
 body {
-  background-color: var(--color-travel-three);
+  background-color: #F0F1F5;
 }
 
 button,
