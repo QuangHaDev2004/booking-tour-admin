@@ -6,8 +6,10 @@ export const createCategoryService = async (dataFinal: FormData) => {
   return res.data;
 };
 
-export const getCategoryListService = async () => {
-  const res = await api.get(`/${pathAdmin}/category/list`);
+export const getCategoryListService = async (
+  params?: Record<string, string>,
+) => {
+  const res = await api.get(`/${pathAdmin}/category/list`, { params });
   return res.data;
 };
 
