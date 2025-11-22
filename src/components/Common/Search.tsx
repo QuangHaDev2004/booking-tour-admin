@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaRegCircleXmark } from "react-icons/fa6";
-import { IoSearch } from "react-icons/io5";
+import { FaMagnifyingGlass, FaRegCircleXmark } from "react-icons/fa6";
 import { useSearchParams } from "react-router";
 
 export const Search = ({ placeholder }: { placeholder: string }) => {
@@ -13,27 +12,27 @@ export const Search = ({ placeholder }: { placeholder: string }) => {
   }, [keywordParam]);
 
   const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    const newParams = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams);
     if (event.code === "Enter") {
       if (keyword.trim()) {
-        newParams.set("keyword", keyword);
+        params.set("keyword", keyword);
       } else {
-        newParams.delete("keyword");
+        params.delete("keyword");
       }
     }
-    setSearchParams(newParams);
+    setSearchParams(params);
   };
 
   const handleClear = () => {
     setKeyword("");
-    const newParams = new URLSearchParams(searchParams);
-    newParams.delete("keyword");
-    setSearchParams(newParams);
+    const params = new URLSearchParams(searchParams);
+    params.delete("keyword");
+    setSearchParams(params);
   };
 
   return (
-    <div className="border-travel-four inline-flex h-10 w-[366px] shadow-md items-center gap-4 rounded-4xl border bg-white px-4 text-sm font-bold">
-      <IoSearch className="text-travel-secondary/60 text-[20px]" />
+    <div className="border-travel-secondary/20 inline-flex h-10 w-[366px] items-center gap-4 rounded-4xl border bg-white px-4 text-sm font-bold shadow-md">
+      <FaMagnifyingGlass className="text-travel-secondary/60 size-4" />
       <input
         type="text"
         value={keyword}
@@ -45,7 +44,7 @@ export const Search = ({ placeholder }: { placeholder: string }) => {
       {keyword && (
         <FaRegCircleXmark
           onClick={handleClear}
-          className="text-travel-secondary/60 cursor-pointer text-lg"
+          className="text-travel-red cursor-pointer text-lg"
         />
       )}
     </div>
