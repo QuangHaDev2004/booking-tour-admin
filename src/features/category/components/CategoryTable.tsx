@@ -83,7 +83,10 @@ export const CategoryTable = () => {
                 <input
                   type="checkbox"
                   className="checkbox checkbox-primary"
-                  checked={selectedIds.length === categoryList.length}
+                  checked={
+                    categoryList.length > 0 &&
+                    selectedIds.length === categoryList.length
+                  }
                   onChange={(event) => handleCheckAll(event)}
                 />
               </th>
