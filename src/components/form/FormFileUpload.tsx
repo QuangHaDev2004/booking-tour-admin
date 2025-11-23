@@ -23,7 +23,7 @@ export const FormFileUpload = ({
     <div className={`col-span-1 ${oneCol ? "" : "md:col-span-2"}`}>
       <label
         htmlFor={name}
-        className="text-travel-label mb-[10px] block text-sm font-semibold"
+        className="text-travel-label mb-1 block text-sm font-semibold"
       >
         {label}
       </label>

@@ -77,17 +77,17 @@ export const CategoryEdit = () => {
   return (
     <>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
-        <PageTitle title="Tạo danh mục" />
+        <PageTitle title="Chỉnh sửa danh mục" />
         <ContextLink
-            text="Quay lại danh sách"
-            to={`/${pathAdmin}/category/list`}
-          />
+          text="Quay lại danh sách"
+          to={`/${pathAdmin}/category/list`}
+        />
       </div>
       {categoryDetail && categoryTree && (
-        <div className="border-travel-four overflow-hidden rounded-[14px] border bg-white p-[30px] md:p-[50px]">
+        <div className="border-travel-secondary/20 overflow-hidden rounded-md border bg-white p-6 shadow-md">
           <form
             onSubmit={handleSubmit(handleCategoryForm)}
-            className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-[30px]"
+            className="grid grid-cols-1 gap-6 md:grid-cols-2"
           >
             <FormInput
               id="name"
@@ -100,13 +100,13 @@ export const CategoryEdit = () => {
             <div>
               <label
                 htmlFor="parent"
-                className="text-travel-label mb-[10px] block text-sm font-semibold"
+                className="text-travel-label mb-1 block text-sm font-semibold"
               >
                 Danh mục cha
               </label>
               <select
                 {...register("parent")}
-                className="select bg-travel-three text-travel-secondary h-[52px] w-full px-[22px] text-sm font-medium"
+                className="select bg-travel-three text-travel-secondary h-12 w-full px-5 text-sm font-medium"
               >
                 <option value="">-- Chọn danh mục --</option>
                 {renderOptions(categoryTree)}
@@ -125,13 +125,13 @@ export const CategoryEdit = () => {
             <div>
               <label
                 htmlFor="status"
-                className="text-travel-label mb-[10px] block text-sm font-semibold"
+                className="text-travel-label mb-1 block text-sm font-semibold"
               >
                 Trạng thái
               </label>
               <select
                 {...register("status")}
-                className="select bg-travel-three text-travel-secondary h-[52px] w-full px-[22px] text-sm font-medium"
+                className="select bg-travel-three text-travel-secondary h-12 w-full px-5 text-sm font-medium"
               >
                 <option value="active">Hoạt động</option>
                 <option value="inactive">Tạm dừng</option>
@@ -147,8 +147,8 @@ export const CategoryEdit = () => {
 
             <div className="col-span-1 md:col-span-2">
               <label
-                htmlFor={id}
-                className="text-travel-label mb-[10px] block text-sm font-semibold"
+                htmlFor="description"
+                className="text-travel-label mb-1 block text-sm font-semibold"
               >
                 Mô tả
               </label>
@@ -161,7 +161,6 @@ export const CategoryEdit = () => {
 
             <ButtonSubmit isPending={isPending} text="Cập nhật" />
           </form>
-          
         </div>
       )}
     </>

@@ -12,7 +12,7 @@ export const TourList = () => {
       <TourListFilterBar />
       <TourListActionBar />
       <TourListTable />
-      <Pagination />
+      {/* <Pagination /> */}
     </>
   );
 };

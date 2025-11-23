@@ -29,7 +29,7 @@ export const FormInput = ({
     <div>
       <label
         htmlFor={id}
-        className="text-travel-label mb-[10px] block text-sm font-semibold"
+        className="text-travel-label mb-1 block text-sm font-semibold"
       >
         <span>{label}</span>
         {isRequired && <span className="text-travel-error ml-1">*</span>}
@@ -45,7 +45,7 @@ export const FormInput = ({
         value={value}
         onWheel={(e) => e.currentTarget.blur()}
         min={0}
-        className={`${error ? "border-travel-error" : "border-travel-four"} text-travel-secondary bg-travel-three h-[52px] w-full rounded-sm border px-[22px] text-sm font-medium`}
+        className={`${error ? "border-travel-error" : "border-travel-four"} text-travel-secondary bg-travel-three h-12 w-full rounded-sm border px-5 text-sm font-medium`}
       />
       {error && (
         <p className="text-travel-error mt-1 text-sm font-medium">

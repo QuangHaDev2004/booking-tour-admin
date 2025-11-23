@@ -1,77 +1,162 @@
-import { EditorMCE } from "@/components/editor/EditorMCE";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { EditorMCEController } from "@/components/editor/EditorMCEController";
+import { useEffect, useRef } from "react";
 import {
   FaChevronDown,
   FaRegTrashCan,
   FaUpDownLeftRight,
 } from "react-icons/fa6";
+import Sortable from "sortablejs";
 
-const schedulesExample = [
-  {
-    title: "Title 1",
-    description: "Description 1",
-  },
-];
-
-export const TourSchedules = ({
-  setSchedules,
-}: {
+type TourSchedulesProps = {
+  schedules: {
+    id: `${string}-${string}-${string}-${string}-${string}`;
+    title: string;
+    description: string;
+    isHidden: boolean;
+  }[];
   setSchedules: React.Dispatch<
     React.SetStateAction<
       {
+        id: `${string}-${string}-${string}-${string}-${string}`;
         title: string;
         description: string;
+        isHidden: boolean;
       }[]
     >
   >;
-}) => {
-  const handleTitleChange = (index: number, value: string) => {
-    setSchedules((prev) =>
-      prev.map((item, i) => (i === index ? { ...item, title: value } : item)),
-    );
+};
+
+export const TourSchedules = ({
+  schedules,
+  setSchedules,
+}: TourSchedulesProps) => {
+  const scheduleRef = useRef<any>(null);
+  const listRef = useRef<any>(null);
+
+  const handleAddSchedule = () => {
+    setSchedules((prev) => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        title: "",
+        description: "",
+        isHidden: false,
+      },
+    ]);
   };
 
-  const handleDescriptionChange = (index: number, content: string) => {
-    setSchedules((prev) =>
-      prev.map((item, i) =>
-        i === index ? { ...item, description: content } : item,
-      ),
-    );
+  const handleToggleHidden = (index: number) => {
+    setSchedules((prev) => {
+      const updated = [...prev];
+      updated[index].isHidden = !updated[index].isHidden;
+      return updated;
+    });
   };
+
+  const handleDeleteSchedule = (index: number) => {
+    if (schedules.length <= 1) return;
+    setSchedules((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleChangeTitle = (index: number, value: string) => {
+    setSchedules((prev) => {
+      const updated = [...prev];
+      updated[index].title = value;
+      return updated;
+    });
+  };
+
+  const handleChangeContent = (index: number, value: string) => {
+    setSchedules((prev) => {
+      const updated = [...prev];
+      updated[index].description = value;
+      return updated;
+    });
+  };
+
+  // SortableJS
+  useEffect(() => {
+    if (!listRef.current) return;
+
+    const sortable = Sortable.create(listRef.current, {
+      animation: 150,
+      handle: ".drag-handle",
+      ghostClass: "opacity-40",
+
+      onEnd: (evt: any) => {
+        if (evt.oldIndex == null || evt.newIndex == null) return;
+
+        setSchedules((prev) => {
+          const newArr = [...prev];
+          const [moved] = newArr.splice(evt.oldIndex, 1);
+          newArr.splice(evt.newIndex, 0, moved);
+          return newArr;
+        });
+      },
+    });
+
+    return () => sortable.destroy();
+  }, []);
 
   return (
     <div className="col-span-1 md:col-span-2">
-      <label className="text-label mb-[10px] block text-sm font-semibold">
+      <label className="text-travel-label mb-1 block text-sm font-semibold">
         Lịch trình tour
       </label>
-      {schedulesExample.map((item, index) => (
-        <div key={index} className="border-four rounded-sm border bg-white p-5">
-          <div className="mb-[15px] flex flex-wrap items-center gap-[15px]">
-            <div className="bg-three border-four flex h-[52px] w-[52px] cursor-move items-center justify-center rounded-sm border">
-              <FaUpDownLeftRight className="text-[18px] text-[#A6A6A6]" />
+      <div ref={listRef} className="flex flex-col gap-4">
+        {schedules.map((item, index) => (
+          <div
+            key={item.id}
+            className="border-travel-four rounded-sm border bg-white p-5"
+          >
+            <div className="flex flex-wrap items-center gap-[15px]">
+              {item.isHidden && (
+                <div className="bg-travel-three border-travel-four drag-handle flex h-12 w-12 cursor-move items-center justify-center rounded-sm border">
+                  <FaUpDownLeftRight className="size-4 text-[#A6A6A6]" />
+                </div>
+              )}
+              <input
+                value={item.title}
+                onChange={(event) =>
+                  handleChangeTitle(index, event.target.value)
+                }
+                type="text"
+                className="border-travel-four text-travel-secondary bg-travel-three order-1 h-12 w-full flex-none rounded-sm border px-[18px] text-sm font-medium sm:order-none sm:flex-1"
+              />
+              <div
+                onClick={() => handleDeleteSchedule(index)}
+                className="bg-travel-three border-travel-four flex h-12 w-12 cursor-pointer items-center justify-center rounded-sm border"
+              >
+                <FaRegTrashCan className="text-error size-4" />
+              </div>
+              <div
+                onClick={() => handleToggleHidden(index)}
+                className="bg-travel-three border-travel-four flex h-12 w-12 cursor-pointer items-center justify-center rounded-sm border"
+              >
+                <FaChevronDown
+                  className={`size-4 text-[#A6A6A6] transition-all duration-300 ${item.isHidden && "rotate-180"}`}
+                />
+              </div>
             </div>
-            <input
-              type="text"
-              onChange={(event) => handleTitleChange(index, event.target.value)}
-              className="border-four text-secondary bg-three order-1 h-[52px] w-full flex-none rounded-sm border px-[18px] text-sm font-medium sm:order-none sm:flex-1"
-            />
-            <div className="bg-three border-four flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-sm border">
-              <FaRegTrashCan className="text-error text-[18px]" />
-            </div>
-            <div className="bg-three border-four flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-sm border">
-              <FaChevronDown className="text-[18px] text-[#A6A6A6]" />
-            </div>
+
+            {!item.isHidden && (
+              <div className="mt-4">
+                <EditorMCEController
+                  editorRef={(el: any) => (scheduleRef.current[item.id] = el)}
+                  value={item.description}
+                  id={`schedule-${item.id}`}
+                  onChange={(v: string) => handleChangeContent(index, v)}
+                />
+              </div>
+            )}
           </div>
-          <EditorMCE
-            id={`schedule-${index}`}
-            onEditorChange={(content: string) =>
-              handleDescriptionChange(index, content)
-            }
-          />
-        </div>
-      ))}
+        ))}
+      </div>
       <button
+        onClick={handleAddSchedule}
         type="button"
-        className="bg-four/90 text-secondary mt-[15px] block h-10 cursor-pointer rounded-sm px-5 py-[10px] text-sm font-bold"
+        className="bg-travel-four/90 text-travel-secondary mt-[15px] block h-10 cursor-pointer rounded-sm px-5 py-[10px] text-sm font-bold"
       >
         + Thêm lich trình
       </button>
