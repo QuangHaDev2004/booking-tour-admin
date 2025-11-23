@@ -5,7 +5,6 @@ import { categoryFormSchema, type CategoryFormInputs } from "@/types";
 import { PageTitle } from "@/components/pageTitle/PageTitle";
 import { FormInput } from "@/components/form/FormInput";
 import { FormFileUpload } from "@/components/form/FormFileUpload";
-import { FormEditor } from "@/components/form/FormEditor";
 import { ButtonSubmit } from "@/components/button/ButtonSubmit";
 import { ContextLink } from "@/components/common/ContextLink";
 import { pathAdmin } from "@/config/path";
@@ -16,6 +15,7 @@ import { toast } from "sonner";
 import type { AxiosError } from "axios";
 import { useCategoryList } from "./hooks/useCategoryList";
 import { renderOptions } from "@/utils/renderOptions";
+import { EditorMCE } from "@/components/editor/EditorMCE";
 
 export const CategoryCreate = () => {
   const editorRef = useRef<any>(null);
@@ -74,10 +74,10 @@ export const CategoryCreate = () => {
           to={`/${pathAdmin}/category/list`}
         />
       </div>
-      <div className="border-travel-four overflow-hidden rounded-[14px] border bg-white p-[30px] md:p-[50px]">
+      <div className="border-travel-secondary/20 overflow-hidden rounded-md border bg-white p-6 shadow-md">
         <form
           onSubmit={handleSubmit(handleCategoryForm)}
-          className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-[30px]"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2"
         >
           <FormInput
             id="name"
@@ -90,13 +90,13 @@ export const CategoryCreate = () => {
           <div>
             <label
               htmlFor="parent"
-              className="text-travel-label mb-[10px] block text-sm font-semibold"
+              className="text-travel-label mb-1 block text-sm font-semibold"
             >
               Danh mục cha
             </label>
             <select
               {...register("parent")}
-              className="select bg-travel-three text-travel-secondary h-[52px] w-full px-[22px] text-sm font-medium"
+              className="select bg-travel-three text-travel-secondary h-12 w-full px-5 text-sm font-medium"
             >
               <option value="">-- Chọn danh mục --</option>
               {renderOptions(categoryTree)}
@@ -115,13 +115,13 @@ export const CategoryCreate = () => {
           <div>
             <label
               htmlFor="status"
-              className="text-travel-label mb-[10px] block text-sm font-semibold"
+              className="text-travel-label mb-1 block text-sm font-semibold"
             >
               Trạng thái
             </label>
             <select
               {...register("status")}
-              className="select bg-travel-three text-travel-secondary h-[52px] w-full px-[22px] text-sm font-medium"
+              className="select bg-travel-three text-travel-secondary h-12 w-full px-5 text-sm font-medium"
             >
               <option value="active">Hoạt động</option>
               <option value="inactive">Tạm dừng</option>
@@ -135,7 +135,15 @@ export const CategoryCreate = () => {
             setFiles={setAvatars}
           />
 
-          <FormEditor editorRef={editorRef} id="description" label="Mô tả" />
+          <div className="col-span-1 md:col-span-2">
+            <label
+              htmlFor="description"
+              className="text-travel-label mb-1 block text-sm font-semibold"
+            >
+              Mô tả
+            </label>
+            <EditorMCE editorRef={editorRef} value="" id="description" />
+          </div>
 
           <ButtonSubmit isPending={isPending} />
         </form>

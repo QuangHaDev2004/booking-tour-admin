@@ -81,7 +81,7 @@ export const CategoryTable = () => {
               <th className="border-travel-four border-b p-4 text-center">
                 <input
                   type="checkbox"
-                  className="checkbox checkbox-primary"
+                  className="checkbox checkbox-primary border-travel-secondary/20 hover:border-travel-primary border"
                   checked={
                     categoryList.length > 0 &&
                     selectedIds.length === categoryList.length
@@ -120,7 +120,7 @@ export const CategoryTable = () => {
                     <td className="border-travel-four border-b px-4 py-2 text-center">
                       <input
                         type="checkbox"
-                        className="checkbox checkbox-primary"
+                        className="checkbox checkbox-primary border-travel-secondary/20 hover:border-travel-primary border"
                         value={item.id}
                         checked={selectedIds.includes(item.id)}
                         onChange={(event) => handleCheckItem(item.id, event)}

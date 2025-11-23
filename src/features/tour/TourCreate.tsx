@@ -6,67 +6,127 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { tourFormSchema, type TourFormInputs } from "@/types";
 import { PageTitle } from "@/components/pageTitle/PageTitle";
 import { FormInput } from "@/components/form/FormInput";
-import { FormSelect } from "@/components/form/FormSelect";
 import { FormFileUpload } from "@/components/form/FormFileUpload";
-import { FormInputGroup } from "@/components/form/FormInputGroup";
-import { FormEditor } from "@/components/form/FormEditor";
 import { ButtonSubmit } from "@/components/button/ButtonSubmit";
 import { ContextLink } from "@/components/common/ContextLink";
-import { CheckboxGroup } from "@/components/checkbox/CheckboxGroup";
-import { useCheckboxGroup } from "@/hooks/useCheckboxGroup";
 import { TourSchedules } from "./components/TourSchedules";
-
-const City = [
-  { id: "1", label: "Hà Nội" },
-  { id: "2", label: "Hồ Chí Minh" },
-  { id: "3", label: "Đà Nẵng" },
-];
+import { renderOptions } from "@/utils/renderOptions";
+import { useCategoryList } from "../category/hooks/useCategoryList";
+import { EditorMCE } from "@/components/editor/EditorMCE";
+import { useCityList } from "./hooks/useCityList";
+import { useTourCreate } from "./hooks/useTourCreate";
 
 export const TourCreate = () => {
+  const { categoryTree } = useCategoryList();
+  const { cityList } = useCityList();
+
   const informationRef = useRef<any>(null);
   const [avatars, setAvatars] = useState<any[]>([]);
-  const [schedules, setSchedules] = useState([{ title: "", description: "" }]);
-  const { checkedItems, handleCheckboxChange } = useCheckboxGroup();
+  const [locationsFrom, setLocationsFrom] = useState<string[]>([]);
+  const [locationsTo, setLocationsTo] = useState<string[]>([]);
+  const [schedules, setSchedules] = useState([
+    {
+      id: crypto.randomUUID(),
+      title: "",
+      description: "",
+      isHidden: false,
+    },
+  ]);
+
+  const filteredSchedules = schedules
+    .map(({ title, description }) => ({
+      title,
+      description,
+    }))
+    .filter(
+      (item) => item.title.trim() !== "" || item.description.trim() !== "",
+    );
+
+  const handleToggleForm = (id: string) => {
+    setLocationsFrom((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
+    );
+  };
+
+  const handleToggleTo = (id: string) => {
+    setLocationsTo((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
+    );
+  };
 
   const {
     register,
-    control,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<TourFormInputs>({
-    resolver: zodResolver(tourFormSchema),
-    defaultValues: {
-      priceAdult: "",
-      priceChildren: "",
-      priceBaby: "",
-      priceNewAdult: "",
-      priceNewChildren: "",
-      priceNewBaby: "",
-    },
+    resolver: zodResolver(tourFormSchema) as any,
+  });
+
+  const { mutate, isPending } = useTourCreate({
+    reset,
+    setAvatars,
+    setLocationsFrom,
+    setLocationsTo,
+    setSchedules,
   });
 
   const handleTourForm: SubmitHandler<TourFormInputs> = (data) => {
     data.avatar = null;
-    if (avatars.length > 0) {
+    if (avatars.length > 0 && avatars[0].file instanceof File) {
       data.avatar = avatars[0].file;
     }
+
     data.information = "";
     if (informationRef.current) {
-      data.information = informationRef.current?.getContent() || "";
+      data.information = informationRef.current.getContent();
     }
 
-    console.log(data);
-    console.log(checkedItems);
-    console.log(schedules);
+    data.locationsFrom = locationsFrom;
+
+    data.locationsTo = locationsTo;
+
+    data.schedules = [];
+    if (filteredSchedules.length > 0) {
+      data.schedules = filteredSchedules;
+    }
+
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("category", data.category || "");
+    formData.append("position", String(data.position || ""));
+    formData.append("status", data.status || "");
+    formData.append("avatar", data.avatar);
+    formData.append("priceAdult", String(data.priceAdult));
+    formData.append("priceChildren", String(data.priceChildren));
+    formData.append("priceBaby", String(data.priceBaby));
+    formData.append("priceNewAdult", String(data.priceNewAdult));
+    formData.append("priceNewChildren", String(data.priceNewChildren));
+    formData.append("priceNewBaby", String(data.priceNewBaby));
+    formData.append("stockAdult", String(data.stockAdult));
+    formData.append("stockChildren", String(data.stockChildren));
+    formData.append("stockBaby", String(data.stockBaby));
+    formData.append("locationsFrom", JSON.stringify(data.locationsFrom));
+    formData.append("locationsTo", JSON.stringify(data.locationsTo));
+    formData.append("time", data.time || "");
+    formData.append("vehicle", data.vehicle || "");
+    formData.append("departureDate", data.departureDate || "");
+    formData.append("information", data.information || "");
+    formData.append("schedules", JSON.stringify(data.schedules));
+
+    mutate(formData);
   };
 
   return (
     <>
-      <PageTitle title="Tạo tour" />
-      <div className="border-four overflow-hidden rounded-[14px] border bg-white p-[30px] md:p-[50px]">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+        <PageTitle title="Tạo tour" />
+        <ContextLink text="Quay lại danh sách" to={`/${pathAdmin}/tour/list`} />
+      </div>
+      <div className="border-travel-secondary/20 overflow-hidden rounded-md border bg-white p-6 shadow-md">
         <form
           onSubmit={handleSubmit(handleTourForm)}
-          className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-[30px]"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2"
         >
           <FormInput
             id="name"
@@ -76,17 +136,21 @@ export const TourCreate = () => {
             isRequired
           />
 
-          <FormSelect
-            id="category"
-            label="Danh mục"
-            register={register("category")}
-            error={errors.category}
-            options={[
-              { value: "", label: "-- Chọn danh mục --" },
-              { value: "v1", label: "Danh mục 1" },
-              { value: "v2", label: "Danh mục 2" },
-            ]}
-          />
+          <div>
+            <label
+              htmlFor="category"
+              className="text-travel-label mb-1 block text-sm font-semibold"
+            >
+              Danh mục
+            </label>
+            <select
+              {...register("category")}
+              className="select bg-travel-three text-travel-secondary h-12 w-full px-5 text-sm font-medium"
+            >
+              <option value="">-- Chọn danh mục --</option>
+              {renderOptions(categoryTree)}
+            </select>
+          </div>
 
           <FormInput
             id="position"
@@ -97,16 +161,21 @@ export const TourCreate = () => {
             placeholder="Note: Tự động tăng"
           />
 
-          <FormSelect
-            id="status"
-            label="Trạng thái"
-            register={register("status")}
-            error={errors.status}
-            options={[
-              { value: "active", label: "Hoạt động" },
-              { value: "inactive", label: "Tạm dừng" },
-            ]}
-          />
+          <div>
+            <label
+              htmlFor="status"
+              className="text-travel-label mb-1 block text-sm font-semibold"
+            >
+              Trạng thái
+            </label>
+            <select
+              {...register("status")}
+              className="select bg-travel-three text-travel-secondary h-12 w-full px-5 text-sm font-medium"
+            >
+              <option value="active">Hoạt động</option>
+              <option value="inactive">Tạm dừng</option>
+            </select>
+          </div>
 
           <FormFileUpload
             name="avatar"
@@ -115,54 +184,223 @@ export const TourCreate = () => {
             setFiles={setAvatars}
           />
 
-          <FormInputGroup
-            title="Giá cũ"
-            items={[
-              { id: "priceAdult", label: "Người lớn" },
-              { id: "priceChildren", label: "Trẻ em" },
-              { id: "priceBaby", label: "Em bé" },
-            ]}
-            register={register}
-            control={control}
-            isPrice
-          />
-
-          <FormInputGroup
-            title="Giá mới"
-            items={[
-              { id: "priceNewAdult", label: "Người lớn" },
-              { id: "priceNewChildren", label: "Trẻ em" },
-              { id: "priceNewBaby", label: "Em bé" },
-            ]}
-            register={register}
-            control={control}
-            isPrice
-          />
-
-          <FormInputGroup
-            title="Còn lại"
-            items={[
-              { id: "stockAdult", label: "Người lớn" },
-              { id: "stockChildren", label: "Trẻ em" },
-              { id: "stockBaby", label: "Em bé" },
-            ]}
-            register={register}
-            control={control}
-            type="number"
-          />
+          <div>
+            <label
+              htmlFor="priceOld"
+              className="text-travel-label mb-1 block text-sm font-semibold"
+            >
+              Giá cũ
+            </label>
+            <div className="flex flex-col gap-1.5">
+              <div className="flex items-center gap-5">
+                <label
+                  htmlFor="priceAdult"
+                  className="text-travel-label mb-1 block w-[89px] text-sm font-semibold"
+                >
+                  Người lớn
+                </label>
+                <input
+                  {...register("priceAdult")}
+                  type="number"
+                  className="border-travel-secondary/20 bg-travel-three text-travel-secondary h-12 flex-1 rounded-sm border px-5 text-sm font-medium"
+                  onWheel={(e) => e.currentTarget.blur()}
+                  autoComplete="off"
+                />
+              </div>
+              <div className="flex items-center gap-5">
+                <label
+                  htmlFor="priceChildren"
+                  className="text-travel-label mb-1 block w-[89px] text-sm font-semibold"
+                >
+                  Trẻ em
+                </label>
+                <input
+                  {...register("priceChildren")}
+                  type="number"
+                  className="border-travel-secondary/20 bg-travel-three text-travel-secondary h-12 flex-1 rounded-sm border px-5 text-sm font-medium"
+                  onWheel={(e) => e.currentTarget.blur()}
+                  autoComplete="off"
+                />
+              </div>
+              <div className="flex items-center gap-5">
+                <label
+                  htmlFor="priceBaby"
+                  className="text-travel-label mb-1 block w-[89px] text-sm font-semibold"
+                >
+                  Em bé
+                </label>
+                <input
+                  {...register("priceBaby")}
+                  type="number"
+                  className="border-travel-secondary/20 bg-travel-three text-travel-secondary h-12 flex-1 rounded-sm border px-5 text-sm font-medium"
+                  onWheel={(e) => e.currentTarget.blur()}
+                  autoComplete="off"
+                />
+              </div>
+            </div>
+          </div>
 
           <div>
-            <label className="text-label mb-[10px] block text-sm font-semibold">
-              Những địa điểm có tour
+            <label
+              htmlFor="priceNew"
+              className="text-travel-label mb-1 block text-sm font-semibold"
+            >
+              Giá mới
             </label>
-            <div className="border-four bg-three flex h-[166px] flex-col gap-2 overflow-y-auto rounded-sm border px-[23px] py-[14px]">
-              {City.map((item) => (
-                <CheckboxGroup
-                  key={item.id}
-                  label={item.label}
-                  value={item.id}
-                  handleCheckboxChange={handleCheckboxChange}
+            <div className="flex flex-col gap-1.5">
+              <div className="flex items-center gap-5">
+                <label
+                  htmlFor="priceNewAdult"
+                  className="text-travel-label mb-1 block w-[89px] text-sm font-semibold"
+                >
+                  Người lớn
+                </label>
+                <input
+                  {...register("priceNewAdult")}
+                  type="number"
+                  className="border-travel-secondary/20 bg-travel-three text-travel-secondary h-12 flex-1 rounded-sm border px-5 text-sm font-medium"
+                  onWheel={(e) => e.currentTarget.blur()}
+                  autoComplete="off"
                 />
+              </div>
+              <div className="flex items-center gap-5">
+                <label
+                  htmlFor="priceNewChildren"
+                  className="text-travel-label mb-1 block w-[89px] text-sm font-semibold"
+                >
+                  Trẻ em
+                </label>
+                <input
+                  {...register("priceNewChildren")}
+                  type="number"
+                  className="border-travel-secondary/20 bg-travel-three text-travel-secondary h-12 flex-1 rounded-sm border px-5 text-sm font-medium"
+                  onWheel={(e) => e.currentTarget.blur()}
+                  autoComplete="off"
+                />
+              </div>
+              <div className="flex items-center gap-5">
+                <label
+                  htmlFor="priceNewBaby"
+                  className="text-travel-label mb-1 block w-[89px] text-sm font-semibold"
+                >
+                  Em bé
+                </label>
+                <input
+                  {...register("priceNewBaby")}
+                  type="number"
+                  className="border-travel-secondary/20 bg-travel-three text-travel-secondary h-12 flex-1 rounded-sm border px-5 text-sm font-medium"
+                  onWheel={(e) => e.currentTarget.blur()}
+                  autoComplete="off"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label
+              htmlFor="stock"
+              className="text-travel-label mb-1 block text-sm font-semibold"
+            >
+              Còn lại
+            </label>
+            <div className="flex flex-col gap-1.5">
+              <div className="flex items-center gap-5">
+                <label
+                  htmlFor="stockAdult"
+                  className="text-travel-label mb-1 block w-[89px] text-sm font-semibold"
+                >
+                  Người lớn
+                </label>
+                <input
+                  {...register("stockAdult")}
+                  type="number"
+                  className="border-travel-secondary/20 bg-travel-three text-travel-secondary h-12 flex-1 rounded-sm border px-5 text-sm font-medium"
+                  onWheel={(e) => e.currentTarget.blur()}
+                />
+              </div>
+              <div className="flex items-center gap-5">
+                <label
+                  htmlFor="stockChildren"
+                  className="text-travel-label mb-1 block w-[89px] text-sm font-semibold"
+                >
+                  Trẻ em
+                </label>
+                <input
+                  {...register("stockChildren")}
+                  type="number"
+                  className="border-travel-secondary/20 bg-travel-three text-travel-secondary h-12 flex-1 rounded-sm border px-5 text-sm font-medium"
+                  onWheel={(e) => e.currentTarget.blur()}
+                />
+              </div>
+              <div className="flex items-center gap-5">
+                <label
+                  htmlFor="stockBaby"
+                  className="text-travel-label mb-1 block w-[89px] text-sm font-semibold"
+                >
+                  Em bé
+                </label>
+                <input
+                  {...register("stockBaby")}
+                  type="number"
+                  className="border-travel-secondary/20 bg-travel-three text-travel-secondary h-12 flex-1 rounded-sm border px-5 text-sm font-medium"
+                  onWheel={(e) => e.currentTarget.blur()}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="col-span-1 md:col-span-2">
+            <label
+              htmlFor="description"
+              className="text-travel-label mb-1 block text-sm font-semibold"
+            >
+              Thông tin tour
+            </label>
+            <EditorMCE editorRef={informationRef} value="" id="description" />
+          </div>
+
+          <div>
+            <label className="text-travel-label mb-1 block text-sm font-semibold">
+              Điểm khởi hành
+            </label>
+            <div className="border-travel-four bg-travel-three flex h-[166px] flex-col gap-2 overflow-y-auto rounded-sm border px-[23px] py-[14px]">
+              {cityList.map((item: { _id: string; name: string }) => (
+                <label
+                  key={item._id}
+                  className="label text-travel-secondary flex items-center gap-3 text-sm font-medium"
+                >
+                  <input
+                    checked={locationsFrom.includes(item._id)}
+                    onChange={() => handleToggleForm(item._id)}
+                    type="checkbox"
+                    className="checkbox checkbox-primary border-travel-secondary/20 hover:border-travel-primary h-5 w-5 rounded-md"
+                    value={item._id}
+                  />
+                  {item.name}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label className="text-travel-label mb-1 block text-sm font-semibold">
+              Điểm đến
+            </label>
+            <div className="border-travel-four bg-travel-three flex h-[166px] flex-col gap-2 overflow-y-auto rounded-sm border px-[23px] py-[14px]">
+              {cityList.map((item: { _id: string; name: string }) => (
+                <label
+                  key={item._id}
+                  className="label text-travel-secondary flex items-center gap-3 text-sm font-medium"
+                >
+                  <input
+                    checked={locationsTo.includes(item._id)}
+                    onChange={() => handleToggleTo(item._id)}
+                    type="checkbox"
+                    className="checkbox checkbox-primary border-travel-secondary/20 hover:border-travel-primary h-5 w-5 rounded-md"
+                    value={item._id}
+                  />
+                  {item.name}
+                </label>
               ))}
             </div>
           </div>
@@ -172,7 +410,7 @@ export const TourCreate = () => {
             label="Thời gian"
             register={register("time")}
             error={errors.time}
-            placeholder="Ví dụ: 3 ngày 2 đêm"
+            placeholder="Ví dụ: 3N2Đ"
           />
 
           <FormInput
@@ -180,7 +418,7 @@ export const TourCreate = () => {
             label="Phương tiện"
             register={register("vehicle")}
             error={errors.vehicle}
-            placeholder="Ví dụ: Ô tô 45 chỗ"
+            placeholder="Ví dụ: Xe, Máy bay"
           />
 
           <FormInput
@@ -191,28 +429,10 @@ export const TourCreate = () => {
             type="date"
           />
 
-          <FormSelect
-            id="feature"
-            label="Nổi bật"
-            register={register("feature")}
-            error={errors.feature}
-            options={[
-              { value: "false", label: "Không" },
-              { value: "true", label: "Nổi bật" },
-            ]}
-          />
+          <TourSchedules schedules={schedules} setSchedules={setSchedules} />
 
-          <FormEditor
-            editorRef={informationRef}
-            id="information"
-            label="Thông tin tour"
-          />
-
-          <TourSchedules setSchedules={setSchedules} />
-
-          <ButtonSubmit />
+          <ButtonSubmit isPending={isPending} />
         </form>
-        <ContextLink text="Quay lại danh sách" to={`/${pathAdmin}/tour/list`} />
       </div>
     </>
   );
