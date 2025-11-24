@@ -24,3 +24,8 @@ export const roleCreateService = async (dataFinal: {
   const res = await api.post(`/${pathAdmin}/setting/role/create`, dataFinal);
   return res.data;
 };
+
+export const roleListService = async () => {
+  const res = await api.get(`/${pathAdmin}/setting/role/list`);
+  return res.data;
+};
