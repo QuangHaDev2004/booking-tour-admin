@@ -29,3 +29,23 @@ export const roleListService = async () => {
   const res = await api.get(`/${pathAdmin}/setting/role/list`);
   return res.data;
 };
+
+export const roleDetailService = async (id: string) => {
+  const res = await api.get(`/${pathAdmin}/setting/role/edit/${id}`);
+  return res.data;
+};
+
+export const roleEditService = async (
+  id: string,
+  dataFinal: {
+    name: string;
+    description?: string | undefined;
+    permissions?: string[] | undefined;
+  },
+) => {
+  const res = await api.patch(
+    `/${pathAdmin}/setting/role/edit/${id}`,
+    dataFinal,
+  );
+  return res.data;
+};

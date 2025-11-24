@@ -116,7 +116,7 @@ export const router = createBrowserRouter([
         element: <SettingRoleCreate />,
       },
       {
-        path: `/${pathAdmin}/setting/role/edit`,
+        path: `/${pathAdmin}/setting/role/edit/:id`,
         element: <SettingRoleEdit />,
       },
       {

@@ -109,7 +109,7 @@ export const RoleTable = () => {
                   </td>
                   <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
                     <div className="border-travel-four inline-flex items-center rounded-lg border bg-[#FAFBFD]">
-                      <ButtonEdit to={`/${pathAdmin}/setting/role/edit`} />
+                      <ButtonEdit to={`/${pathAdmin}/setting/role/edit/${item.id}`} />
                       <ButtonDelete
                         endpoint={`/${pathAdmin}/setting/role/delete`}
                       />
