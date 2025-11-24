@@ -7,22 +7,39 @@ import { permissionList } from "@/constants/permissions";
 import { ButtonSubmit } from "@/components/button/ButtonSubmit";
 import { ContextLink } from "@/components/common/ContextLink";
 import { pathAdmin } from "@/config/path";
+import { useState } from "react";
+import { useRoleCreate } from "./hooks/useRoleCreate";
 
 export const SettingRoleCreate = () => {
+  const [permissions, setPermissions] = useState<string[]>([]);
+
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<RoleInputs>({
     resolver: zodResolver(roleSchema),
   });
 
+  const { mutate: mutateRoleCreate, isPending: isPendingRoleCreate } =
+    useRoleCreate({ reset, setPermissions });
+
+  const handlePermission = (value: string) => {
+    setPermissions((prev) =>
+      prev.includes(value)
+        ? prev.filter((item) => item !== value)
+        : [...prev, value],
+    );
+  };
+
   const handleRoleForm: SubmitHandler<RoleInputs> = (data) => {
     const dataFinal = {
       ...data,
-      // checkedItems,
+      permissions,
     };
-    console.log(dataFinal);
+
+    mutateRoleCreate(dataFinal);
   };
 
   return (
@@ -65,8 +82,8 @@ export const SettingRoleCreate = () => {
                   className="label text-travel-secondary flex items-center gap-3 text-sm font-medium"
                 >
                   <input
-                    // checked={locationsFrom.includes(item._id)}
-                    // onChange={() => handleToggleForm(item._id)}
+                    checked={permissions.includes(item.value)}
+                    onChange={() => handlePermission(item.value)}
                     type="checkbox"
                     className="checkbox checkbox-primary border-travel-secondary/20 hover:border-travel-primary h-5 w-5 rounded-md"
                     value={item.value}
@@ -77,7 +94,7 @@ export const SettingRoleCreate = () => {
             </div>
           </div>
 
-          <ButtonSubmit />
+          <ButtonSubmit isPending={isPendingRoleCreate} />
         </form>
       </div>
     </>

@@ -15,3 +15,12 @@ export const websiteInfoDetailService = async () => {
   const res = await api.get(`/${pathAdmin}/setting/website-info`);
   return res.data;
 };
+
+export const roleCreateService = async (dataFinal: {
+  name: string;
+  description?: string | undefined;
+  permissions?: string[] | undefined;
+}) => {
+  const res = await api.post(`/${pathAdmin}/setting/role/create`, dataFinal);
+  return res.data;
+};
