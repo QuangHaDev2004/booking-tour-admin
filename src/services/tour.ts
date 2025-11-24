@@ -33,3 +33,18 @@ export const tourChangeMultiService = async (dataFinal: {
   const res = await api.patch(`/${pathAdmin}/tour/change-multi`, dataFinal);
   return res.data;
 };
+
+export const tourTrashListService = async (params?: Record<string, string>) => {
+  const res = await api.get(`/${pathAdmin}/tour/trash/list`, { params });
+  return res.data;
+};
+
+export const tourUndoService = async (id: string) => {
+  const res = await api.patch(`/${pathAdmin}/tour/undo/${id}`);
+  return res.data;
+};
+
+export const tourDestroyService = async (id: string) => {
+  const res = await api.delete(`/${pathAdmin}/tour/destroy/${id}`);
+  return res.data;
+};

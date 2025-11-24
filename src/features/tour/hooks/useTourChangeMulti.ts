@@ -15,6 +15,7 @@ export const useTourChangeMulti = ({ setSelectedIds, setAction }: Props) => {
     mutationFn: tourChangeMultiService,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["tourList"] });
+      queryClient.invalidateQueries({ queryKey: ["tourTrashList"] });
       toast.success(data.message);
       setSelectedIds([]);
       setAction("");
