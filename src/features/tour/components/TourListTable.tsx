@@ -9,15 +9,18 @@ import { useTourList } from "../hooks/useTourList";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useTourChangeMulti } from "../hooks/useTourChangeMulti";
+import { useTourDelete } from "../hooks/useTourDelete";
 
 export const TourListTable = () => {
   const { tourList } = useTourList();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [action, setAction] = useState<string>("");
-  const { mutate: changeMulti } = useTourChangeMulti({
+  const { mutate: tourChangeMulti } = useTourChangeMulti({
     setSelectedIds,
     setAction,
   });
+  const { mutate: tourDelete, isPending: isPendingTourDelete } =
+    useTourDelete();
 
   const handleCheckAll = (event: any) => {
     const checked = event.target.checked;
@@ -43,7 +46,7 @@ export const TourListTable = () => {
       ids: selectedIds,
     };
 
-    changeMulti(dataFinal);
+    tourChangeMulti(dataFinal);
   };
 
   return (
@@ -177,12 +180,11 @@ export const TourListTable = () => {
                   <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
                     <div className="border-travel-four inline-flex items-center rounded-lg border bg-[#FAFBFD]">
                       <ButtonEdit to={`/${pathAdmin}/tour/edit/${item.id}`} />
-                      <ButtonDelete endpoint={`/${pathAdmin}/tour/delete`} />
-                      {/* <ButtonDelete
+                      <ButtonDelete
                         id={item.id}
-                        isPending={isPending}
-                        onDelete={(id) => mutate(id)}
-                      /> */}
+                        isPending={isPendingTourDelete}
+                        onDelete={(id) => tourDelete(id)}
+                      />
                     </div>
                   </td>
                 </tr>
