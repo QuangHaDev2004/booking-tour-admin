@@ -15,9 +15,9 @@ import { useCategoryChangeMulti } from "../hooks/useCategoryChangeMulti";
 export const CategoryTable = () => {
   const { categoryList } = useCategoryList();
   const { mutate, isPending } = useCategoryDelete();
+  const { mutate: changeMulti } = useCategoryChangeMulti();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [action, setAction] = useState<string>("");
-  const { mutate: changeMulti } = useCategoryChangeMulti();
 
   const handleCheckAll = (event: any) => {
     const checked = event.target.checked;
