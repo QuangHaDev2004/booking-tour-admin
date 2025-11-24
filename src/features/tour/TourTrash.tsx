@@ -1,7 +1,7 @@
 import { PageTitle } from "@/components/pageTitle/PageTitle";
 import { TourTrashActionBar } from "./components/TourTrashActionBar";
 import { TourTrashTable } from "./components/TourTrashTable";
-import { Pagination } from "@/components/pagination/Pagination";
+// import { Pagination } from "@/components/pagination/Pagination";
 
 
 export const TourTrash = () => {
@@ -10,7 +10,7 @@ export const TourTrash = () => {
       <PageTitle title="Thùng rác tour" />
       <TourTrashActionBar />
       <TourTrashTable />
-      <Pagination />
+      {/* <Pagination /> */}
     </>
   );
 };

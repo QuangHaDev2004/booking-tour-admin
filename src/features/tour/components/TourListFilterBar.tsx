@@ -1,48 +1,113 @@
-import { FilterBar } from "@/components/filter/FilterBar";
-import { FilterButtonReset } from "@/components/filter/FilterButtonReset";
-import { FilterDateRange } from "@/components/filter/FilterDateRange";
-import { FilterSelect } from "@/components/filter/FilterSelect";
-import { actionOptions } from "@/constants/actionOptions";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useCategoryList } from "@/features/category/hooks/useCategoryList";
+import { useAccountAdminList } from "@/hooks/useAccountAdminList";
+import { renderOptions } from "@/utils/renderOptions";
+import { FaRotateLeft, FaSliders } from "react-icons/fa6";
+import { useSearchParams } from "react-router";
 
 export const TourListFilterBar = () => {
+  const { fullAccountAdminList } = useAccountAdminList();
+  const { categoryTree } = useCategoryList();
+  console.log(categoryTree);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const status = searchParams.get("status") || "";
+  const createdBy = searchParams.get("createdBy") || "";
+  const startDate = searchParams.get("startDate") || "";
+  const endDate = searchParams.get("endDate") || "";
+  const price = searchParams.get("price") || "";
+  const category = searchParams.get("category") || "";
+
+  const handleCategoryFilter = (key: string, event: any) => {
+    const params = new URLSearchParams(searchParams);
+    const value = event.target.value;
+    if (value) {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
+
+    setSearchParams(params);
+  };
+
+  const handleReset = () => {
+    setSearchParams(new URLSearchParams());
+  };
+
   return (
-    <FilterBar>
-      <FilterSelect
-        paramKey="status"
-        placeholder="Trạng thái"
-        options={[actionOptions.active, actionOptions.inactive]}
-      />
+    <>
+      <div className="mb-6 flex flex-wrap items-center gap-4">
+        <div className="text-travel-secondary flex items-center gap-3 text-lg font-semibold italic">
+          <FaSliders className="size-5" /> Bộ lọc
+        </div>
+        <select
+          value={status}
+          onChange={(event) => handleCategoryFilter("status", event)}
+          className="select border-travel-secondary/20 text-travel-secondary h-10 w-[140px] rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md"
+        >
+          <option value="">Trạng thái</option>
+          <option value="active">Hoạt động</option>
+          <option value="inactive">Tạm dừng</option>
+        </select>
 
-      <FilterSelect
-        paramKey="createdBy"
-        placeholder="Người tạo"
-        options={[
-          { label: "Nguyễn Văn A", value: "1" },
-          { label: "Nguyễn Văn B", value: "2" },
-        ]}
-      />
+        <select
+          value={createdBy}
+          onChange={(event) => handleCategoryFilter("createdBy", event)}
+          className="select border-travel-secondary/20 text-travel-secondary h-10 w-[160px] rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md"
+        >
+          <option value="">Người tạo</option>
+          {fullAccountAdminList.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.fullName}
+            </option>
+          ))}
+        </select>
 
-      <FilterDateRange />
+        <div className="border-travel-secondary/20 text-travel-secondary flex h-10 items-center gap-4 rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md">
+          <input
+            type="date"
+            className="w-28"
+            value={startDate}
+            onChange={(event) => handleCategoryFilter("startDate", event)}
+          />
+          <span>-</span>
+          <input
+            type="date"
+            className="w-28"
+            value={endDate}
+            onChange={(event) => handleCategoryFilter("endDate", event)}
+          />
+        </div>
 
-      <FilterSelect
-        paramKey="category"
-        placeholder="Danh mục"
-        options={[
-          { label: "Danh mục 1", value: "1" },
-          { label: "Danh mục 2", value: "2" },
-        ]}
-      />
+        <select
+          value={category}
+          onChange={(event) => handleCategoryFilter("category", event)}
+          className="select border-travel-secondary/20 text-travel-secondary h-10 w-[140px] rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md"
+        >
+          <option value="">Danh mục</option>
+          {renderOptions(categoryTree)}
+        </select>
 
-      <FilterSelect
-        paramKey="price"
-        placeholder="Mức giá"
-        options={[
-          { label: "1tr đến 5tr", value: "1" },
-          { label: "Trên 5tr", value: "2" },
-        ]}
-      />
+        <select
+          value={price}
+          onChange={(event) => handleCategoryFilter("price", event)}
+          className="select border-travel-secondary/20 text-travel-secondary h-10 w-[210px] rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md"
+        >
+          <option value="">Mức giá</option>
+          <option value="0-4999999">Dưới 5 triệu</option>
+          <option value="5000000-10000000">Từ 5 triệu đến 10 triệu</option>
+          <option value="10000000-20000000">Từ 10 triệu đến 20 triệu</option>
+          <option value="20000000-1000000000">Trên 20 triệu</option>
+        </select>
 
-      <FilterButtonReset />
-    </FilterBar>
+        <button
+          onClick={handleReset}
+          className="text-travel-red border-travel-red flex h-10 cursor-pointer items-center gap-3 rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md"
+        >
+          <FaRotateLeft className="size-4" />
+          Xóa bộ lọc
+        </button>
+      </div>
+    </>
   );
 };
