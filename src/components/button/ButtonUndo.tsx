@@ -8,7 +8,7 @@ export const ButtonUndo = ({ endpoint }: { endpoint: string }) => {
   return (
     <button
       onClick={handleUndo}
-      className="border-four border-r px-[16.5px] py-[10px] cursor-pointer"
+      className="border-travel-four border-r px-[16.5px] py-[10px] cursor-pointer"
     >
       <FaArrowRotateLeft className="text-[15px]" />
     </button>
