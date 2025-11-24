@@ -8,3 +8,10 @@ export type WebsiteInfoItem = {
   logo: string;
   favicon: string;
 };
+
+export type RoleItem = {
+  id: string;
+  name: string;
+  description: string;
+  permissions: string[];
+};

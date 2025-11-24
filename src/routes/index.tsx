@@ -16,6 +16,7 @@ import {
   SettingAccountAdminList,
   SettingList,
   SettingRoleCreate,
+  SettingRoleEdit,
   SettingRoleList,
   SettingWebsiteInfo,
 } from "@/features/setting";
@@ -113,6 +114,10 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/setting/role/create`,
         element: <SettingRoleCreate />,
+      },
+      {
+        path: `/${pathAdmin}/setting/role/edit`,
+        element: <SettingRoleEdit />,
       },
       {
         path: `/${pathAdmin}/profile/edit`,
