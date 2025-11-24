@@ -1,30 +1,99 @@
-import { FilterBar } from "@/components/filter/FilterBar";
-import { FilterButtonReset } from "@/components/filter/FilterButtonReset";
-import { FilterDateRange } from "@/components/filter/FilterDateRange";
-import { FilterSelect } from "@/components/filter/FilterSelect";
-import { ACTIVE_STATUS_LIST } from "@/constants/status";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { FaRotateLeft, FaSliders } from "react-icons/fa6";
+import { useSearchParams } from "react-router";
 
 export const AccountAdminFilterBar = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const status = searchParams.get("status") || "";
+  const startDate = searchParams.get("startDate") || "";
+  const endDate = searchParams.get("endDate") || "";
+
+  const handleCategoryFilter = (key: string, event: any) => {
+    const params = new URLSearchParams(searchParams);
+    const value = event.target.value;
+    if (value) {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
+
+    setSearchParams(params);
+  };
+
+  const handleReset = () => {
+    setSearchParams(new URLSearchParams());
+  };
+
   return (
-    <FilterBar>
-      <FilterSelect
-        paramKey="status"
-        placeholder="Trạng thái"
-        options={ACTIVE_STATUS_LIST}
-      />
+    <>
+      <div className="mb-6 flex flex-wrap items-center gap-4">
+        <div className="text-travel-secondary flex items-center gap-3 text-lg font-semibold italic">
+          <FaSliders className="size-5" /> Bộ lọc
+        </div>
+        <select
+          value={status}
+          onChange={(event) => handleCategoryFilter("status", event)}
+          className="select border-travel-secondary/20 text-travel-secondary h-10 w-[140px] rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md"
+        >
+          <option value="">Trạng thái</option>
+          <option value="active">Hoạt động</option>
+          <option value="inactive">Tạm dừng</option>
+        </select>
 
-      <FilterDateRange />
+        <div className="border-travel-secondary/20 text-travel-secondary flex h-10 items-center gap-4 rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md">
+          <input
+            type="date"
+            className="w-28"
+            value={startDate}
+            onChange={(event) => handleCategoryFilter("startDate", event)}
+          />
+          <span>-</span>
+          <input
+            type="date"
+            className="w-28"
+            value={endDate}
+            onChange={(event) => handleCategoryFilter("endDate", event)}
+          />
+        </div>
 
-      <FilterSelect
-        paramKey="role"
-        placeholder="Nhóm quyền"
-        options={[
-          { label: "q1", value: "1" },
-          { label: "q2", value: "2" },
-        ]}
-      />
+        <select
+          value={status}
+          onChange={(event) => handleCategoryFilter("status", event)}
+          className="select border-travel-secondary/20 text-travel-secondary h-10 w-[140px] rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md"
+        >
+          <option value="">Nhóm quyền</option>
+          <option value="active">Hoạt động</option>
+          <option value="inactive">Tạm dừng</option>
+        </select>
 
-      <FilterButtonReset />
-    </FilterBar>
+        <button
+          onClick={handleReset}
+          className="text-travel-red border-travel-red flex h-10 cursor-pointer items-center gap-3 rounded-4xl border bg-white px-4 text-sm font-semibold shadow-md"
+        >
+          <FaRotateLeft className="size-4" />
+          Xóa bộ lọc
+        </button>
+      </div>
+    </>
+    // <FilterBar>
+    //   <FilterSelect
+    //     paramKey="status"
+    //     placeholder="Trạng thái"
+    //     options={ACTIVE_STATUS_LIST}
+    //   />
+
+    //   <FilterDateRange />
+
+    //   <FilterSelect
+    //     paramKey="role"
+    //     placeholder="Nhóm quyền"
+    //     options={[
+    //       { label: "q1", value: "1" },
+    //       { label: "q2", value: "2" },
+    //     ]}
+    //   />
+
+    //   <FilterButtonReset />
+    // </FilterBar>
   );
 };

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { websiteInfoSchema, type WebsiteInfoInputs } from "@/types";
@@ -9,27 +9,58 @@ import { FormFileUpload } from "@/components/form/FormFileUpload";
 import { ButtonSubmit } from "@/components/button/ButtonSubmit";
 import { ContextLink } from "@/components/common/ContextLink";
 import { pathAdmin } from "@/config/path";
+import { useWebsiteInfoEdit } from "./hooks/useWebsiteInfoEdit";
+import { useWebsiteInfoDetail } from "./hooks/useWebsiteInfoDetail";
 
 export const SettingWebsiteInfo = () => {
+  const { mutate: mutateWebsiteInfoEdit, isPending: isPendingWebsiteInfoEdit } =
+    useWebsiteInfoEdit();
+  const { websiteInfoDetail } = useWebsiteInfoDetail();
+
   const [logos, setLogos] = useState<any[]>([]);
   const [favicons, setFavicons] = useState<any[]>([]);
 
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<WebsiteInfoInputs>({
     resolver: zodResolver(websiteInfoSchema),
   });
 
+  useEffect(() => {
+    if (websiteInfoDetail) {
+      reset({
+        ...websiteInfoDetail,
+      });
+    }
+
+    if (websiteInfoDetail && websiteInfoDetail.logo) {
+      setLogos([
+        {
+          source: websiteInfoDetail.logo,
+        },
+      ]);
+    }
+
+    if (websiteInfoDetail && websiteInfoDetail.favicon) {
+      setFavicons([
+        {
+          source: websiteInfoDetail.favicon,
+        },
+      ]);
+    }
+  }, [reset, websiteInfoDetail]);
+
   const handleWebsiteInfoForm: SubmitHandler<WebsiteInfoInputs> = (data) => {
     data.logo = null;
-    if (logos.length > 0) {
+    if (logos.length > 0 && logos[0].file instanceof File) {
       data.logo = logos[0].file;
     }
 
     data.favicon = null;
-    if (favicons.length > 0) {
+    if (favicons.length > 0 && favicons[0].file instanceof File) {
       data.favicon = favicons[0].file;
     }
 
@@ -38,19 +69,27 @@ export const SettingWebsiteInfo = () => {
     formData.append("phone", data.phone);
     formData.append("email", data.email);
     formData.append("address", data.address || "");
+    formData.append("facebook", data.facebook || "");
+    formData.append("zalo", data.zalo || "");
     formData.append("logo", data.logo);
     formData.append("favicon", data.favicon);
 
-    console.log(Array.from(formData.entries()));
+    mutateWebsiteInfoEdit(formData);
   };
 
   return (
     <>
-      <PageTitle title="Thông tin website" />
-      <div className="border-four overflow-hidden rounded-[14px] border bg-white p-[30px] md:p-[50px]">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+        <PageTitle title="Thông tin website" />
+        <ContextLink
+          text="Quay lại danh sách"
+          to={`/${pathAdmin}/setting/list`}
+        />
+      </div>
+      <div className="border-travel-secondary/20 overflow-hidden rounded-md border bg-white p-6 shadow-md">
         <form
           onSubmit={handleSubmit(handleWebsiteInfoForm)}
-          className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-[30px]"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2"
         >
           <FormInput
             id="websiteName"
@@ -81,6 +120,20 @@ export const SettingWebsiteInfo = () => {
             error={errors.address}
           />
 
+          <FormInput
+            id="facebook"
+            label="Link Facebook"
+            register={register("facebook")}
+            error={errors.facebook}
+          />
+
+          <FormInput
+            id="zalo"
+            label="Link Zalo"
+            register={register("zalo")}
+            error={errors.zalo}
+          />
+
           <FormFileUpload
             name="logo"
             label="Logo"
@@ -97,12 +150,8 @@ export const SettingWebsiteInfo = () => {
             oneCol
           />
 
-          <ButtonSubmit text="Cập nhật" />
+          <ButtonSubmit text="Cập nhật" isPending={isPendingWebsiteInfoEdit} />
         </form>
-        <ContextLink
-          text="Quay lại danh sách"
-          to={`/${pathAdmin}/setting/list`}
-        />
       </div>
     </>
   );

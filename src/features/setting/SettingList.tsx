@@ -5,7 +5,9 @@ import { SETTING_LIST } from "./constants/settingList";
 export const SettingList = () => {
   return (
     <>
-      <PageTitle title="Cài đặt chung" />
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+        <PageTitle title="Cài đặt chung" />
+      </div>
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-[30px] xl:grid-cols-3">
         {SETTING_LIST.map((item) => (
           <Link
@@ -16,7 +18,7 @@ export const SettingList = () => {
             <div className="flex h-[70px] w-[70px] items-center justify-center rounded-full bg-[#E7EDFF]">
               <item.icon className="text-[30px] text-[#396AFF]" />
             </div>
-            <div className="text-secondary text-lg font-bold">
+            <div className="text-travel-secondary text-lg font-bold">
               {item.content}
             </div>
           </Link>
