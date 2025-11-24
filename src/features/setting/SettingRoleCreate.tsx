@@ -1,18 +1,14 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCheckboxGroup } from "@/hooks/useCheckboxGroup";
 import { roleSchema, type RoleInputs } from "@/types";
 import { PageTitle } from "@/components/pageTitle/PageTitle";
 import { FormInput } from "@/components/form/FormInput";
 import { permissionList } from "@/constants/permissions";
-import { CheckboxGroup } from "@/components/checkbox/CheckboxGroup";
 import { ButtonSubmit } from "@/components/button/ButtonSubmit";
 import { ContextLink } from "@/components/common/ContextLink";
 import { pathAdmin } from "@/config/path";
 
 export const SettingRoleCreate = () => {
-  const { checkedItems, handleCheckboxChange } = useCheckboxGroup();
-
   const {
     register,
     handleSubmit,
@@ -24,18 +20,24 @@ export const SettingRoleCreate = () => {
   const handleRoleForm: SubmitHandler<RoleInputs> = (data) => {
     const dataFinal = {
       ...data,
-      checkedItems,
+      // checkedItems,
     };
     console.log(dataFinal);
   };
 
   return (
     <>
-      <PageTitle title="Tạo nhóm quyền" />
-      <div className="border-four overflow-hidden rounded-[14px] border bg-white p-[30px] md:p-[50px]">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+        <PageTitle title="Tạo nhóm quyền" />
+        <ContextLink
+          text="Quay lại danh sách"
+          to={`/${pathAdmin}/setting/role/list`}
+        />
+      </div>
+      <div className="border-travel-secondary/20 overflow-hidden rounded-md border bg-white p-6 shadow-md">
         <form
           onSubmit={handleSubmit(handleRoleForm)}
-          className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-[30px]"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2"
         >
           <FormInput
             id="name"
@@ -53,27 +55,30 @@ export const SettingRoleCreate = () => {
           />
 
           <div>
-            <label className="text-label mb-[10px] block text-sm font-semibold">
+            <label className="text-travel-label mb-1 block text-sm font-semibold">
               Phân quyền
             </label>
-            <div className="bg-three border-four flex h-[166px] flex-col gap-2 overflow-y-auto rounded-sm border px-[23px] py-[14px]">
+            <div className="border-travel-four bg-travel-three flex h-[166px] flex-col gap-2 overflow-y-auto rounded-sm border p-5">
               {permissionList.map((item) => (
-                <CheckboxGroup
+                <label
                   key={item.value}
-                  label={item.label}
-                  value={item.value}
-                  handleCheckboxChange={handleCheckboxChange}
-                />
+                  className="label text-travel-secondary flex items-center gap-3 text-sm font-medium"
+                >
+                  <input
+                    // checked={locationsFrom.includes(item._id)}
+                    // onChange={() => handleToggleForm(item._id)}
+                    type="checkbox"
+                    className="checkbox checkbox-primary border-travel-secondary/20 hover:border-travel-primary h-5 w-5 rounded-md"
+                    value={item.value}
+                  />
+                  {item.label}
+                </label>
               ))}
             </div>
           </div>
 
           <ButtonSubmit />
         </form>
-        <ContextLink
-          text="Quay lại danh sách"
-          to={`/${pathAdmin}/setting/role/list`}
-        />
       </div>
     </>
   );

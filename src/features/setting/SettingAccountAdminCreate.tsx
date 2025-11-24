@@ -33,11 +33,17 @@ export const SettingAccountAdminCreate = () => {
 
   return (
     <>
-      <PageTitle title="Tạo tài khoản quản trị" />
-      <div className="border-four overflow-hidden rounded-[14px] border bg-white p-[30px] md:p-[50px]">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+        <PageTitle title="Tạo tài khoản quản trị" />
+        <ContextLink
+          text="Quay lại danh sách"
+          to={`/${pathAdmin}/setting/account-admin/list`}
+        />
+      </div>
+      <div className="border-travel-secondary/20 overflow-hidden rounded-md border bg-white p-6 shadow-md">
         <form
           onSubmit={handleSubmit(handleWebsiteInfoForm)}
-          className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-[30px]"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2"
         >
           <FormInput
             id="fullName"
@@ -110,10 +116,6 @@ export const SettingAccountAdminCreate = () => {
 
           <ButtonSubmit />
         </form>
-        <ContextLink
-          text="Quay lại danh sách"
-          to={`/${pathAdmin}/setting/account-admin/list`}
-        />
       </div>
     </>
   );

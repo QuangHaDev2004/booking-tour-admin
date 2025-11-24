@@ -87,6 +87,8 @@ export const websiteInfoSchema = z.object({
     .or(z.literal("")),
   email: z.string().email("Email không đúng định dạng!").or(z.literal("")),
   address: z.string().optional(),
+  facebook: z.string().optional(),
+  zalo: z.string().optional(),
   logo: z.any(),
   favicon: z.any(),
 });
