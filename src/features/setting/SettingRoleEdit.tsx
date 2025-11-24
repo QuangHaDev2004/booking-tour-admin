@@ -7,11 +7,18 @@ import { permissionList } from "@/constants/permissions";
 import { ButtonSubmit } from "@/components/button/ButtonSubmit";
 import { ContextLink } from "@/components/common/ContextLink";
 import { pathAdmin } from "@/config/path";
-import { useState } from "react";
-import { useRoleCreate } from "./hooks/useRoleCreate";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { useRoleDetail } from "./hooks/useRoleDetail";
+import { useRoleEdit } from "./hooks/useRoleEdit";
 
 export const SettingRoleEdit = () => {
+  const { id } = useParams();
   const [permissions, setPermissions] = useState<string[]>([]);
+  const { roleDetail } = useRoleDetail({ id: id! });
+  const { mutate: mutateRoleEdit, isPending: isPendingRoleEdit } = useRoleEdit({
+    id: id!,
+  });
 
   const {
     register,
@@ -22,8 +29,17 @@ export const SettingRoleEdit = () => {
     resolver: zodResolver(roleSchema),
   });
 
-  const { mutate: mutateRoleCreate, isPending: isPendingRoleCreate } =
-    useRoleCreate({ reset, setPermissions });
+  useEffect(() => {
+    if (roleDetail) {
+      reset({
+        ...roleDetail,
+      });
+    }
+
+    if (roleDetail.permissions && roleDetail.permissions.length > 0) {
+      setPermissions(roleDetail.permissions);
+    }
+  }, [reset, roleDetail]);
 
   const handlePermission = (value: string) => {
     setPermissions((prev) =>
@@ -39,7 +55,7 @@ export const SettingRoleEdit = () => {
       permissions,
     };
 
-    mutateRoleCreate(dataFinal);
+    mutateRoleEdit(dataFinal);
   };
 
   return (
@@ -94,7 +110,7 @@ export const SettingRoleEdit = () => {
             </div>
           </div>
 
-          <ButtonSubmit text="Cập nhật" isPending={isPendingRoleCreate} />
+          <ButtonSubmit text="Cập nhật" isPending={isPendingRoleEdit} />
         </form>
       </div>
     </>
