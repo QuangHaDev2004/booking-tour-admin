@@ -18,3 +18,8 @@ export const tourChangeMultiService = async (dataFinal: {
   const res = await api.patch(`/${pathAdmin}/tour/change-multi`, dataFinal);
   return res.data;
 };
+
+export const tourDeleteService = async (id: string) => {
+  const res = await api.patch(`/${pathAdmin}/tour/delete/${id}`);
+  return res.data;
+};

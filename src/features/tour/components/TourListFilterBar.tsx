@@ -8,8 +8,6 @@ import { useSearchParams } from "react-router";
 export const TourListFilterBar = () => {
   const { fullAccountAdminList } = useAccountAdminList();
   const { categoryTree } = useCategoryList();
-  console.log(categoryTree);
-
   const [searchParams, setSearchParams] = useSearchParams();
   const status = searchParams.get("status") || "";
   const createdBy = searchParams.get("createdBy") || "";
