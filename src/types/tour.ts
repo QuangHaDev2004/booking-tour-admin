@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type TourItem = {
   id: string;
   name: string;
@@ -14,4 +15,15 @@ export type TourItem = {
   updatedAt: string;
   createdByFullName: string;
   updatedByFullName: string;
+  category: string;
+  priceAdult: number;
+  priceChildren: number;
+  priceBaby: number;
+  information: string;
+  locationsFrom: string[];
+  locationsTo: string[];
+  time: string;
+  vehicle: string;
+  departureDateFormat: string;
+  schedules: any[];
 };

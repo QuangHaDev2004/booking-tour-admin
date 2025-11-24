@@ -21,6 +21,9 @@ export const CategoryEdit = () => {
   const editorRef = useRef<any>(null);
   const [avatars, setAvatars] = useState<any[]>([]);
   const navigate = useNavigate();
+  const { categoryTree } = useCategoryList();
+  const { categoryDetail, isError } = useCategoryDetail(id);
+  const { mutate, isPending } = useCategoryEdit(id);
 
   const {
     register,
@@ -30,10 +33,6 @@ export const CategoryEdit = () => {
   } = useForm<CategoryFormInputs>({
     resolver: zodResolver(categoryFormSchema) as any,
   });
-
-  const { categoryTree } = useCategoryList();
-  const { categoryDetail, isError } = useCategoryDetail(id);
-  const { mutate, isPending } = useCategoryEdit(id);
 
   useEffect(() => {
     if (categoryDetail && categoryTree.length > 0) {
