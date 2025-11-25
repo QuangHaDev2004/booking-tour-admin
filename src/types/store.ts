@@ -1,12 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { AccountAdminItem } from "./account";
+
 export type AuthState = {
   accessToken: string | null;
-  account: any;
+  account: AccountAdminItem | null;
   loading: boolean;
 
   clearState: () => void;
   setAccessToken: (accessToken: string) => void;
-  setAccount: (account: any) => void;
+  setAccount: (account: AccountAdminItem) => void;
   logout: () => Promise<void>;
   fetchMe: () => Promise<void>;
   refresh: () => Promise<void>;

@@ -5,6 +5,7 @@ import { mainMenus, settingMenus } from "@/constants/menus";
 import { checkActive } from "@/helpers/checkActive";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { pathAdmin } from "@/config/path";
+import { menuPermissionsMap } from "@/constants/menuPermissionsMap";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -14,7 +15,10 @@ type SidebarProps = {
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { logout } = useAuthStore();
+  const { logout, account } = useAuthStore();
+  const permissions = account?.permissions;
+
+  console.log(permissions);
 
   const handleLogout = async () => {
     await logout();
@@ -28,6 +32,11 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
       >
         <ul>
           {mainMenus.map((item) => {
+            const needPermission = menuPermissionsMap[item.to];
+            if (needPermission && !permissions?.includes(needPermission)) {
+              return null;
+            }
+
             const isActive = checkActive(pathname, item.to);
             return (
               <li key={item.to}>

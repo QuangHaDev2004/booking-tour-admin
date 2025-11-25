@@ -6,22 +6,36 @@ import { ButtonCreate } from "@/components/button/ButtonCreate";
 import { ButtonTrash } from "@/components/button/ButtonTrash";
 import { pathAdmin } from "@/config/path";
 import { useTourList } from "./hooks/useTourList";
+import { useAuthStore } from "@/stores/useAuthStore";
+import { NoPermission } from "@/components/common/NoPermission";
 
 export const TourList = () => {
   const { pagination, tourList } = useTourList();
+  const { account } = useAuthStore();
+  const permissions = account?.permissions;
 
   return (
     <>
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
-        <PageTitle title="Quản lý tour" />
-        <div className="flex flex-wrap items-center gap-2">
-          <ButtonTrash to={`/${pathAdmin}/tour/trash`} />
-          <ButtonCreate to={`/${pathAdmin}/tour/create`} />
-        </div>
-      </div>
-      <TourListFilterBar />
-      <TourListTable />
-      <Pagination pagination={pagination} list={tourList} />
+      {permissions?.includes("tour-view") ? (
+        <>
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+            <PageTitle title="Quản lý tour" />
+            <div className="flex flex-wrap items-center gap-2">
+              {permissions.includes("tour-trash") && (
+                <ButtonTrash to={`/${pathAdmin}/tour/trash`} />
+              )}
+              {permissions.includes("tour-create") && (
+                <ButtonCreate to={`/${pathAdmin}/tour/create`} />
+              )}
+            </div>
+          </div>
+          <TourListFilterBar />
+          <TourListTable />
+          <Pagination pagination={pagination} list={tourList} />
+        </>
+      ) : (
+        <NoPermission />
+      )}
     </>
   );
 };
