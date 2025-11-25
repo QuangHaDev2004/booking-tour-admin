@@ -28,11 +28,13 @@ export const ProfileChangePassword = () => {
 
   return (
     <>
-      <PageTitle title="Đổi mật khẩu" />
-      <div className="border-four overflow-hidden rounded-[14px] border bg-white p-[30px] md:p-[50px]">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+        <PageTitle title="Đổi mật khẩu" />
+      </div>
+      <div className="border-travel-secondary/20 overflow-hidden rounded-md border bg-white p-6 shadow-md">
         <form
           onSubmit={handleSubmit(handleProfileChangePasswordForm)}
-          className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-[30px]"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2"
         >
           <FormInput
             id="password"
