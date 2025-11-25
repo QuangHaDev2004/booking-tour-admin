@@ -6,6 +6,14 @@ export const getAccounAdminListService = async () => {
   return res.data;
 };
 
+export const accountAdminCreateService = async (dataFinal: FormData) => {
+  const res = await api.post(
+    `/${pathAdmin}/setting/account-admin/create`,
+    dataFinal,
+  );
+  return res.data;
+};
+
 export const websiteInfoEditService = async (dataFinal: FormData) => {
   const res = await api.patch(`/${pathAdmin}/setting/website-info`, dataFinal);
   return res.data;
