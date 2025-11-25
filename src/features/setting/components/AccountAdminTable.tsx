@@ -1,45 +1,13 @@
-import { CustomCheckbox } from "@/components/checkbox/Checkbox";
 import { pathAdmin } from "@/config/path";
 import { ButtonDelete } from "@/components/button/ButtonDelete";
 import { ButtonEdit } from "@/components/button/ButtonEdit";
-import { Badge } from "@/components/badge/Badge";
 import { EmptyTableRow } from "@/components/table/EmptyTableRow";
-import { useCheckbox } from "@/hooks/useCheckbox";
 import { Search } from "@/components/common/Search";
-
-const adminAccounts = [
-  {
-    id: "a1f9c23b",
-    fullName: "Nguyễn Văn A",
-    avatar: "/assets/images/ha-long.jpg",
-    email: "nguyenvana@example.com",
-    phone: "0905123456",
-    role: "Quản trị viên",
-    positionCompany: "Trưởng phòng",
-    statusInfo: {
-      label: "Hoạt động",
-      color: "green",
-    },
-  },
-  {
-    id: "b4e7d91f",
-    fullName: "Trần Thị B",
-    avatar: "/assets/images/ha-long.jpg",
-    email: "tranthib@example.com",
-    phone: "0987654321",
-    role: "Biên tập viên",
-    positionCompany: "Nhân viên",
-    statusInfo: {
-      label: "Khởi tạo",
-      color: "yellow",
-    },
-  },
-];
+import { useAccountAdminList } from "@/hooks/useAccountAdminList";
+import { statusList } from "@/constants/status";
 
 export const AccountAdminTable = () => {
-  const { checkAll, checkItems, handleCheckAll, handleCheckItem } = useCheckbox(
-    { data: adminAccounts },
-  );
+  const { accountAdminList } = useAccountAdminList();
 
   return (
     <>
@@ -108,57 +76,71 @@ export const AccountAdminTable = () => {
             </tr>
           </thead>
           <tbody>
-            {adminAccounts.length > 0 ? (
-              adminAccounts.map((item) => (
-                <tr key={item.id} className="last:[&>td]:border-0">
-                  <td className="border-travel-four border-b px-4 py-2 text-center">
-                    <input
-                      type="checkbox"
-                      className="checkbox checkbox-primary border-travel-secondary/20 hover:border-travel-primary border"
-                      value={item.id}
-                      // checked={selectedIds.includes(item.id)}
-                      // onChange={(event) => handleCheckItem(item.id, event)}
-                    />
-                  </td>
-                  <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
-                    {item.fullName}
-                  </td>
-                  <td className="border-travel-four border-b px-4 py-2 text-center text-sm font-semibold">
-                    <img
-                      src="/assets/images/ha-long.jpg"
-                      className="mx-auto h-[60px] w-[60px] rounded-md object-cover"
-                    />
-                  </td>
-                  <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
-                    {item.email}
-                  </td>
-                  <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
-                    {item.phone}
-                  </td>
-                  <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
-                    {item.role}
-                  </td>
-                  <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
-                    {item.positionCompany}
-                  </td>
-                  <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
-                    <Badge
-                      className={`badge-${item.statusInfo.color}`}
-                      content={item.statusInfo.label}
-                    />
-                  </td>
-                  <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
-                    <div className="border-travel-four inline-flex items-center rounded-lg border bg-[#FAFBFD]">
-                      <ButtonEdit
-                        to={`/${pathAdmin}/setting/account-admin/edit`}
+            {accountAdminList.length > 0 ? (
+              accountAdminList.map((item) => {
+                const status = statusList.find(
+                  (st) => st.value === item.status,
+                );
+
+                return (
+                  <tr key={item.id} className="last:[&>td]:border-0">
+                    <td className="border-travel-four border-b px-4 py-2 text-center">
+                      <input
+                        type="checkbox"
+                        className="checkbox checkbox-primary border-travel-secondary/20 hover:border-travel-primary border"
+                        value={item.id}
+                        // checked={selectedIds.includes(item.id)}
+                        // onChange={(event) => handleCheckItem(item.id, event)}
                       />
-                      <ButtonDelete
-                        endpoint={`/${pathAdmin}/setting/account-admin/delete`}
+                    </td>
+                    <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
+                      {item.fullName}
+                    </td>
+                    <td className="border-travel-four border-b px-4 py-2 text-center text-sm font-semibold">
+                      <img
+                        src={
+                          item.avatar ||
+                          "https://placehold.co/60x60/white/black?text=No+Image"
+                        }
+                        className="border-travel-four mx-auto h-[60px] w-[60px] overflow-hidden rounded-md border object-cover"
                       />
-                    </div>
-                  </td>
-                </tr>
-              ))
+                    </td>
+                    <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
+                      {item.email}
+                    </td>
+                    <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
+                      {item.phone || "Chưa có"}
+                    </td>
+                    <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
+                      {item.roleName || "Chưa có"}
+                    </td>
+                    <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
+                      {item.positionCompany || "Chưa có"}
+                    </td>
+                    <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
+                      <div
+                        className="flex h-[27px] w-[93px] items-center justify-center rounded-[4.5px] text-xs font-bold"
+                        style={{
+                          color: status?.color,
+                          backgroundColor: status?.colorBg,
+                        }}
+                      >
+                        {status?.label}
+                      </div>
+                    </td>
+                    <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
+                      <div className="border-travel-four inline-flex items-center rounded-lg border bg-[#FAFBFD]">
+                        <ButtonEdit
+                          to={`/${pathAdmin}/setting/account-admin/edit/${item.id}`}
+                        />
+                        <ButtonDelete
+                          endpoint={`/${pathAdmin}/setting/account-admin/delete`}
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
               <EmptyTableRow colSpan={8} />
             )}

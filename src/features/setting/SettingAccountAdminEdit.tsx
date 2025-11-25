@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { accountAdminSchema, type AccountAdminInputs } from "@/types";
+import { useEffect, useState } from "react";
+import { accountAdminEditSchema, type AccountAdminEditInputs } from "@/types";
 import { PageTitle } from "@/components/pageTitle/PageTitle";
 import { FormInput } from "@/components/form/FormInput";
 import { FormFileUpload } from "@/components/form/FormFileUpload";
@@ -10,27 +10,45 @@ import { ButtonSubmit } from "@/components/button/ButtonSubmit";
 import { ContextLink } from "@/components/common/ContextLink";
 import { pathAdmin } from "@/config/path";
 import { useRoleList } from "./hooks/useRoleList";
-import { useAccountAdminCreate } from "./hooks/useAccountAdminCreate";
+import { useParams } from "react-router";
+import { useAccountAdminDetail } from "./hooks/useAccountAdminDetail";
+import { useAccountAdminEdit } from "./hooks/useAccountAdminEdit";
 
-export const SettingAccountAdminCreate = () => {
+export const SettingAccountAdminEdit = () => {
+  const { id } = useParams();
   const [avatars, setAvatars] = useState<any[]>([]);
   const { roleList } = useRoleList();
+  const { accountAdminDetail } = useAccountAdminDetail({ id: id! });
 
   const {
     register,
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<AccountAdminInputs>({
-    resolver: zodResolver(accountAdminSchema),
+  } = useForm<AccountAdminEditInputs>({
+    resolver: zodResolver(accountAdminEditSchema),
   });
 
-  const {
-    mutate: mutateAccountAdminCreate,
-    isPending: isPendingAccountAdminCreate,
-  } = useAccountAdminCreate({ reset, setAvatars });
+  useEffect(() => {
+    if (accountAdminDetail && roleList) {
+      reset({
+        ...accountAdminDetail,
+      });
+    }
 
-  const handleWebsiteInfoForm: SubmitHandler<AccountAdminInputs> = (data) => {
+    if (accountAdminDetail && accountAdminDetail.avatar) {
+      setAvatars([{ source: accountAdminDetail.avatar }]);
+    }
+  }, [accountAdminDetail, reset, roleList]);
+
+  const {
+    mutate: mutateAccountAdminEdit,
+    isPending: isPendingAccountAdminEdit,
+  } = useAccountAdminEdit({ id: accountAdminDetail.id });
+
+  const handleWebsiteInfoForm: SubmitHandler<AccountAdminEditInputs> = (
+    data,
+  ) => {
     data.avatar = null;
     if (avatars.length > 0 && avatars[0].file instanceof File) {
       data.avatar = avatars[0].file;
@@ -46,13 +64,13 @@ export const SettingAccountAdminCreate = () => {
     formData.append("password", data.password);
     formData.append("avatar", data.avatar);
 
-    mutateAccountAdminCreate(formData);
+    mutateAccountAdminEdit(formData);
   };
 
   return (
     <>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
-        <PageTitle title="Tạo tài khoản quản trị" />
+        <PageTitle title="Chỉnh sửa tài khoản quản trị" />
         <ContextLink
           text="Quay lại danh sách"
           to={`/${pathAdmin}/setting/account-admin/list`}
@@ -147,7 +165,7 @@ export const SettingAccountAdminCreate = () => {
             setFiles={setAvatars}
           />
 
-          <ButtonSubmit isPending={isPendingAccountAdminCreate} />
+          <ButtonSubmit text="Cập nhật" isPending={isPendingAccountAdminEdit} />
         </form>
       </div>
     </>

@@ -13,6 +13,7 @@ import { UserList } from "@/features/user";
 import { ContactList } from "@/features/contact";
 import {
   SettingAccountAdminCreate,
+  SettingAccountAdminEdit,
   SettingAccountAdminList,
   SettingList,
   SettingRoleCreate,
@@ -106,6 +107,10 @@ export const router = createBrowserRouter([
       {
         path: `/${pathAdmin}/setting/account-admin/create`,
         element: <SettingAccountAdminCreate />,
+      },
+      {
+        path: `/${pathAdmin}/setting/account-admin/edit/:id`,
+        element: <SettingAccountAdminEdit />,
       },
       {
         path: `/${pathAdmin}/setting/role/list`,

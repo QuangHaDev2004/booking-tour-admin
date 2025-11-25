@@ -7,13 +7,15 @@ import { toast } from "sonner";
 
 type Props = {
   reset: UseFormReset<any>;
+  setAvatars: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
-export const useAccountAdminCreate = ({ reset }: Props) => {
+export const useAccountAdminCreate = ({ reset, setAvatars }: Props) => {
   const mutation = useMutation({
     mutationFn: accountAdminCreateService,
     onSuccess: (data) => {
       reset();
+      setAvatars([]);
       toast.success(data.message);
     },
     onError: (errors: AxiosError<{ message: string }>) => {

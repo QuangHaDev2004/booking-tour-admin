@@ -14,6 +14,22 @@ export const accountAdminCreateService = async (dataFinal: FormData) => {
   return res.data;
 };
 
+export const accountAdminDetailService = async (id: string) => {
+  const res = await api.get(`/${pathAdmin}/setting/account-admin/edit/${id}`);
+  return res.data;
+};
+
+export const accountAdminEditService = async (
+  id: string,
+  dataFinal: FormData,
+) => {
+  const res = await api.patch(
+    `/${pathAdmin}/setting/account-admin/edit/${id}`,
+    dataFinal,
+  );
+  return res.data;
+};
+
 export const websiteInfoEditService = async (dataFinal: FormData) => {
   const res = await api.patch(`/${pathAdmin}/setting/website-info`, dataFinal);
   return res.data;

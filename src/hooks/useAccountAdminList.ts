@@ -8,9 +8,12 @@ export const useAccountAdminList = () => {
     queryFn: getAccounAdminListService,
   });
 
-  const fullAccountAdminList: AccountAdminItem[] = data?.fullAccountAdminList ?? [];
+  const fullAccountAdminList: AccountAdminItem[] =
+    data?.fullAccountAdminList ?? [];
+  const accountAdminList: AccountAdminItem[] = data?.accountAdminList ?? [];
 
   return {
     fullAccountAdminList,
+    accountAdminList,
   };
 };
