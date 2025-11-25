@@ -5,30 +5,48 @@ import { useState } from "react";
 import { accountAdminSchema, type AccountAdminInputs } from "@/types";
 import { PageTitle } from "@/components/pageTitle/PageTitle";
 import { FormInput } from "@/components/form/FormInput";
-import { FormSelect } from "@/components/form/FormSelect";
 import { FormFileUpload } from "@/components/form/FormFileUpload";
 import { ButtonSubmit } from "@/components/button/ButtonSubmit";
 import { ContextLink } from "@/components/common/ContextLink";
 import { pathAdmin } from "@/config/path";
+import { useRoleList } from "./hooks/useRoleList";
+import { useAccountAdminCreate } from "./hooks/useAccountAdminCreate";
 
 export const SettingAccountAdminCreate = () => {
   const [avatars, setAvatars] = useState<any[]>([]);
+  const { roleList } = useRoleList();
 
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<AccountAdminInputs>({
     resolver: zodResolver(accountAdminSchema),
   });
 
+  const {
+    mutate: mutateAccountAdminCreate,
+    isPending: isPendingAccountAdminCreate,
+  } = useAccountAdminCreate({ reset });
+
   const handleWebsiteInfoForm: SubmitHandler<AccountAdminInputs> = (data) => {
     data.avatar = null;
-    if (avatars.length > 0) {
+    if (avatars.length > 0 && avatars[0].file instanceof File) {
       data.avatar = avatars[0].file;
     }
 
-    console.log(data);
+    const formData = new FormData();
+    formData.append("fullName", data.fullName);
+    formData.append("email", data.email);
+    formData.append("phone", data.phone);
+    formData.append("role", data.role || "");
+    formData.append("positionCompany", data.positionCompany);
+    formData.append("status", data.status || "");
+    formData.append("password", data.password);
+    formData.append("avatar", data.avatar);
+
+    mutateAccountAdminCreate(formData);
   };
 
   return (
@@ -69,16 +87,24 @@ export const SettingAccountAdminCreate = () => {
             isRequired
           />
 
-          <FormSelect
-            id="role"
-            label="Nhóm quyền"
-            register={register("role")}
-            error={errors.role}
-            options={[
-              { value: "1", label: "q1" },
-              { value: "2", label: "q2" },
-            ]}
-          />
+          <div>
+            <label
+              htmlFor="status"
+              className="text-travel-label mb-1 block text-sm font-semibold"
+            >
+              Nhóm quyền
+            </label>
+            <select
+              {...register("role")}
+              className="select bg-travel-three text-travel-secondary h-12 w-full px-5 text-sm font-medium"
+            >
+              {roleList.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
           <FormInput
             id="positionCompany"
@@ -88,16 +114,22 @@ export const SettingAccountAdminCreate = () => {
             isRequired
           />
 
-          <FormSelect
-            id="status"
-            label="Trạng thái"
-            register={register("status")}
-            error={errors.status}
-            options={[
-              { value: "active", label: "Hoạt động" },
-              { value: "inactive", label: "Tạm dừng" },
-            ]}
-          />
+          <div>
+            <label
+              htmlFor="status"
+              className="text-travel-label mb-1 block text-sm font-semibold"
+            >
+              Trạng thái
+            </label>
+            <select
+              {...register("status")}
+              className="select bg-travel-three text-travel-secondary h-12 w-full px-5 text-sm font-medium"
+            >
+              <option value="initial">Khởi tạo</option>
+              <option value="active">Hoạt động</option>
+              <option value="inactive">Tạm dừng</option>
+            </select>
+          </div>
 
           <FormInput
             id="password"
@@ -114,7 +146,7 @@ export const SettingAccountAdminCreate = () => {
             setFiles={setAvatars}
           />
 
-          <ButtonSubmit />
+          <ButtonSubmit isPending={isPendingAccountAdminCreate} />
         </form>
       </div>
     </>
