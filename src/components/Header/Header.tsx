@@ -31,9 +31,12 @@ export const Header = ({ onOpenSidebar }: HeaderProps) => {
             </span>
           </div>
           <div className="flex items-center gap-[10px]">
-            <div className="h-11 w-11 overflow-hidden rounded-full">
+            <div className="border-travel-secondary/20 h-11 w-11 overflow-hidden rounded-full border">
               <img
-                src="/assets/images/admin.jpg"
+                src={
+                  account?.avatar ||
+                  "https://placehold.co/60x60/white/black?text=No+Image"
+                }
                 className="h-full w-full object-cover"
               />
             </div>
@@ -42,7 +45,7 @@ export const Header = ({ onOpenSidebar }: HeaderProps) => {
                 {account?.fullName}
               </div>
               <div className="text-[12px] font-semibold text-[#565656]">
-                Role
+                {account?.roleName}
               </div>
             </div>
           </div>

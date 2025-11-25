@@ -10,3 +10,13 @@ export const profileEditService = async (dataFinal: FormData) => {
   const res = await api.patch(`/${pathAdmin}/profile/edit`, dataFinal);
   return res.data;
 };
+
+export const profileChangePasswordService = async (dataFinal: {
+  password: string;
+}) => {
+  const res = await api.patch(
+    `/${pathAdmin}/profile/change-password`,
+    dataFinal,
+  );
+  return res.data;
+};

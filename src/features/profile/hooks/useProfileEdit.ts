@@ -14,8 +14,6 @@ export const useProfileEdit = () => {
       queryClient.invalidateQueries({ queryKey: ["profileDetail"] });
       setAccount(data.account);
       toast.success(data.message);
-      console.log(data.account);
-      
     },
     onError: (errors: AxiosError<{ message: string }>) => {
       toast.error(errors?.response?.data?.message);

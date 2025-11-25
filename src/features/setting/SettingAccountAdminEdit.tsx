@@ -9,10 +9,10 @@ import { FormFileUpload } from "@/components/form/FormFileUpload";
 import { ButtonSubmit } from "@/components/button/ButtonSubmit";
 import { ContextLink } from "@/components/common/ContextLink";
 import { pathAdmin } from "@/config/path";
-import { useRoleList } from "./hooks/useRoleList";
 import { useParams } from "react-router";
 import { useAccountAdminDetail } from "./hooks/useAccountAdminDetail";
 import { useAccountAdminEdit } from "./hooks/useAccountAdminEdit";
+import { useRoleList } from "./hooks/useRoleList";
 
 export const SettingAccountAdminEdit = () => {
   const { id } = useParams();

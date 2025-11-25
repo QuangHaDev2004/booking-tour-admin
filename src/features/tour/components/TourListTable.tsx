@@ -10,8 +10,11 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { useTourChangeMulti } from "../hooks/useTourChangeMulti";
 import { useTourDelete } from "../hooks/useTourDelete";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 export const TourListTable = () => {
+  const { account } = useAuthStore();
+  const permissions = account?.permissions;
   const { tourList } = useTourList();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [action, setAction] = useState<string>("");
@@ -179,12 +182,16 @@ export const TourListTable = () => {
                   </td>
                   <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
                     <div className="border-travel-four inline-flex items-center rounded-lg border bg-[#FAFBFD]">
-                      <ButtonEdit to={`/${pathAdmin}/tour/edit/${item.id}`} />
-                      <ButtonDelete
-                        id={item.id}
-                        isPending={isPendingTourDelete}
-                        onDelete={(id) => tourDelete(id)}
-                      />
+                      {permissions?.includes("tour-edit") && (
+                        <ButtonEdit to={`/${pathAdmin}/tour/edit/${item.id}`} />
+                      )}
+                      {permissions?.includes("tour-delete") && (
+                        <ButtonDelete
+                          id={item.id}
+                          isPending={isPendingTourDelete}
+                          onDelete={(id) => tourDelete(id)}
+                        />
+                      )}
                     </div>
                   </td>
                 </tr>

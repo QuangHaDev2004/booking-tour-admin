@@ -7,8 +7,14 @@ import {
   profileChangePasswordSchema,
   type ProfileChangePasswordInputs,
 } from "@/types";
+import { useProfileChangePassword } from "./hooks/useProfileChangePassword";
 
 export const ProfileChangePassword = () => {
+  const {
+    mutate: mutateProfileChangePassword,
+    isPending: isPendingProfileChangePassword,
+  } = useProfileChangePassword();
+
   const {
     register,
     handleSubmit,
@@ -23,7 +29,8 @@ export const ProfileChangePassword = () => {
     const dataFinal = {
       password: data.password,
     };
-    console.log(dataFinal);
+
+    mutateProfileChangePassword(dataFinal);
   };
 
   return (
@@ -52,7 +59,10 @@ export const ProfileChangePassword = () => {
             isRequired
           />
 
-          <ButtonSubmit text="Đổi mật khẩu" />
+          <ButtonSubmit
+            text="Đổi mật khẩu"
+            isPending={isPendingProfileChangePassword}
+          />
         </form>
       </div>
     </>

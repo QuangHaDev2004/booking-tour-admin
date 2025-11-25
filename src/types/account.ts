@@ -7,4 +7,5 @@ export type AccountAdminItem = {
   roleName: string;
   positionCompany: string;
   status: string;
+  permissions: string[];
 };
