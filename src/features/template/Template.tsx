@@ -2,55 +2,80 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { templateSchema, type TemplateInputs } from "@/types";
 import { PageTitle } from "@/components/pageTitle/PageTitle";
-import { FormSelect } from "@/components/form/FormSelect";
 import { ButtonSubmit } from "@/components/button/ButtonSubmit";
+import { useCategoryList } from "../category/hooks/useCategoryList";
+import { renderOptions } from "@/utils/renderOptions";
+import { useTemplateEdit } from "./hook/useTemplateEdit";
+import { useTemplateDetail } from "./hook/useTemplateDetail";
+import { useEffect } from "react";
 
 export const Template = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<TemplateInputs>({
+  const { categoryTree } = useCategoryList();
+  const { templateDetail } = useTemplateDetail();
+  const { mutate: mutateTemplateEdit, isPending: pendingTemplateEdit } =
+    useTemplateEdit();
+
+  const { register, reset, handleSubmit } = useForm<TemplateInputs>({
     resolver: zodResolver(templateSchema),
   });
+
+  useEffect(() => {
+    if (templateDetail && categoryTree) {
+      reset({
+        ...templateDetail,
+      });
+    }
+  }, [categoryTree, reset, templateDetail]);
 
   const handleTemplateForm: SubmitHandler<TemplateInputs> = (data) => {
     const dataFinal = { ...data };
 
-    console.log(dataFinal);
+    mutateTemplateEdit(dataFinal);
   };
 
   return (
     <>
-      <PageTitle title="Thiết lập giao diện" />
-      <div className="border-four overflow-hidden rounded-[14px] border bg-white p-[30px] md:p-[50px]">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+        <PageTitle title="Thiết lập giao diện" />
+      </div>
+      <div className="border-travel-secondary/20 overflow-hidden rounded-md border bg-white p-6 shadow-md">
         <form
           onSubmit={handleSubmit(handleTemplateForm)}
-          className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-[30px]"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2"
         >
-          <FormSelect
-            id="dataSection4"
-            label="Dữ liệu Section 4"
-            register={register("dataSection4")}
-            error={errors.dataSection4}
-            options={[
-              { label: "pt1", value: "1" },
-              { label: "pt2", value: "2" },
-            ]}
-          />
+          <div>
+            <label
+              htmlFor="dataTourListOne"
+              className="text-travel-label mb-1 block text-sm font-semibold"
+            >
+              Dữ liệu Home Tour List One
+            </label>
+            <select
+              {...register("dataTourListOne")}
+              className="select bg-travel-three text-travel-secondary h-12 w-full px-5 text-sm font-medium"
+            >
+              <option value="">-- Chọn danh mục --</option>
+              {renderOptions(categoryTree)}
+            </select>
+          </div>
 
-          <FormSelect
-            id="dataSection6"
-            label="Dữ liệu Section 6"
-            register={register("dataSection6")}
-            error={errors.dataSection6}
-            options={[
-              { label: "tt1", value: "1" },
-              { label: "tt2", value: "2" },
-            ]}
-          />
+          <div>
+            <label
+              htmlFor="dataTourListTwo"
+              className="text-travel-label mb-1 block text-sm font-semibold"
+            >
+              Dữ liệu Home Tour List Two
+            </label>
+            <select
+              {...register("dataTourListTwo")}
+              className="select bg-travel-three text-travel-secondary h-12 w-full px-5 text-sm font-medium"
+            >
+              <option value="">-- Chọn danh mục --</option>
+              {renderOptions(categoryTree)}
+            </select>
+          </div>
 
-          <ButtonSubmit text="Cập nhật" />
+          <ButtonSubmit text="Cập nhật" isPending={pendingTemplateEdit} />
         </form>
       </div>
     </>

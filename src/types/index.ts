@@ -218,8 +218,8 @@ export type ProfileChangePasswordInputs = z.infer<
 
 // Template
 export const templateSchema = z.object({
-  dataSection4: z.string().optional(),
-  dataSection6: z.string().optional(),
+  dataTourListOne: z.string().optional(),
+  dataTourListTwo: z.string().optional(),
 });
 
 export type TemplateInputs = z.infer<typeof templateSchema>;

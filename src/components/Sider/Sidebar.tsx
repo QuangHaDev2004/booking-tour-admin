@@ -18,8 +18,6 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const { logout, account } = useAuthStore();
   const permissions = account?.permissions;
 
-  console.log(permissions);
-
   const handleLogout = async () => {
     await logout();
     navigate(`/${pathAdmin}/account/login`);

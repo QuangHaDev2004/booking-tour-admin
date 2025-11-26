@@ -134,7 +134,7 @@ export const TourListTable = () => {
                       onChange={(event) => handleCheckItem(item.id, event)}
                     />
                   </td>
-                  <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold">
+                  <td className="border-travel-four border-b px-4 py-2 text-left text-sm font-semibold w-40">
                     {item.name}
                   </td>
                   <td className="border-travel-four border-b px-4 py-2 text-center text-sm font-semibold">

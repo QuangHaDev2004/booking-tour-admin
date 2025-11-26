@@ -16,7 +16,7 @@ export const ButtonCopy = ({ email }: { email: string }) => {
   return (
     <button
       onClick={handleCopy}
-      className="border-four cursor-pointer border-r px-[16.5px] py-[10px]"
+      className="border-travel-four cursor-pointer border-r px-[16.5px] py-[10px]"
     >
       {copied ? (
         <LuClipboardCheck className="text-[15px] text-green-500" />
