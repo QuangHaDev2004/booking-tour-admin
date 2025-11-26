@@ -14,8 +14,9 @@ export const Dashboard = () => {
     <>
       {permissions?.includes("dashboard-view") ? (
         <>
-          <PageTitle title="Tổng quan" />
-
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+            <PageTitle title="Tổng quan" />
+          </div>
           <div className="mb-[30px] grid gap-[30px] md:grid-cols-2 xl:grid-cols-3">
             {dashboardStats.map((item) => (
               <StatCard
