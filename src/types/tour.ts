@@ -3,6 +3,7 @@ export type TourItem = {
   id: string;
   name: string;
   avatar: string;
+  images: string[];
   priceNewAdult: number;
   priceNewChildren: number;
   priceNewBaby: number;

@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { tourFormSchema, type TourFormInputs } from "@/types";
 import { PageTitle } from "@/components/pageTitle/PageTitle";
 import { FormInput } from "@/components/form/FormInput";
-import { FormFileUpload } from "@/components/form/FormFileUpload";
 import { ButtonSubmit } from "@/components/button/ButtonSubmit";
 import { ContextLink } from "@/components/common/ContextLink";
 import { TourSchedules } from "./components/TourSchedules";
@@ -17,17 +16,14 @@ import { useCityList } from "./hooks/useCityList";
 import { useParams } from "react-router";
 import { useTourDetail } from "./hooks/useTourDetail";
 import { useTourEdit } from "./hooks/useTourEdit";
+import { FileMultiUploader } from "@/components/form/FileMultiUploader";
+import { FileUploader } from "@/components/form/FileUploader";
 
 export const TourEdit = () => {
   const { id } = useParams();
-  const { categoryTree } = useCategoryList();
-  const { cityList } = useCityList();
-  const { tourDetail } = useTourDetail(id!);
-  const { mutate: mutateTourEdit, isPending: isPendingTourEdit } = useTourEdit({
-    id: id!,
-  });
   const informationRef = useRef<any>(null);
   const [avatars, setAvatars] = useState<any[]>([]);
+  const [images, setImages] = useState<any[]>([]);
   const [locationsFrom, setLocationsFrom] = useState<string[]>([]);
   const [locationsTo, setLocationsTo] = useState<string[]>([]);
   const [schedules, setSchedules] = useState([
@@ -38,6 +34,12 @@ export const TourEdit = () => {
       isHidden: false,
     },
   ]);
+  const { categoryTree } = useCategoryList();
+  const { cityList } = useCityList();
+  const { tourDetail } = useTourDetail(id!);
+  const { mutate: mutateTourEdit, isPending: isPendingTourEdit } = useTourEdit({
+    id: id!,
+  });
 
   const {
     register,
@@ -77,6 +79,13 @@ export const TourEdit = () => {
 
     if (tourDetail && tourDetail.avatar) {
       setAvatars([{ source: tourDetail.avatar }]);
+    }
+
+    if (tourDetail?.images && tourDetail?.images.length > 0) {
+      const listImage = tourDetail.images.map((url: string) => ({
+        source: url,
+      }));
+      setImages(listImage);
     }
   }, [categoryTree, reset, tourDetail]);
 
@@ -143,6 +152,15 @@ export const TourEdit = () => {
     formData.append("departureDate", data.departureDate || "");
     formData.append("information", data.information || "");
     formData.append("schedules", JSON.stringify(data.schedules));
+    if (images.length > 0) {
+      for (const image of images) {
+        if (image.file instanceof File) {
+          formData.append("images", image.file);
+        } else {
+          formData.append("images", image.source);
+        }
+      }
+    }
 
     mutateTourEdit(formData);
   };
@@ -209,11 +227,25 @@ export const TourEdit = () => {
             </select>
           </div>
 
-          <FormFileUpload
+          {/* <FormFileUpload
             name="avatar"
             label="Ảnh đại diện"
             files={avatars}
             setFiles={setAvatars}
+          /> */}
+
+          <FileUploader
+            id="avatar"
+            label="Ảnh đại diện"
+            files={avatars}
+            setFiles={setAvatars}
+          />
+
+          <FileMultiUploader
+            id="images"
+            label="Danh sách ảnh"
+            files={images}
+            setFiles={setImages}
           />
 
           <div>
