@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { tourFormSchema, type TourFormInputs } from "@/types";
 import { PageTitle } from "@/components/pageTitle/PageTitle";
 import { FormInput } from "@/components/form/FormInput";
-import { FormFileUpload } from "@/components/form/FormFileUpload";
 import { ButtonSubmit } from "@/components/button/ButtonSubmit";
 import { ContextLink } from "@/components/common/ContextLink";
 import { TourSchedules } from "./components/TourSchedules";
@@ -17,6 +16,8 @@ import { useCityList } from "./hooks/useCityList";
 import { useTourCreate } from "./hooks/useTourCreate";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { NoPermission } from "@/components/common/NoPermission";
+import { FileUploader } from "@/components/form/FileUploader";
+import { FileMultiUploader } from "@/components/form/FileMultiUploader";
 
 export const TourCreate = () => {
   const { categoryTree } = useCategoryList();
@@ -26,6 +27,7 @@ export const TourCreate = () => {
 
   const informationRef = useRef<any>(null);
   const [avatars, setAvatars] = useState<any[]>([]);
+  const [images, setImages] = useState<any[]>([]);
   const [locationsFrom, setLocationsFrom] = useState<string[]>([]);
   const [locationsTo, setLocationsTo] = useState<string[]>([]);
   const [schedules, setSchedules] = useState([
@@ -70,6 +72,7 @@ export const TourCreate = () => {
   const { mutate, isPending } = useTourCreate({
     reset,
     setAvatars,
+    setImages,
     setLocationsFrom,
     setLocationsTo,
     setSchedules,
@@ -117,6 +120,11 @@ export const TourCreate = () => {
     formData.append("departureDate", data.departureDate || "");
     formData.append("information", data.information || "");
     formData.append("schedules", JSON.stringify(data.schedules));
+    if (images.length > 0) {
+      for (const image of images) {
+        formData.append("images", image.file);
+      }
+    }
 
     mutate(formData);
   };
@@ -186,11 +194,25 @@ export const TourCreate = () => {
                 </select>
               </div>
 
-              <FormFileUpload
+              {/* <FormFileUpload
                 name="avatar"
                 label="Ảnh đại diện"
                 files={avatars}
                 setFiles={setAvatars}
+              /> */}
+
+              <FileUploader
+                id="avatar"
+                label="Ảnh đại diện"
+                files={avatars}
+                setFiles={setAvatars}
+              />
+
+              <FileMultiUploader
+                id="images"
+                label="Danh sách ảnh"
+                files={images}
+                setFiles={setImages}
               />
 
               <div>

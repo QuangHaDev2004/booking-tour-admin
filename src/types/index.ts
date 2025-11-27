@@ -25,6 +25,7 @@ export const tourFormSchema = z.object({
   position: z.coerce.number().optional(),
   status: z.string().optional(),
   avatar: z.any(),
+  images: z.any(),
   priceAdult: z.coerce.number().optional(),
   priceChildren: z.coerce.number().optional(),
   priceBaby: z.coerce.number().optional(),

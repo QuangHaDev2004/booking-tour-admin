@@ -8,6 +8,7 @@ import { toast } from "sonner";
 type Props = {
   reset: UseFormReset<any>;
   setAvatars: React.Dispatch<React.SetStateAction<any[]>>;
+  setImages: React.Dispatch<React.SetStateAction<any[]>>;
   setLocationsFrom: React.Dispatch<React.SetStateAction<string[]>>;
   setLocationsTo: React.Dispatch<React.SetStateAction<string[]>>;
   setSchedules: React.Dispatch<
@@ -25,6 +26,7 @@ type Props = {
 export const useTourCreate = ({
   reset,
   setAvatars,
+  setImages,
   setLocationsFrom,
   setLocationsTo,
   setSchedules,
@@ -34,6 +36,7 @@ export const useTourCreate = ({
     onSuccess: (data) => {
       reset();
       setAvatars([]);
+      setImages([]);
       setLocationsFrom([]);
       setLocationsTo([]);
       setSchedules([
