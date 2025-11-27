@@ -23,7 +23,7 @@ export const EditorMCE = ({
           'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
         ],
         toolbar: `undo redo | blocks | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help`,
-        images_upload_url: "",
+        images_upload_url: `${import.meta.env.VITE_API_URL}/admin/upload/image`,
       }}
     />
   );
