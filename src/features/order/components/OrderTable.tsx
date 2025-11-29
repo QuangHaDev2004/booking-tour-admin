@@ -3,12 +3,12 @@ import { ButtonDelete } from "@/components/button/ButtonDelete";
 import { ButtonEdit } from "@/components/button/ButtonEdit";
 import { Search } from "@/components/common/Search";
 import { useOrderList } from "../hooks/useOrderList";
-import type { OrderItem } from "@/types/order";
+import type { OrderDetail } from "@/types/order";
 import { orderStatusList } from "@/constants/order";
 
 export const OrderTable = () => {
   const { data } = useOrderList();
-  const orderList: OrderItem[] = data?.orderList ?? [];
+  const orderList: OrderDetail[] = data?.orderList ?? [];
 
   return (
     <>

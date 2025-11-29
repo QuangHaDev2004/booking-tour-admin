@@ -1,4 +1,4 @@
-export type OrderItem = {
+export type OrderDetail = {
   fullName: string;
   id: string;
   note: string;
@@ -17,6 +17,8 @@ export type OrderItem = {
     priceNewBaby: number;
     avatar: string;
     name: string;
+    departureDateFormat: string;
+    locationsFromName: string;
   }[];
   paymentMethodName: string;
   paymentStatusName: string;
@@ -27,4 +29,5 @@ export type OrderItem = {
   };
   createdAtTime: string;
   createdAtDate: string;
+  createdAtFormat: string;
 };

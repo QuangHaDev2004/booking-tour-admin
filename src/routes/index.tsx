@@ -81,7 +81,7 @@ export const router = createBrowserRouter([
         element: <OrderList />,
       },
       {
-        path: `/${pathAdmin}/order/edit`,
+        path: `/${pathAdmin}/order/edit/:id`,
         element: <OrderEdit />,
       },
       {

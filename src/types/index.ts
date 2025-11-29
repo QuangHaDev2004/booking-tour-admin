@@ -55,20 +55,6 @@ export type TourFormInputs = z.infer<typeof tourFormSchema>;
 
 // Order
 export const orderFormSchema = z.object({
-  fullName: z
-    .string()
-    .min(1, "Vui lòng nhập họ tên!")
-    .min(5, "Họ tên phải có ít nhất 5 ký tự!")
-    .max(50, "Họ tên không được vượt quá 50 ký tự!"),
-  phone: z
-    .string()
-    .min(1, "Vui lòng nhập số điện thoại!")
-    .regex(
-      /^(0|\+84)(3[2-9]|5[6|8|9]|7[0|6-9]|8[1-6|8|9]|9[0-9])[0-9]{7}$/,
-      "Số điện thoại không đúng định dạng!",
-    ),
-  note: z.string().optional(),
-  createAt: z.string().optional(),
   paymentMethod: z.string().optional(),
   paymentStatus: z.string().optional(),
   status: z.string().optional(),
